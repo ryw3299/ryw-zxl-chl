@@ -1,0 +1,834 @@
+{
+  "workflow_request": {
+    "course_id": "COURSE_WORKFLOW",
+    "lesson_id": "LESSON_WORKFLOW",
+    "lesson_name": "Workflow Lesson",
+    "assets": [
+      {
+        "asset_id": "asset_txt_1",
+        "file_path": "/Users/kilo/Documents/GitHub/ChaoXingAgent/tests/parser/fixtures/sample_lesson.txt",
+        "file_type": "txt",
+        "file_name": "sample_lesson.txt",
+        "mime_type": "text/plain"
+      }
+    ],
+    "parse_instruction": "Focus on definitions and examples.",
+    "teacher_notes": "Use this for classroom delivery.",
+    "generate_instruction": "Emphasize structure and key concepts."
+  },
+  "workflow_config": {
+    "parser_max_workers": null,
+    "parser_batch_size": null,
+    "generate_max_sections": null,
+    "generate_max_workers": null,
+    "generate_batch_size": null,
+    "render_ppt": true
+  },
+  "parser_request": {
+    "trace_id": null,
+    "metadata": {},
+    "course_id": "COURSE_WORKFLOW",
+    "lesson_id": "LESSON_WORKFLOW",
+    "assets": [
+      {
+        "asset_id": "asset_txt_1",
+        "file_path": "/Users/kilo/Documents/GitHub/ChaoXingAgent/tests/parser/fixtures/sample_lesson.txt",
+        "file_type": "txt",
+        "file_name": "sample_lesson.txt",
+        "mime_type": "text/plain"
+      }
+    ],
+    "parse_instruction": "Focus on definitions and examples.",
+    "file_id": null,
+    "file_name": "",
+    "file_path": null,
+    "file_type": null
+  },
+  "parser_output": {
+    "status": "success",
+    "message": "file parser finished",
+    "error_code": null,
+    "metadata": {
+      "log_file": null,
+      "structuring_enabled": true,
+      "structuring_strategy": "single_pass",
+      "structuring_used_fallback": false,
+      "structuring_chunk_count": 1,
+      "structuring_validation_errors": []
+    },
+    "course_id": "COURSE_WORKFLOW",
+    "lesson_id": "LESSON_WORKFLOW",
+    "source_file": {
+      "file_id": "asset_txt_1",
+      "file_name": "sample_lesson.txt",
+      "file_path": "/Users/kilo/Documents/GitHub/ChaoXingAgent/tests/parser/fixtures/sample_lesson.txt",
+      "file_type": "txt",
+      "mime_type": "text/plain"
+    },
+    "source_assets": [
+      {
+        "asset_id": "asset_txt_1",
+        "file_path": "/Users/kilo/Documents/GitHub/ChaoXingAgent/tests/parser/fixtures/sample_lesson.txt",
+        "file_type": "txt",
+        "file_name": "sample_lesson.txt",
+        "mime_type": "text/plain"
+      }
+    ],
+    "parsed_document": {
+      "course_id": "COURSE_WORKFLOW",
+      "lesson_id": "LESSON_WORKFLOW",
+      "source_assets": [
+        {
+          "asset_id": "asset_txt_1",
+          "file_path": "/Users/kilo/Documents/GitHub/ChaoXingAgent/tests/parser/fixtures/sample_lesson.txt",
+          "file_type": "txt",
+          "file_name": "sample_lesson.txt",
+          "mime_type": "text/plain"
+        }
+      ],
+      "units": [
+        {
+          "unit_id": "asset_txt_1_chunk_1",
+          "unit_type": "chunk",
+          "index": 1,
+          "title": "平面假设",
+          "text": "平面假设\n平面假设是梁弯曲理论中的基础假设，用来说明截面在变形前后保持平面。",
+          "source_ref": "chunk 1",
+          "source_asset_id": "asset_txt_1",
+          "metadata": {
+            "file_name": "sample_lesson.txt",
+            "file_type": "txt",
+            "source_index": 1,
+            "char_count": 38
+          }
+        },
+        {
+          "unit_id": "asset_txt_1_chunk_2",
+          "unit_type": "chunk",
+          "index": 2,
+          "title": "应力与应变",
+          "text": "应力与应变\n应力表示单位面积上的内力，应变表示材料在外力作用下产生的相对变形量。",
+          "source_ref": "chunk 2",
+          "source_asset_id": "asset_txt_1",
+          "metadata": {
+            "file_name": "sample_lesson.txt",
+            "file_type": "txt",
+            "source_index": 2,
+            "char_count": 40
+          }
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "sec_1",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "name": "平面假设",
+          "summary": "平面假设 平面假设是梁弯曲理论中的基础假设，用来说明截面在变形前后保持平面。",
+          "page_range": [
+            1
+          ],
+          "key_points": [
+            "平面假设"
+          ],
+          "knowledge_points": [
+            "平面假设"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_1"
+          ],
+          "section_type": "intro",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_2",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "name": "应力与应变",
+          "summary": "应力与应变 应力表示单位面积上的内力，应变表示材料在外力作用下产生的相对变形量。",
+          "page_range": [
+            2
+          ],
+          "key_points": [
+            "应力与应变"
+          ],
+          "knowledge_points": [
+            "应力与应变"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_2"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        }
+      ],
+      "parse_instruction": "Focus on definitions and examples.",
+      "knowledge_points": [
+        "平面假设",
+        "应力与应变"
+      ],
+      "metadata": {
+        "asset_count": 1
+      }
+    },
+    "structured_content": {
+      "course_id": "COURSE_WORKFLOW",
+      "lesson_id": "LESSON_WORKFLOW",
+      "source_asset_ids": [
+        "asset_txt_1"
+      ],
+      "lesson_summary": "Structured by parser LLM",
+      "pages": [
+        {
+          "page_id": "page_1",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "section_id": "sec_1",
+          "page": 1,
+          "title": "平面假设",
+          "content": "平面假设\n平面假设是梁弯曲理论中的基础假设，用来说明截面在变形前后保持平面。",
+          "summary": "Structured summary for 平面假设",
+          "key_points": [
+            "平面假设"
+          ],
+          "knowledge_points": [
+            "平面假设"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_1"
+          ],
+          "page_role": "content",
+          "file_id": "asset_txt_1",
+          "file_type": "txt"
+        },
+        {
+          "page_id": "page_2",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "section_id": "sec_2",
+          "page": 2,
+          "title": "应力与应变",
+          "content": "应力与应变\n应力表示单位面积上的内力，应变表示材料在外力作用下产生的相对变形量。",
+          "summary": "Structured summary for 应力与应变",
+          "key_points": [
+            "应力与应变"
+          ],
+          "knowledge_points": [
+            "应力与应变"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_2"
+          ],
+          "page_role": "content",
+          "file_id": "asset_txt_1",
+          "file_type": "txt"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "sec_1",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "name": "平面假设",
+          "summary": "Section summary for 平面假设",
+          "page_range": [
+            1
+          ],
+          "key_points": [
+            "平面假设"
+          ],
+          "knowledge_points": [
+            "平面假设"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_1"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_2",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "name": "应力与应变",
+          "summary": "Section summary for 应力与应变",
+          "page_range": [
+            2
+          ],
+          "key_points": [
+            "应力与应变"
+          ],
+          "knowledge_points": [
+            "应力与应变"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_2"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        }
+      ],
+      "knowledge_points": [
+        "平面假设",
+        "应力与应变"
+      ],
+      "parse_instruction": "Focus on definitions and examples.",
+      "metadata": {
+        "loose_payload_normalized": true,
+        "normalized": true,
+        "page_count": 2,
+        "section_count": 2
+      }
+    },
+    "pages": [
+      {
+        "page_id": "page_1",
+        "course_id": "COURSE_WORKFLOW",
+        "lesson_id": "LESSON_WORKFLOW",
+        "section_id": "sec_1",
+        "page": 1,
+        "title": "平面假设",
+        "content": "平面假设\n平面假设是梁弯曲理论中的基础假设，用来说明截面在变形前后保持平面。",
+        "summary": "Structured summary for 平面假设",
+        "key_points": [
+          "平面假设"
+        ],
+        "knowledge_points": [
+          "平面假设"
+        ],
+        "source_unit_ids": [
+          "asset_txt_1_chunk_1"
+        ],
+        "page_role": "content",
+        "file_id": "asset_txt_1",
+        "file_type": "txt"
+      },
+      {
+        "page_id": "page_2",
+        "course_id": "COURSE_WORKFLOW",
+        "lesson_id": "LESSON_WORKFLOW",
+        "section_id": "sec_2",
+        "page": 2,
+        "title": "应力与应变",
+        "content": "应力与应变\n应力表示单位面积上的内力，应变表示材料在外力作用下产生的相对变形量。",
+        "summary": "Structured summary for 应力与应变",
+        "key_points": [
+          "应力与应变"
+        ],
+        "knowledge_points": [
+          "应力与应变"
+        ],
+        "source_unit_ids": [
+          "asset_txt_1_chunk_2"
+        ],
+        "page_role": "content",
+        "file_id": "asset_txt_1",
+        "file_type": "txt"
+      }
+    ],
+    "sections": [
+      {
+        "section_id": "sec_1",
+        "course_id": "COURSE_WORKFLOW",
+        "lesson_id": "LESSON_WORKFLOW",
+        "name": "平面假设",
+        "summary": "Section summary for 平面假设",
+        "page_range": [
+          1
+        ],
+        "key_points": [
+          "平面假设"
+        ],
+        "knowledge_points": [
+          "平面假设"
+        ],
+        "source_unit_ids": [
+          "asset_txt_1_chunk_1"
+        ],
+        "section_type": "content",
+        "parent_section_id": null
+      },
+      {
+        "section_id": "sec_2",
+        "course_id": "COURSE_WORKFLOW",
+        "lesson_id": "LESSON_WORKFLOW",
+        "name": "应力与应变",
+        "summary": "Section summary for 应力与应变",
+        "page_range": [
+          2
+        ],
+        "key_points": [
+          "应力与应变"
+        ],
+        "knowledge_points": [
+          "应力与应变"
+        ],
+        "source_unit_ids": [
+          "asset_txt_1_chunk_2"
+        ],
+        "section_type": "content",
+        "parent_section_id": null
+      }
+    ],
+    "total_units": 2,
+    "total_pages": 2,
+    "knowledge_points": [
+      "平面假设",
+      "应力与应变"
+    ]
+  },
+  "generate_request": {
+    "trace_id": null,
+    "metadata": {},
+    "course_id": "COURSE_WORKFLOW",
+    "lesson_id": "LESSON_WORKFLOW",
+    "lesson_name": "Workflow Lesson",
+    "structured_content": {
+      "course_id": "COURSE_WORKFLOW",
+      "lesson_id": "LESSON_WORKFLOW",
+      "source_asset_ids": [
+        "asset_txt_1"
+      ],
+      "lesson_summary": "Structured by parser LLM",
+      "pages": [
+        {
+          "page_id": "page_1",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "section_id": "sec_1",
+          "page": 1,
+          "title": "平面假设",
+          "content": "平面假设\n平面假设是梁弯曲理论中的基础假设，用来说明截面在变形前后保持平面。",
+          "summary": "Structured summary for 平面假设",
+          "key_points": [
+            "平面假设"
+          ],
+          "knowledge_points": [
+            "平面假设"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_1"
+          ],
+          "page_role": "content",
+          "file_id": "asset_txt_1",
+          "file_type": "txt"
+        },
+        {
+          "page_id": "page_2",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "section_id": "sec_2",
+          "page": 2,
+          "title": "应力与应变",
+          "content": "应力与应变\n应力表示单位面积上的内力，应变表示材料在外力作用下产生的相对变形量。",
+          "summary": "Structured summary for 应力与应变",
+          "key_points": [
+            "应力与应变"
+          ],
+          "knowledge_points": [
+            "应力与应变"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_2"
+          ],
+          "page_role": "content",
+          "file_id": "asset_txt_1",
+          "file_type": "txt"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "sec_1",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "name": "平面假设",
+          "summary": "Section summary for 平面假设",
+          "page_range": [
+            1
+          ],
+          "key_points": [
+            "平面假设"
+          ],
+          "knowledge_points": [
+            "平面假设"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_1"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_2",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "name": "应力与应变",
+          "summary": "Section summary for 应力与应变",
+          "page_range": [
+            2
+          ],
+          "key_points": [
+            "应力与应变"
+          ],
+          "knowledge_points": [
+            "应力与应变"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_2"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        }
+      ],
+      "knowledge_points": [
+        "平面假设",
+        "应力与应变"
+      ],
+      "parse_instruction": "Focus on definitions and examples.",
+      "metadata": {
+        "loose_payload_normalized": true,
+        "normalized": true,
+        "page_count": 2,
+        "section_count": 2
+      }
+    },
+    "pages": [
+      {
+        "page_id": "page_1",
+        "course_id": "COURSE_WORKFLOW",
+        "lesson_id": "LESSON_WORKFLOW",
+        "section_id": "sec_1",
+        "page": 1,
+        "title": "平面假设",
+        "content": "平面假设\n平面假设是梁弯曲理论中的基础假设，用来说明截面在变形前后保持平面。",
+        "summary": "Structured summary for 平面假设",
+        "key_points": [
+          "平面假设"
+        ],
+        "knowledge_points": [
+          "平面假设"
+        ],
+        "source_unit_ids": [
+          "asset_txt_1_chunk_1"
+        ],
+        "page_role": "content",
+        "file_id": "asset_txt_1",
+        "file_type": "txt"
+      },
+      {
+        "page_id": "page_2",
+        "course_id": "COURSE_WORKFLOW",
+        "lesson_id": "LESSON_WORKFLOW",
+        "section_id": "sec_2",
+        "page": 2,
+        "title": "应力与应变",
+        "content": "应力与应变\n应力表示单位面积上的内力，应变表示材料在外力作用下产生的相对变形量。",
+        "summary": "Structured summary for 应力与应变",
+        "key_points": [
+          "应力与应变"
+        ],
+        "knowledge_points": [
+          "应力与应变"
+        ],
+        "source_unit_ids": [
+          "asset_txt_1_chunk_2"
+        ],
+        "page_role": "content",
+        "file_id": "asset_txt_1",
+        "file_type": "txt"
+      }
+    ],
+    "sections": [
+      {
+        "section_id": "sec_1",
+        "course_id": "COURSE_WORKFLOW",
+        "lesson_id": "LESSON_WORKFLOW",
+        "name": "平面假设",
+        "summary": "Section summary for 平面假设",
+        "page_range": [
+          1
+        ],
+        "key_points": [
+          "平面假设"
+        ],
+        "knowledge_points": [
+          "平面假设"
+        ],
+        "source_unit_ids": [
+          "asset_txt_1_chunk_1"
+        ],
+        "section_type": "content",
+        "parent_section_id": null
+      },
+      {
+        "section_id": "sec_2",
+        "course_id": "COURSE_WORKFLOW",
+        "lesson_id": "LESSON_WORKFLOW",
+        "name": "应力与应变",
+        "summary": "Section summary for 应力与应变",
+        "page_range": [
+          2
+        ],
+        "key_points": [
+          "应力与应变"
+        ],
+        "knowledge_points": [
+          "应力与应变"
+        ],
+        "source_unit_ids": [
+          "asset_txt_1_chunk_2"
+        ],
+        "section_type": "content",
+        "parent_section_id": null
+      }
+    ],
+    "teacher_notes": "Use this for classroom delivery.",
+    "generate_instruction": "Emphasize structure and key concepts."
+  },
+  "generate_output": {
+    "status": "success",
+    "message": "generate finished",
+    "error_code": null,
+    "metadata": {
+      "log_file": null,
+      "generation_enabled": true,
+      "generation_used_fallback": false,
+      "generation_validation_errors": [],
+      "generation_section_errors": [
+        {
+          "section_id": "sec_1",
+          "errors": [],
+          "used_fallback": false
+        },
+        {
+          "section_id": "sec_2",
+          "errors": [],
+          "used_fallback": false
+        }
+      ],
+      "generation_processed_sections": 2,
+      "generation_total_input_sections": 2,
+      "generation_max_sections": null,
+      "generation_max_workers": 2,
+      "generation_batch_size": 1
+    },
+    "course_id": "COURSE_WORKFLOW",
+    "lesson_id": "LESSON_WORKFLOW",
+    "presentation_outline": {
+      "lesson_title": "Workflow Lesson",
+      "lesson_summary": "Structured by parser LLM",
+      "sections": [
+        {
+          "section_id": "sec_1",
+          "title": "平面假设",
+          "summary": "Section summary for 平面假设",
+          "cards": [
+            {
+              "card_id": "sec_1_card_1",
+              "card_type": "concept",
+              "title": "平面假设",
+              "subtitle": null,
+              "bullets": [
+                "平面假设"
+              ],
+              "body_text": null,
+              "speaker_notes": "Structured summary for 平面假设",
+              "visual_plan": [
+                {
+                  "visual_type": "none",
+                  "source_unit_ids": [],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_1"
+              ],
+              "source_page_ids": [
+                "page_1"
+              ],
+              "source_unit_ids": [
+                "asset_txt_1_chunk_1"
+              ],
+              "metadata": {}
+            }
+          ],
+          "source_page_ids": [
+            "page_1"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_1"
+          ],
+          "metadata": {}
+        },
+        {
+          "section_id": "sec_2",
+          "title": "应力与应变",
+          "summary": "Section summary for 应力与应变",
+          "cards": [
+            {
+              "card_id": "sec_2_card_1",
+              "card_type": "concept",
+              "title": "应力与应变",
+              "subtitle": null,
+              "bullets": [
+                "应力与应变"
+              ],
+              "body_text": null,
+              "speaker_notes": "Structured summary for 应力与应变",
+              "visual_plan": [
+                {
+                  "visual_type": "none",
+                  "source_unit_ids": [],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2"
+              ],
+              "source_page_ids": [
+                "page_2"
+              ],
+              "source_unit_ids": [
+                "asset_txt_1_chunk_2"
+              ],
+              "metadata": {}
+            }
+          ],
+          "source_page_ids": [
+            "page_2"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_2"
+          ],
+          "metadata": {}
+        }
+      ],
+      "knowledge_points": [
+        "平面假设",
+        "应力与应变"
+      ],
+      "metadata": {
+        "source": "generate_pipeline",
+        "section_count": 2,
+        "card_count": 2
+      }
+    },
+    "teacher_feedback_text": "已根据上传资料整理出《Workflow Lesson》的展示内容，当前共生成 2 个章节、2 张展示卡片，重点覆盖 平面假设、应力与应变。结果已包含展示结构、讲解稿基础和 PPT 大纲，可继续用于前端展示或后续导出。",
+    "lesson_script": {
+      "lesson_title": "Workflow Lesson",
+      "script_blocks": [
+        {
+          "script_block_id": "script_1",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "section_id": "sec_1",
+          "title": "平面假设",
+          "page_range": [
+            1
+          ],
+          "script_text": "本部分讲解 平面假设。 重点包括：平面假设。 Structured summary for 平面假设",
+          "key_points": [
+            "平面假设"
+          ],
+          "block_type": "teaching"
+        },
+        {
+          "script_block_id": "script_2",
+          "course_id": "COURSE_WORKFLOW",
+          "lesson_id": "LESSON_WORKFLOW",
+          "section_id": "sec_2",
+          "title": "应力与应变",
+          "page_range": [
+            2
+          ],
+          "script_text": "本部分讲解 应力与应变。 重点包括：应力与应变。 Structured summary for 应力与应变",
+          "key_points": [
+            "应力与应变"
+          ],
+          "block_type": "teaching"
+        }
+      ],
+      "metadata": {
+        "source": "presentation_outline"
+      }
+    },
+    "ppt_outline": {
+      "deck_title": "Workflow Lesson",
+      "theme_name": "default_teaching",
+      "slides": [
+        {
+          "slide_id": "slide_1",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "平面假设",
+          "subtitle": null,
+          "bullets": [
+            "平面假设"
+          ],
+          "speaker_notes": "Structured summary for 平面假设",
+          "visual_plan": [
+            {
+              "visual_type": "none",
+              "source_unit_ids": [],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_1"
+          ],
+          "source_page_ids": [
+            "page_1"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_1"
+          ],
+          "metadata": {
+            "derived_from_card_id": "sec_1_card_1"
+          }
+        },
+        {
+          "slide_id": "slide_2",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "应力与应变",
+          "subtitle": null,
+          "bullets": [
+            "应力与应变"
+          ],
+          "speaker_notes": "Structured summary for 应力与应变",
+          "visual_plan": [
+            {
+              "visual_type": "none",
+              "source_unit_ids": [],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2"
+          ],
+          "source_page_ids": [
+            "page_2"
+          ],
+          "source_unit_ids": [
+            "asset_txt_1_chunk_2"
+          ],
+          "metadata": {
+            "derived_from_card_id": "sec_2_card_1"
+          }
+        }
+      ],
+      "metadata": {
+        "source": "presentation_outline"
+      }
+    },
+    "total_cards": 2,
+    "total_script_blocks": 2,
+    "total_slides": 2
+  },
+  "rendered_ppt_file": "/Users/kilo/Documents/GitHub/ChaoXingAgent/tests/generate/integration/artifacts/teacher_workflow_rendered.pptx",
+  "render_error": null
+}

@@ -1,0 +1,511 @@
+{
+  "generate_output": {
+    "ppt_outline": {
+      "deck_title": "1 电路概念定律",
+      "theme_name": "default_teaching",
+      "slides": [
+        {
+          "slide_id": "slide_1",
+          "slide_type": "cover",
+          "layout_template": "cover_layout",
+          "title": "课程介绍与教师信息",
+          "subtitle": null,
+          "bullets": [
+            "教师：沈冰",
+            "地点：工程综合训练中心巡天405A"
+          ],
+          "speaker_notes": "大家好，欢迎来到电工学课程。我是沈冰，本课程的授课教师。我的办公室位于工程综合训练中心巡天405A，欢迎大家在学习过程中有任何问题前来咨询。",
+          "visual_plan": [
+            {
+              "visual_type": "none",
+              "source_unit_ids": [],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_1"
+          ],
+          "source_page_ids": [
+            "page_1"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_1",
+            "manual_asset_1_slide_3",
+            "manual_asset_1_slide_4",
+            "manual_asset_1_slide_5",
+            "manual_asset_1_slide_6"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_1_1"
+          }
+        },
+        {
+          "slide_id": "slide_2",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "1.1   电路的作用与组成部分",
+          "subtitle": null,
+          "bullets": [
+            "1.1 电路的作用与组成部分"
+          ],
+          "speaker_notes": "本页主题：1.1   电路的作用与组成部分 重点包括：1.1 电路的作用与组成部分 1.1 电路的作用与组成部分 (1) 实现电能的传输、分配与转换 (2)实现信号的传递与处理 1. 电路的作用 电路是电流的通路，是为了某种需要由电工设备或电路元件按一定方式组合而成。",
+          "visual_plan": [
+            {
+              "visual_type": "source_image",
+              "source_unit_ids": [
+                "manual_asset_1_slide_7",
+                "manual_asset_1_slide_8",
+                "manual_asset_1_slide_9"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_2"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_7",
+            "manual_asset_1_slide_8",
+            "manual_asset_1_slide_9"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_1"
+          }
+        },
+        {
+          "slide_id": "slide_3",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "1. 2  电路模型",
+          "subtitle": null,
+          "bullets": [
+            "1. 2 电路模型"
+          ],
+          "speaker_notes": "本页主题：1. 2  电路模型 重点包括：1. 2 电路模型 1. 2 电路模型 手电筒的电路模型 实际电路由各种作用不同的的电路元件或器件组成。 为了便于用数学方法分析电路, 一般要将实际电路模型化，用足以反映其电磁性质的理想电路元件或其组合来模拟实际电路中的器件，从而构成与实际电路相对应的电...",
+          "visual_plan": [
+            {
+              "visual_type": "source_image",
+              "source_unit_ids": [
+                "manual_asset_1_slide_10",
+                "manual_asset_1_slide_11"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_3"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_10",
+            "manual_asset_1_slide_11"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_2"
+          }
+        },
+        {
+          "slide_id": "slide_4",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "1.3  电压和电流的参考方向",
+          "subtitle": null,
+          "bullets": [
+            "1.3 电压和电流的参考方向"
+          ],
+          "speaker_notes": "本页主题：1.3  电压和电流的参考方向 重点包括：1.3 电压和电流的参考方向 1.3 电压和电流的参考方向 物理中对基本物理量规定的方向 1. 电路基本物理量的实际方向",
+          "visual_plan": [
+            {
+              "visual_type": "source_image",
+              "source_unit_ids": [
+                "manual_asset_1_slide_12",
+                "manual_asset_1_slide_13",
+                "manual_asset_1_slide_14",
+                "manual_asset_1_slide_15",
+                "manual_asset_1_slide_16",
+                "manual_asset_1_slide_17"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_4"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_12",
+            "manual_asset_1_slide_13",
+            "manual_asset_1_slide_14",
+            "manual_asset_1_slide_15",
+            "manual_asset_1_slide_16",
+            "manual_asset_1_slide_17"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_3"
+          }
+        },
+        {
+          "slide_id": "slide_5",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "1.4  电路的基本元件",
+          "subtitle": null,
+          "bullets": [
+            "1.4 电路的基本元件"
+          ],
+          "speaker_notes": "本页主题：1.4  电路的基本元件 重点包括：1.4 电路的基本元件 介绍电阻元件及其伏安特性，包括线性电阻的定义和表达式。",
+          "visual_plan": [
+            {
+              "visual_type": "source_table",
+              "source_unit_ids": [
+                "manual_asset_1_slide_18",
+                "manual_asset_1_slide_19"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_5"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_18",
+            "manual_asset_1_slide_19"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_4"
+          }
+        },
+        {
+          "slide_id": "slide_6",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "描述线圈通有电流时产生磁场、储存磁场能量的性质。",
+          "subtitle": null,
+          "bullets": [
+            "描述线圈通有电流时产生磁场、储存磁场能量的性质。"
+          ],
+          "speaker_notes": "本页主题：描述线圈通有电流时产生磁场、储存磁场能量的性质。 重点包括：描述线圈通有电流时产生磁场、储存磁场能量的性质。 介绍电感元件的物理意义和储能特性，说明磁场能量的转换过程。",
+          "visual_plan": [
+            {
+              "visual_type": "source_image",
+              "source_unit_ids": [
+                "manual_asset_1_slide_20",
+                "manual_asset_1_slide_21"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_6"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_20",
+            "manual_asset_1_slide_21"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_5"
+          }
+        },
+        {
+          "slide_id": "slide_7",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "3.  电容元件",
+          "subtitle": null,
+          "bullets": [
+            "3. 电容元件"
+          ],
+          "speaker_notes": "本页主题：3.  电容元件 重点包括：3. 电容元件 介绍电容元件的定义、电流与电压关系及储能特性，强调线性元件概念。",
+          "visual_plan": [
+            {
+              "visual_type": "source_image",
+              "source_unit_ids": [
+                "manual_asset_1_slide_22",
+                "manual_asset_1_slide_23",
+                "manual_asset_1_slide_24"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_7"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_22",
+            "manual_asset_1_slide_23",
+            "manual_asset_1_slide_24"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_6"
+          }
+        },
+        {
+          "slide_id": "slide_8",
+          "slide_type": "formula",
+          "layout_template": "formula_layout",
+          "title": "1.5 电源有载工作、开路与短路",
+          "subtitle": null,
+          "bullets": [
+            "1.5 电源有载工作、开路与短路"
+          ],
+          "speaker_notes": "本页主题：1.5 电源有载工作、开路与短路 重点包括：1.5 电源有载工作、开路与短路 1.5 电源有载工作、开路与短路 开关闭合, 接通电源与负载 负载端电压 U = IR 1. 电压电流关系 1.5.1 电源有载工作 (1) 电流的大小由负载决定。 (2) 在电源有内阻时，I  U 。 或 U = E – IR...",
+          "visual_plan": [
+            {
+              "visual_type": "source_table",
+              "source_unit_ids": [
+                "manual_asset_1_slide_25",
+                "manual_asset_1_slide_26",
+                "manual_asset_1_slide_27",
+                "manual_asset_1_slide_28",
+                "manual_asset_1_slide_29",
+                "manual_asset_1_slide_30",
+                "manual_asset_1_slide_31"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_8"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_25",
+            "manual_asset_1_slide_26",
+            "manual_asset_1_slide_27",
+            "manual_asset_1_slide_28",
+            "manual_asset_1_slide_29",
+            "manual_asset_1_slide_30",
+            "manual_asset_1_slide_31"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_7"
+          }
+        },
+        {
+          "slide_id": "slide_9",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "基尔霍夫(kirchhoff )简介",
+          "subtitle": null,
+          "bullets": [
+            "基尔霍夫(kirchhoff )简介"
+          ],
+          "speaker_notes": "本页主题：基尔霍夫(kirchhoff )简介 重点包括：基尔霍夫(kirchhoff )简介 基尔霍夫（1824-1887）是德国著名物理学家，化学家，天文家。1845年，年仅21岁的基尔霍夫在上大学期间提出基尔霍夫定律。 基尔霍夫定律 ｛ 基尔霍夫电流定律 基尔霍夫电压定律 (KCL) (KVL) 基尔霍夫(kirchhof...",
+          "visual_plan": [
+            {
+              "visual_type": "source_image",
+              "source_unit_ids": [
+                "manual_asset_1_slide_33",
+                "manual_asset_1_slide_34",
+                "manual_asset_1_slide_35",
+                "manual_asset_1_slide_36",
+                "manual_asset_1_slide_37"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_9"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_33",
+            "manual_asset_1_slide_34",
+            "manual_asset_1_slide_35",
+            "manual_asset_1_slide_36",
+            "manual_asset_1_slide_37"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_8"
+          }
+        },
+        {
+          "slide_id": "slide_10",
+          "slide_type": "formula",
+          "layout_template": "formula_layout",
+          "title": "电流定律可以推广应用于包围部分电路的任一假设的闭合面。",
+          "subtitle": null,
+          "bullets": [
+            "电流定律可以推广应用于包围部分电路的任一假设的闭合面。"
+          ],
+          "speaker_notes": "本页主题：电流定律可以推广应用于包围部分电路的任一假设的闭合面。 重点包括：电流定律可以推广应用于包围部分电路的任一假设的闭合面。 电流定律可以推广应用于包围部分电路的任一假设的闭合面。 3．推广 I =? 例: I = 0 IA + IB + IC = 0 广义结点",
+          "visual_plan": [
+            {
+              "visual_type": "source_formula",
+              "source_unit_ids": [
+                "manual_asset_1_slide_38",
+                "manual_asset_1_slide_39",
+                "manual_asset_1_slide_40",
+                "manual_asset_1_slide_41",
+                "manual_asset_1_slide_42",
+                "manual_asset_1_slide_43",
+                "manual_asset_1_slide_44"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_10"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_38",
+            "manual_asset_1_slide_39",
+            "manual_asset_1_slide_40",
+            "manual_asset_1_slide_41",
+            "manual_asset_1_slide_42",
+            "manual_asset_1_slide_43",
+            "manual_asset_1_slide_44"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_9"
+          }
+        },
+        {
+          "slide_id": "slide_11",
+          "slide_type": "formula",
+          "layout_template": "formula_layout",
+          "title": "2. 举例",
+          "subtitle": null,
+          "bullets": [
+            "2. 举例"
+          ],
+          "speaker_notes": "本页主题：2. 举例 重点包括：2. 举例 2. 举例 求图示电路中各点的电位:Va、Vb、Vc、Vd 。 解： 设 a为参考点， 即Va=0V Vb=Uba= –10×6= 60V Vc=Uca = 4×20 = 80 V Vd =Uda= 6×5 = 30 V 设 b为参...",
+          "visual_plan": [
+            {
+              "visual_type": "source_formula",
+              "source_unit_ids": [
+                "manual_asset_1_slide_45",
+                "manual_asset_1_slide_46",
+                "manual_asset_1_slide_47",
+                "manual_asset_1_slide_48",
+                "manual_asset_1_slide_49",
+                "manual_asset_1_slide_50"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_11"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_45",
+            "manual_asset_1_slide_46",
+            "manual_asset_1_slide_47",
+            "manual_asset_1_slide_48",
+            "manual_asset_1_slide_49",
+            "manual_asset_1_slide_50"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_10"
+          }
+        },
+        {
+          "slide_id": "slide_12",
+          "slide_type": "concept",
+          "layout_template": "content_layout",
+          "title": "电工学（电工技术）",
+          "subtitle": null,
+          "bullets": [
+            "电工学（电工技术）"
+          ],
+          "speaker_notes": "本页主题：电工学（电工技术） 重点包括：电工学（电工技术） 介绍电工学课程的平时成绩评分规则，包括扣分和加分情况。",
+          "visual_plan": [
+            {
+              "visual_type": "source_image",
+              "source_unit_ids": [
+                "manual_asset_1_slide_51"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_12"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_51"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_11"
+          }
+        },
+        {
+          "slide_id": "slide_13",
+          "slide_type": "formula",
+          "layout_template": "formula_layout",
+          "title": "例: 已知:电路中U=220V，I=5A，内阻R01= R02= 0.6。",
+          "subtitle": null,
+          "bullets": [
+            "例: 已知:电路中U=220V，I=5A，内阻R01= R02= 0.6。"
+          ],
+          "speaker_notes": "本页主题：例: 已知:电路中U=220V，I=5A，内阻R01= R02= 0.6。 重点包括：例: 已知:电路中U=220V，I=5A，内阻R01= R02= 0.6。 通过一个具体电路示例，计算电源电动势、负载反电动势，并分析功率平衡关系。",
+          "visual_plan": [
+            {
+              "visual_type": "source_formula",
+              "source_unit_ids": [
+                "manual_asset_1_slide_52"
+              ],
+              "caption": "",
+              "metadata": {}
+            }
+          ],
+          "source_section_ids": [
+            "sec_2_combined"
+          ],
+          "source_page_ids": [
+            "page_13"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_52"
+          ],
+          "metadata": {
+            "derived_from_card_id": "card_2_12"
+          }
+        }
+      ],
+      "metadata": {
+        "source": "presentation_outline"
+      }
+    }
+  }
+}

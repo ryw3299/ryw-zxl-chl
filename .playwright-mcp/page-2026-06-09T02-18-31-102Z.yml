@@ -1,0 +1,90 @@
+- generic [ref=e1]:
+  - generic [ref=e67]:
+    - complementary [ref=e16]:
+      - img "知微智课 智慧学习平台" [ref=e18]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - paragraph [ref=e21]: 学习中心
+          - button "首页" [ref=e22] [cursor=pointer]:
+            - img [ref=e24]
+            - generic [ref=e26]: 首页
+          - button "资源空间" [ref=e27] [cursor=pointer]:
+            - img [ref=e29]
+            - generic [ref=e31]: 资源空间
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: 学习工具
+          - button "题库练习" [ref=e34] [cursor=pointer]:
+            - img [ref=e36]
+            - generic [ref=e39]: 题库练习
+          - button "学习助手" [ref=e40] [cursor=pointer]:
+            - img [ref=e42]
+            - generic [ref=e45]: 学习助手
+          - button "成绩排行" [ref=e46] [cursor=pointer]:
+            - img [ref=e48]
+            - generic [ref=e51]: 成绩排行
+          - button "知识图谱" [ref=e52] [cursor=pointer]:
+            - img [ref=e54]
+            - generic [ref=e57]: 知识图谱
+      - generic [ref=e58]:
+        - button "退出登录" [ref=e60] [cursor=pointer]:
+          - img [ref=e62]
+          - generic [ref=e64]: 退出登录
+        - generic [ref=e65]: 知微智课 v2.1
+    - main [ref=e69]:
+      - generic [ref=e254]:
+        - generic [ref=e255]:
+          - generic [ref=e256]:
+            - generic [ref=e257]: AI
+            - generic [ref=e258]:
+              - generic [ref=e259]: 学习助手
+              - generic [ref=e260]: 解答课程概念、作业思路、复习计划与代码问题。
+          - generic [ref=e261]:
+            - generic [ref=e262]: DeepSeek-V4 在线
+            - generic [ref=e264]: 学生端
+            - generic [ref=e265]: 实时响应
+        - generic [ref=e266]:
+          - complementary [ref=e267]:
+            - generic [ref=e268]:
+              - generic [ref=e269]: 最近对话
+              - generic [ref=e270]:
+                - button "1 运算放大器综合题" [ref=e271] [cursor=pointer]:
+                  - generic [ref=e272]: "1"
+                  - text: 运算放大器综合题
+                - button "2 Simulink 调制解调实验" [ref=e273] [cursor=pointer]:
+                  - generic [ref=e274]: "2"
+                  - text: Simulink 调制解调实验
+                - button "3 复变函数速记清单" [ref=e275] [cursor=pointer]:
+                  - generic [ref=e276]: "3"
+                  - text: 复变函数速记清单
+            - button "+ 新建对话" [ref=e277] [cursor=pointer]
+            - generic [ref=e279]:
+              - generic [ref=e280]: 学习状态
+              - strong [ref=e281]: 复习节奏稳定
+              - paragraph [ref=e282]: 建议优先处理最近提问中暴露的薄弱概念。
+          - generic [ref=e283]:
+            - generic [ref=e284]:
+              - generic [ref=e285]:
+                - generic [ref=e286]: CURRENT THREAD
+                - heading "课程答疑对话" [level=2] [ref=e287]
+              - generic [ref=e288]:
+                - button "整理要点" [ref=e289] [cursor=pointer]
+                - button "生成计划" [ref=e290] [cursor=pointer]
+            - generic [ref=e291]:
+              - generic [ref=e292]:
+                - generic [ref=e293]: AI
+                - generic [ref=e294]: 你好，我是学习助手。你可以直接问我课程概念、作业思路、复习安排，或者把一段代码贴过来让我帮你分析。
+              - generic [ref=e308]: 你好
+              - generic [ref=e310]: AI
+            - generic [ref=e295]:
+              - generic [ref=e296]:
+                - textbox "输入你的问题，支持粘贴代码或题目内容" [active] [ref=e297]
+                - button "语音输入" [ref=e298] [cursor=pointer]:
+                  - img [ref=e299]
+                - button [disabled] [ref=e302]:
+                  - img [ref=e303]
+              - paragraph [ref=e306]: 按 Enter 发送，Shift + Enter 换行
+  - generic [ref=e4]:
+    - generic "Toggle devtools panel" [ref=e5] [cursor=pointer]:
+      - img [ref=e6]
+    - generic "Toggle Component Inspector" [ref=e11] [cursor=pointer]:
+      - img [ref=e12]

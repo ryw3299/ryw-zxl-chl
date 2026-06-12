@@ -1,0 +1,327 @@
+{
+  "parser_output": {
+    "structured_content": {
+      "course_id": null,
+      "lesson_id": "LESSON_20260317_215752",
+      "source_asset_ids": [
+        "manual_asset_1"
+      ],
+      "lesson_summary": "介绍学银在线第二期材料力学混合式教学，包括改革目的、4+2教学范式及其成绩构成。; 本部分介绍材料力学在线课程的基本信息、登录方式、任务点构成及知识点内容。; 本部分涵盖单元测验、在线课程手机应用、课程说明及教师助教工作，涉及课程评估、学习工具、规则要求和教学职责。",
+      "pages": [
+        {
+          "page_id": "page_1",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "section_id": "sec_1",
+          "page": 1,
+          "title": "学银在线第二期",
+          "content": "学银在线第二期\n材料力学混合式教学",
+          "summary": "学银在线第二期 材料力学混合式教学",
+          "key_points": [
+            "学银在线第二期"
+          ],
+          "knowledge_points": [
+            "学银在线第二期"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_1"
+          ],
+          "page_role": "cover",
+          "file_id": "manual_asset_1",
+          "file_type": "ppt"
+        },
+        {
+          "page_id": "page_2",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "section_id": "sec_2",
+          "page": 2,
+          "title": "1、实施混合式教学改革的目的",
+          "content": "1、实施混合式教学改革的目的\n教学资源的精品化\n教学资源的精细化\n学习过程的个别化\n学习进程的控制交给学生，自适应，私人订制。\n学习过程的互动化\n聊课互动是强制性的，讨论、研讨强制性\n夯实基础、加强过程监控、综合评判学习效果",
+          "summary": "1、实施混合式教学改革的目的 教学资源的精品化 教学资源的精细化 学习过程的个别化 学习进程的控制交给学生，自适应，私人订制。 学习过程的互动化 聊课互动是强制性的，讨论、研讨强制性 夯实基础、加强过程监控、综合评判学习效果",
+          "key_points": [
+            "1、实施混合式教学改革的目的"
+          ],
+          "knowledge_points": [
+            "1、实施混合式教学改革的目的"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_2"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "ppt"
+        },
+        {
+          "page_id": "page_3",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "section_id": "sec_3",
+          "page": 3,
+          "title": "2、“4+2”混合式教学范式",
+          "content": "2、“4+2”混合式教学范式\n6个教学活动：\n讲授  群体面授+线上视频（精炼知识点）\n互动  在线讨论区、学习通、班级群聊\n作业  知识点作业+单元测验\n答疑  在线答疑（学习通、微信或qq群）\n实验 在线预习，线下操作\n考试  线上期末测验+线下期末考试\n线上前四个环节，线下后两个环节。",
+          "summary": "2、“4+2”混合式教学范式 6个教学活动： 讲授 群体面授+线上视频（精炼知识点） 互动 在线讨论区、学习通、班级群聊 作业 知识点作业+单元测验 答疑 在线答疑（学习通、微信或qq群） 实验 在线预习，线下操作 考试 线上期末测验+线下期末考试 线上前四个环节，线下后两个环节。",
+          "key_points": [
+            "2、“4+2”混合式教学范式"
+          ],
+          "knowledge_points": [
+            "2、“4+2”混合式教学范式"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_3"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "ppt"
+        },
+        {
+          "page_id": "page_4",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "section_id": "sec_4",
+          "page": 4,
+          "title": "3、“4+2”混合式教学范式成绩构成",
+          "content": "3、“4+2”混合式教学范式成绩构成\n线上成绩占40%；线下成绩占60%。\n线上成绩组成如下：\n（1）作业权重：10 %\n每个知识点所有作业的平均分，每个知识点5个小题，包含判断、选择、填空、简答等，不含计算题，以巩固基本概念为主。每次作业100分。每周布置一次作业。题目乱序，随机出题，过期无成绩。\n重点知识点发布作业！",
+          "summary": "3、“4+2”混合式教学范式成绩构成 线上成绩占40%；线下成绩占60%。 线上成绩组成如下： （1）作业权重：10 % 每个知识点所有作业的平均分，每个知识点5个小题，包含判断、选择、填空、简答等，不含计算题，以巩固基本概念为主。每次作业100分。每周布置一次作业。题目乱序，随机出题，过期无成绩。 重点知识点发...",
+          "key_points": [
+            "3、“4+2”混合式教学范式成绩构成"
+          ],
+          "knowledge_points": [
+            "3、“4+2”混合式教学范式成绩构成"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_4",
+            "manual_asset_1_slide_5",
+            "manual_asset_1_slide_6"
+          ],
+          "page_role": "definition",
+          "file_id": "manual_asset_1",
+          "file_type": "ppt"
+        },
+        {
+          "page_id": "page_5",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "section_id": "sec_5",
+          "page": 5,
+          "title": "4、材料力学在线课程",
+          "content": "4、材料力学在线课程",
+          "summary": "4、材料力学在线课程",
+          "key_points": [
+            "4、材料力学在线课程"
+          ],
+          "knowledge_points": [
+            "4、材料力学在线课程"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_7",
+            "manual_asset_1_slide_8",
+            "manual_asset_1_slide_9",
+            "manual_asset_1_slide_10",
+            "manual_asset_1_slide_11",
+            "manual_asset_1_slide_12"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "ppt"
+        },
+        {
+          "page_id": "page_6",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "section_id": "sec_6",
+          "page": 6,
+          "title": "单元测验",
+          "content": "单元测验",
+          "summary": "单元测验",
+          "key_points": [
+            "单元测验"
+          ],
+          "knowledge_points": [
+            "单元测验"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_13",
+            "manual_asset_1_slide_14",
+            "manual_asset_1_slide_15",
+            "manual_asset_1_slide_16"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "ppt"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "sec_1",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "name": "课程介绍",
+          "summary": "学银在线第二期材料力学混合式教学概述。",
+          "page_range": [
+            1
+          ],
+          "key_points": [
+            "课程介绍"
+          ],
+          "knowledge_points": [
+            "课程介绍"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_1"
+          ],
+          "section_type": "intro",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_2",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "name": "混合式教学改革目的",
+          "summary": "实现教学资源精品化、精细化，学习过程个别化、互动化，加强基础与过程监控。",
+          "page_range": [
+            2
+          ],
+          "key_points": [
+            "混合式教学改革目的"
+          ],
+          "knowledge_points": [
+            "混合式教学改革目的"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_2"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_3",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "name": "4+2混合式教学范式",
+          "summary": "包括讲授、互动、作业、答疑、实验、考试六个教学活动，线上与线下结合。",
+          "page_range": [
+            3
+          ],
+          "key_points": [
+            "4+2混合式教学范式"
+          ],
+          "knowledge_points": [
+            "4+2混合式教学范式"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_3"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_4",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "name": "成绩构成",
+          "summary": "线上成绩占40%（作业、单元测验、课程视频、讨论、在线考试），线下占60%，总成绩由过程、实验、期末组成。",
+          "page_range": [
+            4
+          ],
+          "key_points": [
+            "成绩构成"
+          ],
+          "knowledge_points": [
+            "成绩构成"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_4",
+            "manual_asset_1_slide_5",
+            "manual_asset_1_slide_6"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_5",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "name": "材料力学在线课程介绍",
+          "summary": "课程概述与登录方式，包括实名登录和班级名单录入，提供课程链接。",
+          "page_range": [
+            5
+          ],
+          "key_points": [
+            "材料力学在线课程介绍"
+          ],
+          "knowledge_points": [
+            "材料力学在线课程介绍"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_7",
+            "manual_asset_1_slide_8",
+            "manual_asset_1_slide_9",
+            "manual_asset_1_slide_10",
+            "manual_asset_1_slide_11",
+            "manual_asset_1_slide_12"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_6",
+          "course_id": null,
+          "lesson_id": "LESSON_20260317_215752",
+          "name": "单元测验与在线课程工具",
+          "summary": "单元测验与在线课程工具",
+          "page_range": [
+            6
+          ],
+          "key_points": [
+            "单元测验与在线课程工具"
+          ],
+          "knowledge_points": [
+            "单元测验与在线课程工具"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_13",
+            "manual_asset_1_slide_14",
+            "manual_asset_1_slide_15",
+            "manual_asset_1_slide_16"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        }
+      ],
+      "knowledge_points": [
+        "混合式教学改革目的包括资源精品化、精细化，学习个别化、互动化",
+        "4+2教学范式包含讲授、互动、作业、答疑、实验、考试六个活动",
+        "线上成绩权重：作业10%、单元测验30%、课程视频30%、讨论10%、在线考试20%",
+        "期末总成绩计算公式：过程40% + 实验10% + 期末50%",
+        "课程介绍",
+        "混合式教学改革目的",
+        "4+2混合式教学范式",
+        "成绩构成",
+        "学银在线第二期",
+        "1、实施混合式教学改革的目的",
+        "2、“4+2”混合式教学范式",
+        "3、“4+2”混合式教学范式成绩构成",
+        "材料力学在线课程概述",
+        "实名登录与班级名单录入",
+        "任务点构成与分值计算",
+        "知识点内容结构",
+        "材料力学在线课程介绍",
+        "4、材料力学在线课程",
+        "单元测验作为课程评估的一部分",
+        "材料力学在线课程手机应用支持学习和群聊功能",
+        "课程运行时间、作业批改方式、邮箱设置、讨论区规则和完成时限",
+        "教师和助教在混合式教学中的工作内容，包括发布作业、互动讨论和监控学习",
+        "单元测验与在线课程工具",
+        "单元测验"
+      ],
+      "parse_instruction": null,
+      "metadata": {
+        "merged_from_chunks": 3,
+        "normalized": true,
+        "page_count": 6,
+        "section_count": 6
+      }
+    }
+  }
+}

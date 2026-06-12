@@ -1,0 +1,84 @@
+# ─── Python ────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ─── Virtual Environments ─────────────────────────────────────────
+.venv/
+venv/
+ENV/
+env/
+
+# ─── Testing ──────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+tests/logs/
+!tests/logs/**/.gitkeep
+
+# ─── IDE / Editor ─────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ─── OS ───────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ─── Environment & Secrets ────────────────────────────────────────
+.env
+.env.local
+.env.*
+!.env.example
+
+# ─── Runtime Data (generated at runtime, not source) ──────────────
+data/uploads/
+data/audio/
+data/renders/
+data/*.db
+data/rag_indices/
+
+# ─── Node / Frontend ─────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# ─── Linters / Type Checkers ──────────────────────────────────────
+.mypy_cache/
+.ruff_cache/
+.pytype/
+
+# ─── Misc ─────────────────────────────────────────────────────────
+claude_code.ps1
+.claude_code
+*.log
+
+# ─── Claude SDK Workspace (runtime generated) ─────────────────────
+# 保留目录结构以便交接；具体项目目录和本地测试产物不纳入版本控制
+ChaoxingAgentWorkspace/projects/
+tmp_*
+tmp_export_*/
+tmp_pptx_*/
+
+# ─── Archived (历史文档与一次性训练数据，本地保留但不入库) ───────────
+archive/
+
+# Browser test temp profiles
+.tmp-chrome-*/

@@ -1,0 +1,779 @@
+{
+  "generate_output": {
+    "presentation_outline": {
+      "lesson_title": "5三相交流电",
+      "lesson_summary": "介绍电工学三相电路章节，对比三相制与单相制的优势，包括发电机容量、传输效率和电动机性能。；三相负载不对称与故障分析；概述本章主要内容（三相电压、负载联结、功率）和学习目标，如掌握电压电流关系和计算方法。；讲解三相电压的产生原理，涉...",
+      "sections": [
+        {
+          "section_id": "sec_1",
+          "title": "课程介绍与三相制优势",
+          "summary": "介绍电工学三相电路章节，对比三相制与单相制的优势，包括发电机容量、传输效率和电动机性能。",
+          "cards": [
+            {
+              "card_id": "card_1_1",
+              "card_type": "cover",
+              "title": "电工学（电工技术）",
+              "subtitle": null,
+              "bullets": [
+                "电工学（电工技术）"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：电工学（电工技术） 重点包括：电工学（电工技术） 电工学（电工技术） 第5章 三相电路",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_1"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_1"
+              ],
+              "source_page_ids": [
+                "page_1"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_1"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            }
+          ],
+          "source_page_ids": [
+            "page_1"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_1"
+          ],
+          "metadata": {
+            "fallback": true
+          }
+        },
+        {
+          "section_id": "sec_9",
+          "title": "三相负载不对称与故障分析",
+          "summary": "三相负载不对称与故障分析",
+          "cards": [
+            {
+              "card_id": "card_2_1",
+              "card_type": "formula",
+              "title": "(2) 三相负载不对称（R1=5 、R2=10  、R3=20 ）",
+              "subtitle": null,
+              "bullets": [
+                "(2) 三相负载不对称（R1=5 、R2=10  、R3=20 ）"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：(2) 三相负载不对称（R1=5 、R2=10  、R3=20 ） 重点包括：(2) 三相负载不对称（R1=5 、R2=10  、R3=20 ） (2) 三相负载不对称（R1=5 、R2=10  、R3=20 ） 分别计算各线电流 中性线电流",
+              "visual_plan": [
+                {
+                  "visual_type": "source_formula",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_19",
+                    "manual_asset_1_slide_20",
+                    "manual_asset_1_slide_21",
+                    "manual_asset_1_slide_22",
+                    "manual_asset_1_slide_23"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_9"
+              ],
+              "source_page_ids": [
+                "page_9"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_19",
+                "manual_asset_1_slide_20",
+                "manual_asset_1_slide_21",
+                "manual_asset_1_slide_22",
+                "manual_asset_1_slide_23"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            }
+          ],
+          "source_page_ids": [
+            "page_9"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_19",
+            "manual_asset_1_slide_20",
+            "manual_asset_1_slide_21",
+            "manual_asset_1_slide_22",
+            "manual_asset_1_slide_23"
+          ],
+          "metadata": {
+            "fallback": true
+          }
+        },
+        {
+          "section_id": "sec_2_combined",
+          "title": "章节结构与学习要求",
+          "summary": "概述本章主要内容（三相电压、负载联结、功率）和学习目标，如掌握电压电流关系和计算方法。；讲解三相电压的产生原理，涉及三相交流发电机和绕组示意图，基于动磁生电工作原理。；概述本章主要内容（三相电压、负载联结、功率）和学习目标，如掌握电压电流关系和计算方法。；讲解三相电压的产生原理，涉及三相交流发电机和绕组示意图，基于动磁生电工作原理。；三相电压表示与对称性；三相电源的星形联结；介绍三相负载分类（单相和三相负载）及连接原则，强调电压匹配和负载均衡。",
+          "cards": [
+            {
+              "card_id": "card_3_1",
+              "card_type": "concept",
+              "title": "第5章  三相电路",
+              "subtitle": null,
+              "bullets": [
+                "第5章 三相电路"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：第5章  三相电路 重点包括：第5章 三相电路 第5章 三相电路 三相制与单相制相比较： 在发电机尺寸相同的情况下，三相发电机比单相发电机容量大、效率高。 传输功率相同时，三相制的用铜量仅为单相制的75%。 使用电时，三相交流电动机比单相电动机性能好，结构简单，便于维护。三相制既能...",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_2"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_2"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_2"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_3_2",
+              "card_type": "concept",
+              "title": "第5章  三相电路",
+              "subtitle": null,
+              "bullets": [
+                "第5章 三相电路"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：第5章  三相电路 重点包括：第5章 三相电路 第5章 三相电路 5.1 三相电压 5.2 负载星形联结的三相电路 5.3 负载三角形联结的三相电路 5.4 三相功率",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_3"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_3"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_3"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_3_3",
+              "card_type": "concept",
+              "title": "第5章 三相电路",
+              "subtitle": null,
+              "bullets": [
+                "第5章 三相电路"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：第5章 三相电路 重点包括：第5章 三相电路 第5章 三相电路 本章要求： 1. 搞清对称三相负载Y和△联结时相线电压，相线 电流关系; 2. 掌握三相四线制供电系统中单相及三相负载的正 确联接方法，理解中线的作用; 3. 掌握对称三相电路电压、电流及功率的计算。",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_4"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_4"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_4"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_3_4",
+              "card_type": "concept",
+              "title": "5.1  三相电压",
+              "subtitle": null,
+              "bullets": [
+                "5.1 三相电压"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：5.1  三相电压 重点包括：5.1 三相电压 图5.1.1 三相交流发电机示意图 5.1 三相电压 1. 三相电压的产生 工作原理：动磁生电 图5.1.2 三相绕组示意图 图5.1.3 每相电枢绕组",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_5"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_5"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_5"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_3_5",
+              "card_type": "concept",
+              "title": "三相电压瞬时表示式",
+              "subtitle": null,
+              "bullets": [
+                "三相电压瞬时表示式"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：三相电压瞬时表示式 重点包括：三相电压瞬时表示式 三相电压瞬时表示式 相量表示 相电压：每相首端与尾端间的电压",
+              "visual_plan": [
+                {
+                  "visual_type": "source_table",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_6",
+                    "manual_asset_1_slide_7",
+                    "manual_asset_1_slide_8"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_6"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_6",
+                "manual_asset_1_slide_7",
+                "manual_asset_1_slide_8"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_3_6",
+              "card_type": "concept",
+              "title": "2. 三相电源的星形联结",
+              "subtitle": null,
+              "bullets": [
+                "2. 三相电源的星形联结"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：2. 三相电源的星形联结 重点包括：2. 三相电源的星形联结 2. 三相电源的星形联结 (1) 联接方式 中性线或零线 中性点 端线或相线 相电压：端线与中性线间 (发电机每相绕组) 的电压 线电压：端线与端线间的电压 Up Ul (火线)",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_9",
+                    "manual_asset_1_slide_10",
+                    "manual_asset_1_slide_11"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_7"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_9",
+                "manual_asset_1_slide_10",
+                "manual_asset_1_slide_11"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_3_7",
+              "card_type": "formula",
+              "title": "5.2  负载星形联结的三相电路",
+              "subtitle": null,
+              "bullets": [
+                "5.2 负载星形联结的三相电路"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：5.2  负载星形联结的三相电路 重点包括：5.2 负载星形联结的三相电路 5.2 负载星形联结的三相电路 三相负载 不对称三相负载： 不满足 Z1 =Z2 = Z3 如单相负载组成的三相负载 1. 三相负载 分类 单相负载：只需一相电源供电 照明负载、家用电器 三相负载：需三相电源同时供电 三相电动机等 三...",
+              "visual_plan": [
+                {
+                  "visual_type": "source_formula",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_12",
+                    "manual_asset_1_slide_13",
+                    "manual_asset_1_slide_14",
+                    "manual_asset_1_slide_15",
+                    "manual_asset_1_slide_16"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_8"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_12",
+                "manual_asset_1_slide_13",
+                "manual_asset_1_slide_14",
+                "manual_asset_1_slide_15",
+                "manual_asset_1_slide_16"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            }
+          ],
+          "source_page_ids": [
+            "page_2",
+            "page_3",
+            "page_4",
+            "page_5",
+            "page_6",
+            "page_7",
+            "page_8"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_2",
+            "manual_asset_1_slide_3",
+            "manual_asset_1_slide_4",
+            "manual_asset_1_slide_5",
+            "manual_asset_1_slide_6",
+            "manual_asset_1_slide_7",
+            "manual_asset_1_slide_8",
+            "manual_asset_1_slide_9",
+            "manual_asset_1_slide_10",
+            "manual_asset_1_slide_11",
+            "manual_asset_1_slide_12",
+            "manual_asset_1_slide_13",
+            "manual_asset_1_slide_14",
+            "manual_asset_1_slide_15",
+            "manual_asset_1_slide_16"
+          ],
+          "metadata": {
+            "fallback": true
+          }
+        },
+        {
+          "section_id": "sec_10_combined",
+          "title": "负载三角形联结",
+          "summary": "负载三角形联结；讲解对称负载下的相量图和三相负载的联接原则。；介绍三相功率的计算公式，包括Y和△联结下的对称负载情况。；计算三相电动机在星形和三角形连接下的相电流、线电流和输入功率，并比较结果，说明额定电压与连接方式的关系。；例3：三角形联结负载计算；例4：混合照明系统负载分配；照明系统故障案例分析",
+          "cards": [
+            {
+              "card_id": "card_4_1",
+              "card_type": "concept",
+              "title": "1. 联结形式",
+              "subtitle": null,
+              "bullets": [
+                "1. 联结形式"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：1. 联结形式 重点包括：1. 联结形式 1. 联结形式 5.3 负载三角形联结的三相电路",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_24",
+                    "manual_asset_1_slide_25"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_10_combined"
+              ],
+              "source_page_ids": [
+                "page_10"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_24",
+                "manual_asset_1_slide_25"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_4_2",
+              "card_type": "concept",
+              "title": "相量图",
+              "subtitle": null,
+              "bullets": [
+                "相量图"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：相量图 重点包括：相量图 介绍相量图、三相负载联接原则和三相功率计算。",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_26",
+                    "manual_asset_1_slide_27",
+                    "manual_asset_1_slide_28"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_10_combined"
+              ],
+              "source_page_ids": [
+                "page_11"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_26",
+                "manual_asset_1_slide_27",
+                "manual_asset_1_slide_28"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_4_3",
+              "card_type": "concept",
+              "title": "正误判断",
+              "subtitle": null,
+              "bullets": [
+                "正误判断"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：正误判断 重点包括：正误判断 进行对称负载Y联接的正误判断练习。",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_29",
+                    "manual_asset_1_slide_30",
+                    "manual_asset_1_slide_31"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_10_combined"
+              ],
+              "source_page_ids": [
+                "page_12"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_29",
+                "manual_asset_1_slide_30",
+                "manual_asset_1_slide_31"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_4_4",
+              "card_type": "formula",
+              "title": "有一三相电动机, 每相的等效电阻R = 29, 等效",
+              "subtitle": null,
+              "bullets": [
+                "有一三相电动机, 每相的等效电阻R = 29, 等效"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：有一三相电动机, 每相的等效电阻R = 29, 等效 重点包括：有一三相电动机, 每相的等效电阻R = 29, 等效 有一三相电动机, 每相的等效电阻R = 29, 等效 感抗XL=21.8, 试求下列两种情况下电动机的相电流、 线电流以及从电源输入的功率，并比较所得的结果： (1) 绕组联成星形接于Ul =380 V的三相电源上; (2) 绕组...",
+              "visual_plan": [
+                {
+                  "visual_type": "source_formula",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_32",
+                    "manual_asset_1_slide_33",
+                    "manual_asset_1_slide_34",
+                    "manual_asset_1_slide_35",
+                    "manual_asset_1_slide_36"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_10_combined"
+              ],
+              "source_page_ids": [
+                "page_13"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_32",
+                "manual_asset_1_slide_33",
+                "manual_asset_1_slide_34",
+                "manual_asset_1_slide_35",
+                "manual_asset_1_slide_36"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_4_5",
+              "card_type": "formula",
+              "title": "三相对称负载作三角形联结，Ul =220V，当S1、",
+              "subtitle": null,
+              "bullets": [
+                "三相对称负载作三角形联结，Ul =220V，当S1、"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：三相对称负载作三角形联结，Ul =220V，当S1、 重点包括：三相对称负载作三角形联结，Ul =220V，当S1、 三相对称负载作三角形联结，Ul =220V，当S1、 S2 均闭合时，各电流表读数均为17.3A，三相功率 P = 4.5 kW，试求: 1) 每相负载的电阻和感抗； 2) S1合、S2断开时, 各电流表读数和有功功率P； 3) S ...",
+              "visual_plan": [
+                {
+                  "visual_type": "source_table",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_37",
+                    "manual_asset_1_slide_38",
+                    "manual_asset_1_slide_39",
+                    "manual_asset_1_slide_40"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_10_combined"
+              ],
+              "source_page_ids": [
+                "page_14"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_37",
+                "manual_asset_1_slide_38",
+                "manual_asset_1_slide_39",
+                "manual_asset_1_slide_40"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_4_6",
+              "card_type": "formula",
+              "title": "例4：",
+              "subtitle": null,
+              "bullets": [
+                "例4："
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：例4： 重点包括：例4： 某大楼为日光灯和白炽灯混合照明，需装40瓦 日光灯210盏(cos1=0.5)，60瓦白炽灯90盏(cos2=1), 它们的额定电压都是220V，由380V/220V的电网供电。试分配其负载并指出应如何接入电网。这种情况下,线路电...",
+              "visual_plan": [
+                {
+                  "visual_type": "source_formula",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_41"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_10_combined"
+              ],
+              "source_page_ids": [
+                "page_15"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_41"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_4_7",
+              "card_type": "concept",
+              "title": "解: (1) 该照明系统与电网连接图",
+              "subtitle": null,
+              "bullets": [
+                "解: (1) 该照明系统与电网连接图"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：解: (1) 该照明系统与电网连接图 重点包括：解: (1) 该照明系统与电网连接图 解: (1) 该照明系统与电网连接图",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_42",
+                    "manual_asset_1_slide_43",
+                    "manual_asset_1_slide_44"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_10_combined"
+              ],
+              "source_page_ids": [
+                "page_16"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_42",
+                "manual_asset_1_slide_43",
+                "manual_asset_1_slide_44"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            }
+          ],
+          "source_page_ids": [
+            "page_10",
+            "page_11",
+            "page_12",
+            "page_13",
+            "page_14",
+            "page_15",
+            "page_16"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_24",
+            "manual_asset_1_slide_25",
+            "manual_asset_1_slide_26",
+            "manual_asset_1_slide_27",
+            "manual_asset_1_slide_28",
+            "manual_asset_1_slide_29",
+            "manual_asset_1_slide_30",
+            "manual_asset_1_slide_31",
+            "manual_asset_1_slide_32",
+            "manual_asset_1_slide_33",
+            "manual_asset_1_slide_34",
+            "manual_asset_1_slide_35",
+            "manual_asset_1_slide_36",
+            "manual_asset_1_slide_37",
+            "manual_asset_1_slide_38",
+            "manual_asset_1_slide_39",
+            "manual_asset_1_slide_40",
+            "manual_asset_1_slide_41",
+            "manual_asset_1_slide_42",
+            "manual_asset_1_slide_43",
+            "manual_asset_1_slide_44"
+          ],
+          "metadata": {
+            "fallback": true
+          }
+        }
+      ],
+      "knowledge_points": [
+        "三相制相比单相制在发电机容量、传输效率和电动机性能方面的优势",
+        "三相电路的主要章节内容：三相电压、负载星形联结、负载三角形联结、三相功率",
+        "本章学习要求：理解相线电压电流关系、中线作用、掌握对称三相电路计算",
+        "三相电压的产生原理：动磁生电，通过三相交流发电机实现",
+        "课程介绍与三相制优势",
+        "章节结构与学习要求",
+        "三相电压的产生",
+        "电工学（电工技术）",
+        "第5章 三相电路",
+        "5.1 三相电压",
+        "三相电压瞬时表示式和相量表示",
+        "相序的定义",
+        "对称三相电压瞬时值之和为零",
+        "三相电源星形联结的联接方式",
+        "相电压和线电压的定义",
+        "线电压与相电压的关系（基于KVL和相量图）",
+        "三相电源三角形联结的引入",
+        "三相电压表示与对称性",
+        "三相电源的星形联结",
+        "三相电压瞬时表示式",
+        "2. 三相电源的星形联结",
+        "三相负载分为单相负载和三相负载，连接方式有Y和Δ两种。",
+        "三相负载连接原则：电源电压等于负载额定电压，单相负载均衡分配。",
+        "负载星形联结时，线电流等于相电流。",
+        "负载星形联结电路计算包括线电压、相电压、线电流和相电流的关系。",
+        "对称负载星形联结时，中性线无电流可省略，只需计算一相电流。",
+        "三相负载与连接原则",
+        "5.2 负载星形联结的三相电路",
+        "三相负载不对称时线电流和中性线电流的计算",
+        "照明系统故障分析：L1相短路和断路在不同中性线状态下的影响",
+        "不对称负载Y联结未接中性线时负载相电压不对称的结论",
+        "中性线的作用：保证星形联结三相不对称负载的相电压对称",
+        "照明负载必须采用三相四线制供电且中性线不允许接熔断器或刀闸开关",
+        "负载三角形联结的联结形式",
+        "负载三角形联结中负载相电压等于电源线电压的分析计算",
+        "三相负载不对称与故障分析",
+        "负载三角形联结",
+        "(2) 三相负载不对称（R1=5 、R2=10  、R3=20 ）",
+        "1. 联结形式",
+        "对称负载时，线电流比相电流滞后30°。",
+        "三相负载联接原则：负载额定电压等于电源线电压，每相电压等于其额定电压。",
+        "三相功率公式：P = 3Up Ip cosφp，适用于对称负载的Y和△联结。",
+        "对称负载Y联接的正误判断方法。",
+        "相量图与负载联接",
+        "三相功率",
+        "相量图",
+        "正误判断",
+        "三相电动机星形和三角形连接的电流与功率计算",
+        "额定电压与绕组连接方式的匹配原则",
+        "对称负载的相电流简化计算",
+        "星形和三角形连接的线电流与相电流关系",
+        "三相电路的有功功率",
+        "三相电动机连接方式示例",
+        "有一三相电动机, 每相的等效电阻R = 29, 等效",
+        "三相对称负载三角形联结的电阻和感抗计算",
+        "开关状态变化对电流和功率的影响",
+        "单相电路与三相电路的转换分析",
+        "混合照明系统的负载分配与电网接入方法",
+        "例3：三角形联结负载计算",
+        "例4：混合照明系统负载分配",
+        "三相对称负载作三角形联结，Ul =220V，当S1、",
+        "例4：",
+        "三相交流电照明系统连接图",
+        "电灯亮度变化与电压分配关系",
+        "串联电路中电阻对亮度的影响",
+        "照明系统故障案例分析",
+        "解: (1) 该照明系统与电网连接图"
+      ],
+      "metadata": {
+        "source": "generate_pipeline",
+        "section_count": 4,
+        "card_count": 16,
+        "fallback": true
+      }
+    }
+  }
+}

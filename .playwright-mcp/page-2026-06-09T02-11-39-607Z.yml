@@ -1,0 +1,212 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e5]:
+    - complementary [ref=e6]:
+      - img "知微智课 智慧学习平台" [ref=e8]
+      - navigation [ref=e9]:
+        - generic [ref=e10]:
+          - paragraph [ref=e11]: 学习中心
+          - button "首页" [ref=e12] [cursor=pointer]:
+            - img [ref=e14]
+            - generic [ref=e16]: 首页
+          - button "我的课程" [ref=e17] [cursor=pointer]:
+            - img [ref=e19]
+            - generic [ref=e21]: 我的课程
+          - button "资源空间" [ref=e22] [cursor=pointer]:
+            - img [ref=e24]
+            - generic [ref=e26]: 资源空间
+        - generic [ref=e27]:
+          - paragraph [ref=e28]: 学习工具
+          - button "题库练习" [ref=e29] [cursor=pointer]:
+            - img [ref=e31]
+            - generic [ref=e34]: 题库练习
+          - button "学习记录" [ref=e35] [cursor=pointer]:
+            - img [ref=e37]
+            - generic [ref=e39]: 学习记录
+          - button "成绩排行" [ref=e40] [cursor=pointer]:
+            - img [ref=e42]
+            - generic [ref=e45]: 成绩排行
+          - button "知识图谱" [ref=e46] [cursor=pointer]:
+            - img [ref=e48]
+            - generic [ref=e51]: 知识图谱
+      - generic [ref=e52]:
+        - button "退出登录" [ref=e54] [cursor=pointer]:
+          - img [ref=e56]
+          - generic [ref=e58]: 退出登录
+        - generic [ref=e59]: 知微智课 v2.1
+    - main [ref=e61]:
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e64]:
+            - paragraph [ref=e65]: Learning Materials
+            - heading "课程资源" [level=1] [ref=e66]
+            - paragraph [ref=e67]: 按课程筛选学习资料，查看重点讲义、实验模板与课堂补充资源。
+            - generic [ref=e68]:
+              - generic [ref=e69]:
+                - generic [ref=e70]: "4"
+                - generic [ref=e71]: 可用资源
+              - generic [ref=e72]:
+                - generic [ref=e73]: 人工智能导论导学讲义
+                - generic [ref=e74]: 最热资料
+              - generic [ref=e75]:
+                - generic [ref=e76]: "4"
+                - generic [ref=e77]: 覆盖课程
+          - img [ref=e83]
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - generic [ref=e87]:
+              - img [ref=e88]
+              - textbox "搜索资源标题或标签..." [ref=e91]
+            - generic [ref=e92]:
+              - button "全部" [ref=e93] [cursor=pointer]
+              - button "导学" [ref=e94] [cursor=pointer]
+              - button "PDF" [ref=e95] [cursor=pointer]
+              - button "重点" [ref=e96] [cursor=pointer]
+              - button "实验" [ref=e97] [cursor=pointer]
+              - button "模板" [ref=e98] [cursor=pointer]
+          - generic [ref=e99]:
+            - generic [ref=e100]: 筛选课程
+            - combobox "筛选课程" [ref=e101]:
+              - option "全部课程" [selected]
+              - option "人工智能导论"
+              - option "机器学习基础"
+              - option "数据结构与算法"
+              - option "Python 程序设计"
+            - button "清空筛选" [ref=e102] [cursor=pointer]:
+              - img [ref=e103]
+        - generic [ref=e105]:
+          - generic [ref=e107]:
+            - generic [ref=e108]:
+              - generic [ref=e109]:
+                - paragraph [ref=e110]: BROWSE
+                - heading "资源浏览" [level=2] [ref=e111]
+              - generic [ref=e112]: 共匹配到 4 项
+            - generic [ref=e113]:
+              - article [ref=e114]:
+                - generic [ref=e115]:
+                  - generic [ref=e116]: PDF
+                  - strong [ref=e117]: 人工智能导论
+                - generic [ref=e118]:
+                  - heading "人工智能导论导学讲义" [level=4] [ref=e120]
+                  - paragraph [ref=e121]: 覆盖课程目标、章节结构与课堂讨论引导，适合作为导学材料与课前预习资源。
+                  - generic [ref=e122]:
+                    - generic [ref=e123]: 人工智能导论导学讲义.pdf (4.8 MB)
+                    - generic [ref=e124]: 下载 58
+                    - generic [ref=e125]: 上传者 张老师
+                    - generic [ref=e126]: 2026-04-10
+                  - generic [ref=e127]:
+                    - generic [ref=e128]: 导学
+                    - generic [ref=e129]: PDF
+                    - generic [ref=e130]: 重点
+                - generic [ref=e131]:
+                  - button "查看课时" [ref=e132] [cursor=pointer]
+                  - button "下载" [ref=e133] [cursor=pointer]
+              - article [ref=e134]:
+                - generic [ref=e135]:
+                  - generic [ref=e136]: ZIP
+                  - strong [ref=e137]: 机器学习基础
+                - generic [ref=e138]:
+                  - heading "机器学习基础实验模板" [level=4] [ref=e140]
+                  - paragraph [ref=e141]: 包含 sklearn 实验骨架、数据说明与结果记录页，适合作为课堂实验起始模板。
+                  - generic [ref=e142]:
+                    - generic [ref=e143]: 机器学习基础实验模板.zip (12.1 MB)
+                    - generic [ref=e144]: 下载 41
+                    - generic [ref=e145]: 上传者 张老师
+                    - generic [ref=e146]: 2026-04-12
+                  - generic [ref=e147]:
+                    - generic [ref=e148]: 实验
+                    - generic [ref=e149]: 模板
+                    - generic [ref=e150]: 作业
+                - generic [ref=e151]:
+                  - button "查看课时" [ref=e152] [cursor=pointer]
+                  - button "下载" [ref=e153] [cursor=pointer]
+              - article [ref=e154]:
+                - generic [ref=e155]:
+                  - generic [ref=e156]: DOCX
+                  - strong [ref=e157]: 数据结构与算法
+                - generic [ref=e158]:
+                  - heading "数据结构高频题型清单" [level=4] [ref=e160]
+                  - paragraph [ref=e161]: 整理了树、图、排序和动态规划的高频考点，适合复习和课堂随练。
+                  - generic [ref=e162]:
+                    - generic [ref=e163]: 数据结构高频题型清单.docx (1.3 MB)
+                    - generic [ref=e164]: 下载 36
+                    - generic [ref=e165]: 上传者 张老师
+                    - generic [ref=e166]: 2026-04-13
+                  - generic [ref=e167]:
+                    - generic [ref=e168]: 练习
+                    - generic [ref=e169]: 重点
+                    - generic [ref=e170]: 复习
+                - generic [ref=e171]:
+                  - button "查看课时" [ref=e172] [cursor=pointer]
+                  - button "下载" [ref=e173] [cursor=pointer]
+              - article [ref=e174]:
+                - generic [ref=e175]:
+                  - generic [ref=e176]: ZIP
+                  - strong [ref=e177]: Python 程序设计
+                - generic [ref=e178]:
+                  - heading "Python 课堂案例素材包" [level=4] [ref=e180]
+                  - paragraph [ref=e181]: 收录文件读写、函数封装和面向对象三个课堂案例，配套截图与运行说明。
+                  - generic [ref=e182]:
+                    - generic [ref=e183]: Python课堂案例素材包.zip (8.6 MB)
+                    - generic [ref=e184]: 下载 29
+                    - generic [ref=e185]: 上传者 张老师
+                    - generic [ref=e186]: 2026-04-14
+                  - generic [ref=e187]:
+                    - generic [ref=e188]: 案例
+                    - generic [ref=e189]: 课堂
+                    - generic [ref=e190]: 素材
+                - generic [ref=e191]:
+                  - button "查看课时" [ref=e192] [cursor=pointer]
+                  - button "下载" [ref=e193] [cursor=pointer]
+          - complementary [ref=e194]:
+            - generic [ref=e195]:
+              - paragraph [ref=e196]: RANKING
+              - heading "资源热度排行" [level=3] [ref=e197]
+              - generic [ref=e198]:
+                - generic [ref=e199]:
+                  - generic [ref=e200]: TOP 1
+                  - generic [ref=e201]:
+                    - strong [ref=e202]: 人工智能导论导学讲义
+                    - text: 人工智能导论 · 下载 58
+                - generic [ref=e203]:
+                  - generic [ref=e204]: TOP 2
+                  - generic [ref=e205]:
+                    - strong [ref=e206]: 机器学习基础实验模板
+                    - text: 机器学习基础 · 下载 41
+                - generic [ref=e207]:
+                  - generic [ref=e208]: TOP 3
+                  - generic [ref=e209]:
+                    - strong [ref=e210]: 数据结构高频题型清单
+                    - text: 数据结构与算法 · 下载 36
+                - generic [ref=e211]:
+                  - generic [ref=e212]: TOP 4
+                  - generic [ref=e213]:
+                    - strong [ref=e214]: Python 课堂案例素材包
+                    - text: Python 程序设计 · 下载 29
+            - generic [ref=e215]:
+              - paragraph [ref=e216]: COURSES
+              - heading "课程分布" [level=3] [ref=e217]
+              - generic [ref=e218]:
+                - generic [ref=e219]:
+                  - generic [ref=e222]: 人工智能导论
+                  - strong [ref=e223]: "1"
+                - generic [ref=e224]:
+                  - generic [ref=e227]: 机器学习基础
+                  - strong [ref=e228]: "1"
+                - generic [ref=e229]:
+                  - generic [ref=e232]: 数据结构与算法
+                  - strong [ref=e233]: "1"
+                - generic [ref=e234]:
+                  - generic [ref=e237]: Python 程序设计
+                  - strong [ref=e238]: "1"
+            - generic [ref=e239]:
+              - paragraph [ref=e240]: GUIDE
+              - heading "使用建议" [level=3] [ref=e241]
+              - list [ref=e242]:
+                - listitem [ref=e243]: 优先查看带“重点”“导学”“实验”标签的资料。
+                - listitem [ref=e244]: 下载量较高的资料通常更贴合当前课堂进度。
+                - listitem [ref=e245]: 当前下载为前端演示动作，后续可接入真实资源服务。
+  - generic [ref=e246]:
+    - generic "Toggle devtools panel" [ref=e247] [cursor=pointer]:
+      - img [ref=e248]
+    - generic "Toggle Component Inspector" [ref=e253] [cursor=pointer]:
+      - img [ref=e254]

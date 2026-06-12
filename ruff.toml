@@ -1,0 +1,71 @@
+# Ruff configuration for ChaoXingAgent
+#
+# Goals:
+#   * format consistently (replaces black + isort)
+#   * catch real bugs (pyflakes / bugbear / pyupgrade)
+#   * stay pragmatic — we do NOT enforce strict pep8 line length on
+#     existing data-heavy modules; instead we focus on undefined names,
+#     unused imports, mutable defaults, etc.
+#
+# Re-format the whole repo with:  .venv/bin/ruff format src/ tests/
+# Lint the whole repo with:       .venv/bin/ruff check src/ tests/
+# Auto-fix safe issues:            .venv/bin/ruff check --fix src/ tests/
+
+target-version = "py311"
+line-length = 110
+
+extend-exclude = [
+    ".venv",
+    "archive",
+    "data",
+    "ChaoXingAgentWorkspace",
+    "ppt-master",
+    "frontend",
+    "claude_sdk",
+    "Model_fine_tuning",
+    "tests/student/integration",  # depends on optional claude_agent_sdk
+]
+
+[lint]
+select = [
+    "F",      # pyflakes (unused imports, undefined names)
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "I",      # isort
+    "UP",     # pyupgrade (modernize syntax)
+    "B",      # flake8-bugbear (real bug patterns)
+    "SIM",    # flake8-simplify
+    "C4",     # comprehensions
+    "PIE",    # misc improvements
+]
+ignore = [
+    "E501",   # long lines: too many docstrings/JSON literals to chase
+    "B008",   # FastAPI Depends() default ARG is intentional
+    "SIM108", # ternary not always more readable
+    "B904",   # `raise ... from err` — too many existing un-chained raises
+    "UP007",  # Optional[...] vs X | None — keep current style
+    "UP045",  # ditto for 3.10 unions
+    "E711",   # `== None` is intentional for SQLAlchemy filters (translates to SQL `IS NULL`)
+    "SIM105", # contextlib.suppress is not always more readable than try/except/pass
+    "B905",   # zip(strict=...) — adding strict=True everywhere would be noisy
+    "B007",   # unused loop control vars — sometimes intentional for parallelism counter
+]
+
+[lint.per-file-ignores]
+"src/agents/student/agent.py" = ["E402"]   # late re-export at module bottom
+"src/agents/student/__init__.py" = ["F401"]  # backend re-export module
+"src/claude_agents/*" = ["E402"]            # sys.path tweak before import
+"src/api/models/__init__.py" = ["F401"]    # re-export module
+"src/api/__init__.py" = ["F401"]
+"src/schemas/__init__.py" = ["F401"]
+"src/services/student/__init__.py" = ["F401"]
+"src/utils/student/__init__.py" = ["F401"]
+"src/agents/__init__.py" = ["F401"]
+"tests/**/*.py" = ["E402", "E741"]          # tests regularly do sys.path tweaks + use one-letter vars in comprehensions
+
+[format]
+# Match the existing project style (double-quoted strings, no magic trailing
+# commas).
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = false

@@ -1,0 +1,678 @@
+{
+  "generate_output": {
+    "presentation_outline": {
+      "lesson_title": "1 电路概念定律",
+      "lesson_summary": "介绍教师沈冰和课程学时安排，包括总成绩构成。；电路的作用与组成部分；电路模型；电压和电流的参考方向基础；电阻元件的定义、线性电阻的伏安特性及电能转换。；电感元件...",
+      "sections": [
+        {
+          "section_id": "sec_1",
+          "title": "课程介绍与教师信息",
+          "summary": "介绍教师沈冰和课程学时安排，包括总成绩构成。",
+          "cards": [
+            {
+              "card_id": "card_1_1",
+              "card_type": "cover",
+              "title": "课程介绍与教师信息",
+              "subtitle": null,
+              "bullets": [
+                "教师：沈冰",
+                "地点：工程综合训练中心巡天405A"
+              ],
+              "body_text": null,
+              "speaker_notes": "大家好，欢迎来到电工学课程。我是沈冰，本课程的授课教师。我的办公室位于工程综合训练中心巡天405A，欢迎大家在学习过程中有任何问题前来咨询。",
+              "visual_plan": [
+                {
+                  "visual_type": "none",
+                  "source_unit_ids": [],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_1"
+              ],
+              "source_page_ids": [
+                "page_1"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_1",
+                "manual_asset_1_slide_3",
+                "manual_asset_1_slide_4",
+                "manual_asset_1_slide_5",
+                "manual_asset_1_slide_6"
+              ],
+              "metadata": {}
+            }
+          ],
+          "source_page_ids": [
+            "page_1"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_1",
+            "manual_asset_1_slide_3",
+            "manual_asset_1_slide_4",
+            "manual_asset_1_slide_5",
+            "manual_asset_1_slide_6"
+          ],
+          "metadata": {}
+        },
+        {
+          "section_id": "sec_2_combined",
+          "title": "电路的作用与组成部分",
+          "summary": "电路的作用与组成部分；电路模型；电压和电流的参考方向基础；电阻元件的定义、线性电阻的伏安特性及电能转换。；电感元件的物理意义、储能原理及磁场能量转换。；电容元件的定义、电流与电压关系、储能特性及线性元件概述。；介绍开关闭合时电源与负载的连接，电压电流关系U=IR和U=E-IR0，功率平衡及负载大小概念。；介绍基尔霍夫生平及其定律，定义支路、结点、回路和网孔等电路基本概念。；基尔霍夫电流定律推广；通过具体电路示例计算各点电位，展示参考点选择对电位值的影响，并总结电位相对性和电压固定性的结论。；说明电工学课程的平时成绩评定标准，涵盖扣分和加分项目。；基于给定电路参数，计算电动势并验证功率平衡。",
+          "cards": [
+            {
+              "card_id": "card_2_1",
+              "card_type": "concept",
+              "title": "1.1   电路的作用与组成部分",
+              "subtitle": null,
+              "bullets": [
+                "1.1 电路的作用与组成部分"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：1.1   电路的作用与组成部分 重点包括：1.1 电路的作用与组成部分 1.1 电路的作用与组成部分 (1) 实现电能的传输、分配与转换 (2)实现信号的传递与处理 1. 电路的作用 电路是电流的通路，是为了某种需要由电工设备或电路元件按一定方式组合而成。",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_7",
+                    "manual_asset_1_slide_8",
+                    "manual_asset_1_slide_9"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_2"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_7",
+                "manual_asset_1_slide_8",
+                "manual_asset_1_slide_9"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_2",
+              "card_type": "concept",
+              "title": "1. 2  电路模型",
+              "subtitle": null,
+              "bullets": [
+                "1. 2 电路模型"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：1. 2  电路模型 重点包括：1. 2 电路模型 1. 2 电路模型 手电筒的电路模型 实际电路由各种作用不同的的电路元件或器件组成。 为了便于用数学方法分析电路, 一般要将实际电路模型化，用足以反映其电磁性质的理想电路元件或其组合来模拟实际电路中的器件，从而构成与实际电路相对应的电...",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_10",
+                    "manual_asset_1_slide_11"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_3"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_10",
+                "manual_asset_1_slide_11"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_3",
+              "card_type": "concept",
+              "title": "1.3  电压和电流的参考方向",
+              "subtitle": null,
+              "bullets": [
+                "1.3 电压和电流的参考方向"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：1.3  电压和电流的参考方向 重点包括：1.3 电压和电流的参考方向 1.3 电压和电流的参考方向 物理中对基本物理量规定的方向 1. 电路基本物理量的实际方向",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_12",
+                    "manual_asset_1_slide_13",
+                    "manual_asset_1_slide_14",
+                    "manual_asset_1_slide_15",
+                    "manual_asset_1_slide_16",
+                    "manual_asset_1_slide_17"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_4"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_12",
+                "manual_asset_1_slide_13",
+                "manual_asset_1_slide_14",
+                "manual_asset_1_slide_15",
+                "manual_asset_1_slide_16",
+                "manual_asset_1_slide_17"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_4",
+              "card_type": "concept",
+              "title": "1.4  电路的基本元件",
+              "subtitle": null,
+              "bullets": [
+                "1.4 电路的基本元件"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：1.4  电路的基本元件 重点包括：1.4 电路的基本元件 介绍电阻元件及其伏安特性，包括线性电阻的定义和表达式。",
+              "visual_plan": [
+                {
+                  "visual_type": "source_table",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_18",
+                    "manual_asset_1_slide_19"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_5"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_18",
+                "manual_asset_1_slide_19"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_5",
+              "card_type": "concept",
+              "title": "描述线圈通有电流时产生磁场、储存磁场能量的性质。",
+              "subtitle": null,
+              "bullets": [
+                "描述线圈通有电流时产生磁场、储存磁场能量的性质。"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：描述线圈通有电流时产生磁场、储存磁场能量的性质。 重点包括：描述线圈通有电流时产生磁场、储存磁场能量的性质。 介绍电感元件的物理意义和储能特性，说明磁场能量的转换过程。",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_20",
+                    "manual_asset_1_slide_21"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_6"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_20",
+                "manual_asset_1_slide_21"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_6",
+              "card_type": "concept",
+              "title": "3.  电容元件",
+              "subtitle": null,
+              "bullets": [
+                "3. 电容元件"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：3.  电容元件 重点包括：3. 电容元件 介绍电容元件的定义、电流与电压关系及储能特性，强调线性元件概念。",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_22",
+                    "manual_asset_1_slide_23",
+                    "manual_asset_1_slide_24"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_7"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_22",
+                "manual_asset_1_slide_23",
+                "manual_asset_1_slide_24"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_7",
+              "card_type": "formula",
+              "title": "1.5 电源有载工作、开路与短路",
+              "subtitle": null,
+              "bullets": [
+                "1.5 电源有载工作、开路与短路"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：1.5 电源有载工作、开路与短路 重点包括：1.5 电源有载工作、开路与短路 1.5 电源有载工作、开路与短路 开关闭合, 接通电源与负载 负载端电压 U = IR 1. 电压电流关系 1.5.1 电源有载工作 (1) 电流的大小由负载决定。 (2) 在电源有内阻时，I  U 。 或 U = E – IR...",
+              "visual_plan": [
+                {
+                  "visual_type": "source_table",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_25",
+                    "manual_asset_1_slide_26",
+                    "manual_asset_1_slide_27",
+                    "manual_asset_1_slide_28",
+                    "manual_asset_1_slide_29",
+                    "manual_asset_1_slide_30",
+                    "manual_asset_1_slide_31"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_8"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_25",
+                "manual_asset_1_slide_26",
+                "manual_asset_1_slide_27",
+                "manual_asset_1_slide_28",
+                "manual_asset_1_slide_29",
+                "manual_asset_1_slide_30",
+                "manual_asset_1_slide_31"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_8",
+              "card_type": "concept",
+              "title": "基尔霍夫(kirchhoff )简介",
+              "subtitle": null,
+              "bullets": [
+                "基尔霍夫(kirchhoff )简介"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：基尔霍夫(kirchhoff )简介 重点包括：基尔霍夫(kirchhoff )简介 基尔霍夫（1824-1887）是德国著名物理学家，化学家，天文家。1845年，年仅21岁的基尔霍夫在上大学期间提出基尔霍夫定律。 基尔霍夫定律 ｛ 基尔霍夫电流定律 基尔霍夫电压定律 (KCL) (KVL) 基尔霍夫(kirchhof...",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_33",
+                    "manual_asset_1_slide_34",
+                    "manual_asset_1_slide_35",
+                    "manual_asset_1_slide_36",
+                    "manual_asset_1_slide_37"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_9"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_33",
+                "manual_asset_1_slide_34",
+                "manual_asset_1_slide_35",
+                "manual_asset_1_slide_36",
+                "manual_asset_1_slide_37"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_9",
+              "card_type": "formula",
+              "title": "电流定律可以推广应用于包围部分电路的任一假设的闭合面。",
+              "subtitle": null,
+              "bullets": [
+                "电流定律可以推广应用于包围部分电路的任一假设的闭合面。"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：电流定律可以推广应用于包围部分电路的任一假设的闭合面。 重点包括：电流定律可以推广应用于包围部分电路的任一假设的闭合面。 电流定律可以推广应用于包围部分电路的任一假设的闭合面。 3．推广 I =? 例: I = 0 IA + IB + IC = 0 广义结点",
+              "visual_plan": [
+                {
+                  "visual_type": "source_formula",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_38",
+                    "manual_asset_1_slide_39",
+                    "manual_asset_1_slide_40",
+                    "manual_asset_1_slide_41",
+                    "manual_asset_1_slide_42",
+                    "manual_asset_1_slide_43",
+                    "manual_asset_1_slide_44"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_10"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_38",
+                "manual_asset_1_slide_39",
+                "manual_asset_1_slide_40",
+                "manual_asset_1_slide_41",
+                "manual_asset_1_slide_42",
+                "manual_asset_1_slide_43",
+                "manual_asset_1_slide_44"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_10",
+              "card_type": "formula",
+              "title": "2. 举例",
+              "subtitle": null,
+              "bullets": [
+                "2. 举例"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：2. 举例 重点包括：2. 举例 2. 举例 求图示电路中各点的电位:Va、Vb、Vc、Vd 。 解： 设 a为参考点， 即Va=0V Vb=Uba= –10×6= 60V Vc=Uca = 4×20 = 80 V Vd =Uda= 6×5 = 30 V 设 b为参...",
+              "visual_plan": [
+                {
+                  "visual_type": "source_formula",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_45",
+                    "manual_asset_1_slide_46",
+                    "manual_asset_1_slide_47",
+                    "manual_asset_1_slide_48",
+                    "manual_asset_1_slide_49",
+                    "manual_asset_1_slide_50"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_11"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_45",
+                "manual_asset_1_slide_46",
+                "manual_asset_1_slide_47",
+                "manual_asset_1_slide_48",
+                "manual_asset_1_slide_49",
+                "manual_asset_1_slide_50"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_11",
+              "card_type": "concept",
+              "title": "电工学（电工技术）",
+              "subtitle": null,
+              "bullets": [
+                "电工学（电工技术）"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：电工学（电工技术） 重点包括：电工学（电工技术） 介绍电工学课程的平时成绩评分规则，包括扣分和加分情况。",
+              "visual_plan": [
+                {
+                  "visual_type": "source_image",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_51"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_12"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_51"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            },
+            {
+              "card_id": "card_2_12",
+              "card_type": "formula",
+              "title": "例: 已知:电路中U=220V，I=5A，内阻R01= R02= 0.6。",
+              "subtitle": null,
+              "bullets": [
+                "例: 已知:电路中U=220V，I=5A，内阻R01= R02= 0.6。"
+              ],
+              "body_text": null,
+              "speaker_notes": "本页主题：例: 已知:电路中U=220V，I=5A，内阻R01= R02= 0.6。 重点包括：例: 已知:电路中U=220V，I=5A，内阻R01= R02= 0.6。 通过一个具体电路示例，计算电源电动势、负载反电动势，并分析功率平衡关系。",
+              "visual_plan": [
+                {
+                  "visual_type": "source_formula",
+                  "source_unit_ids": [
+                    "manual_asset_1_slide_52"
+                  ],
+                  "caption": "",
+                  "metadata": {}
+                }
+              ],
+              "source_section_ids": [
+                "sec_2_combined"
+              ],
+              "source_page_ids": [
+                "page_13"
+              ],
+              "source_unit_ids": [
+                "manual_asset_1_slide_52"
+              ],
+              "metadata": {
+                "fallback": true
+              }
+            }
+          ],
+          "source_page_ids": [
+            "page_2",
+            "page_3",
+            "page_4",
+            "page_5",
+            "page_6",
+            "page_7",
+            "page_8",
+            "page_9",
+            "page_10",
+            "page_11",
+            "page_12",
+            "page_13"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_7",
+            "manual_asset_1_slide_8",
+            "manual_asset_1_slide_9",
+            "manual_asset_1_slide_10",
+            "manual_asset_1_slide_11",
+            "manual_asset_1_slide_12",
+            "manual_asset_1_slide_13",
+            "manual_asset_1_slide_14",
+            "manual_asset_1_slide_15",
+            "manual_asset_1_slide_16",
+            "manual_asset_1_slide_17",
+            "manual_asset_1_slide_18",
+            "manual_asset_1_slide_19",
+            "manual_asset_1_slide_20",
+            "manual_asset_1_slide_21",
+            "manual_asset_1_slide_22",
+            "manual_asset_1_slide_23",
+            "manual_asset_1_slide_24",
+            "manual_asset_1_slide_25",
+            "manual_asset_1_slide_26",
+            "manual_asset_1_slide_27",
+            "manual_asset_1_slide_28",
+            "manual_asset_1_slide_29",
+            "manual_asset_1_slide_30",
+            "manual_asset_1_slide_31",
+            "manual_asset_1_slide_33",
+            "manual_asset_1_slide_34",
+            "manual_asset_1_slide_35",
+            "manual_asset_1_slide_36",
+            "manual_asset_1_slide_37",
+            "manual_asset_1_slide_38",
+            "manual_asset_1_slide_39",
+            "manual_asset_1_slide_40",
+            "manual_asset_1_slide_41",
+            "manual_asset_1_slide_42",
+            "manual_asset_1_slide_43",
+            "manual_asset_1_slide_44",
+            "manual_asset_1_slide_45",
+            "manual_asset_1_slide_46",
+            "manual_asset_1_slide_47",
+            "manual_asset_1_slide_48",
+            "manual_asset_1_slide_49",
+            "manual_asset_1_slide_50",
+            "manual_asset_1_slide_51",
+            "manual_asset_1_slide_52"
+          ],
+          "metadata": {
+            "fallback": true
+          }
+        }
+      ],
+      "knowledge_points": [
+        "电路的基本概念与基本定律",
+        "电压与电流参考方向",
+        "欧姆定律",
+        "基尔霍夫定律",
+        "电路中电位的计算",
+        "课程介绍与教师信息",
+        "沈冰",
+        "电路的作用包括电能传输、分配、转换和信号传递、处理。",
+        "电路的组成部分包括电源、负载和中间环节。",
+        "电源或信号源提供激励，负载产生响应。",
+        "电路模型用理想电路元件模拟实际电路，便于数学分析。",
+        "理想电路元件包括电阻、电感、电容和电源元件。",
+        "手电筒电路模型中，电池是电源元件，灯泡是电阻元件，筒体为理想导体。",
+        "电路的作用与组成部分",
+        "电路模型",
+        "1.1 电路的作用与组成部分",
+        "1. 2 电路模型",
+        "电压和电流的参考方向是电路分析中任意假定的方向，用于确定物理量的正负值。",
+        "电流和电压的参考方向表示方法包括箭头或符号标注。",
+        "实际方向与参考方向一致时，电流或电压值为正；相反时为负。",
+        "欧姆定律在参考方向相同时为U=IR，相反时为U=-IR，涉及两套正负号。",
+        "通常取电压和电流参考方向相同以简化分析。",
+        "电压和电流的参考方向基础",
+        "1.3 电压和电流的参考方向",
+        "电阻元件消耗电能并转换为热能，电压与电流成线性关系。",
+        "线性电阻的伏安特性是一条过原点的直线，遵循欧姆定律。",
+        "电感元件产生磁场并储存磁场能量，电流变化时与电源交换能量。",
+        "电容元件储存电场能量，电压变化时产生电流，恒定电压下视为开路。",
+        "线性元件（R、L、C）的值为常数，电能与磁场能或电场能相互转换。",
+        "电阻元件",
+        "电感元件",
+        "电容元件",
+        "1.4 电路的基本元件",
+        "描述线圈通有电流时产生磁场、储存磁场能量的性质。",
+        "3. 电容元件",
+        "电源有载工作时电压电流关系U=IR和U=E-IR0",
+        "功率平衡：电源产生功率等于负载取用功率加内阻消耗功率",
+        "根据U、I方向判别电源与负载的方法",
+        "电气设备额定值的定义及运行状态",
+        "白炽灯示例中的电流、电阻和电能计算",
+        "电源开路时电流为零，电压视电路而定",
+        "电源短路时电压为零，电流视电路而定",
+        "电源有载工作",
+        "1.5 电源有载工作、开路与短路",
+        "基尔霍夫是德国物理学家，21岁提出基尔霍夫定律。",
+        "支路是含元器件无岔路的路径，结点是三条以上支路联接点，回路是闭合路径，网孔是内部无支路的回路。",
+        "KCL定律：在任一瞬间，流向任一结点的电流等于流出该结点的电流，公式为∑I入=∑I出或∑I=0。",
+        "KCL解题步骤包括设置电流参考方向、找结点列方程、求解，注意事项包括与元件无关、按参考方向列写。",
+        "基尔霍夫简介与基本概念",
+        "基尔霍夫(kirchhoff )简介",
+        "电流定律可推广至假设闭合面",
+        "KVL定律定义与电位升降关系",
+        "KVL应用步骤与注意事项",
+        "KVL推广至开口回路",
+        "KVL示例方程",
+        "KCL应用示例",
+        "电位概念与计算步骤",
+        "基尔霍夫电流定律推广",
+        "电流定律可以推广应用于包围部分电路的任一假设的闭合面。",
+        "电位计算依赖于参考点的选择",
+        "电压值在电路中是固定的，与参考点无关",
+        "开关状态改变电流路径，影响电位值",
+        "电路分析包括支路、结点计数和等电位点识别",
+        "电位器滑动会改变回路电流，从而影响相关点电位",
+        "电位计算与参考点示例",
+        "2. 举例",
+        "电工学课程平时成绩的评分规则",
+        "电源电动势和负载反电动势的计算方法",
+        "电路中的功率平衡关系",
+        "课程评分规则",
+        "电路计算示例",
+        "电工学（电工技术）",
+        "例: 已知:电路中U=220V，I=5A，内阻R01= R02= 0.6。",
+        "教师：沈冰",
+        "地点：工程综合训练中心巡天405A"
+      ],
+      "metadata": {
+        "source": "generate_pipeline",
+        "section_count": 2,
+        "card_count": 13,
+        "fallback": true
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="616" height="202" viewBox="0 0 616 202" role="img" aria-label="知微智课 智慧学习平台">
+  <defs>
+    <linearGradient id="bookBlue" x1="28" y1="34" x2="169" y2="164" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#126cff"/>
+      <stop offset="1" stop-color="#1f73f2"/>
+    </linearGradient>
+  </defs>
+  <rect width="616" height="202" fill="#fff"/>
+  <g transform="translate(24 28)">
+    <path d="M6 13c0-4.2 3.4-7.5 7.6-7.2l54.5 4c17.4 1.3 31 15.8 31 33.2v101.7c0 4.3-5.2 6.5-8.3 3.5l-11.6-11.5c-5.4-5.4-12.6-8.6-20.3-9L13.2 125C9.1 124.7 6 121.4 6 117.3V13Z" fill="url(#bookBlue)"/>
+    <path d="M106.5 25.6c0-4.6 3.8-8.2 8.4-8l46 2.1c6.6.3 11.8 5.7 11.8 12.3v83.4c0 6.9-5.7 12.4-12.6 12.2l-43.1-1.4c-5.8-.2-10.5 4.4-10.5 10.2V25.6Z" fill="url(#bookBlue)"/>
+    <path d="M106.5 25.6v110.8" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M137.5 20.6 172.8 55h-27.1c-4.5 0-8.2-3.7-8.2-8.2V20.6Z" fill="#111827"/>
+    <rect x="121" y="49" width="18" height="18" rx="2" fill="#fff" opacity=".96"/>
+    <rect x="143" y="69" width="18" height="18" rx="2" fill="#fff" opacity=".96"/>
+    <rect x="121" y="91" width="18" height="18" rx="2" fill="#fff" opacity=".96"/>
+  </g>
+  <g fill="#111827" font-family="'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', sans-serif">
+    <text x="214" y="105" font-size="58" font-weight="800" letter-spacing="5">知微智课</text>
+    <text x="270" y="158" font-size="25" font-weight="400" fill="#7a8391" letter-spacing="15">智慧学习平台</text>
+  </g>
+  <path d="M218 147h38M535 147h38" stroke="#a4abb6" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

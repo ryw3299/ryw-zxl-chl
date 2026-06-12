@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <defs>
+        <linearGradient id="trackGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="{{ colors.primary }}"/>
+            <stop offset="50%" stop-color="{{ colors.secondary_accent }}"/>
+            <stop offset="100%" stop-color="{{ colors.accent }}"/>
+        </linearGradient>
+        <filter id="sumCardShadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+            <feOffset dx="0" dy="3" result="offsetblur"/>
+            <feFlood flood-color="#1F2937" flood-opacity="0.1" result="shadowColor"/>
+            <feComposite in="shadowColor" in2="offsetblur" operator="in" result="shadow"/>
+            <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+    </defs>
+
+    <rect width="1280" height="720" fill="{{ colors.bg }}"/>
+    <rect x="0" y="0" width="1280" height="180" fill="{{ colors.info_bg }}"/>
+
+    <g id="page-header">
+        <rect x="60" y="44" width="6" height="32" fill="{{ colors.primary }}"/>
+        <text x="80" y="68" font-family="{{ typography.body_family }}" font-size="14" font-weight="600" fill="{{ colors.text_secondary }}" letter-spacing="3">章节小结</text>
+        <text x="640" y="116" text-anchor="middle" font-family="{{ typography.title_family }}" font-size="38" font-weight="700" fill="{{ colors.text }}">{{ title }}</text>
+        {% if subtitle %}
+        <text x="640" y="156" text-anchor="middle" font-family="{{ typography.emphasis_family }}" font-size="20" font-style="italic" fill="{{ colors.text_secondary }}" letter-spacing="6">{{ subtitle }}</text>
+        {% endif %}
+    </g>
+
+    <line x1="140" y1="270" x2="1140" y2="270" stroke="url(#trackGrad)" stroke-width="4" stroke-linecap="round"/>
+
+    {% set card_w = 280 %}
+    {% set gap = 40 %}
+    {% set total_w = bullets|length * card_w + (bullets|length - 1) * gap %}
+    {% set start_x = (1280 - total_w) / 2 %}
+    {% for bullet in bullets %}
+    {% set cx = start_x + loop.index0 * (card_w + gap) + card_w / 2 %}
+    {% set x = start_x + loop.index0 * (card_w + gap) %}
+    <circle cx="{{ cx }}" cy="270" r="20" fill="{{ colors.bg }}" stroke="{{ colors.primary }}" stroke-width="4"/>
+    <text x="{{ cx }}" y="278" text-anchor="middle" font-family="{{ typography.emphasis_family }}" font-size="18" font-weight="800" fill="{{ colors.primary }}">{{ loop.index }}</text>
+
+    <g filter="url(#sumCardShadow)">
+        <rect x="{{ x }}" y="310" width="{{ card_w }}" height="240" rx="14" fill="{{ colors.bg }}" stroke="{{ colors.border }}" stroke-width="1"/>
+        <rect x="{{ x }}" y="310" width="{{ card_w }}" height="8" rx="4" fill="{{ colors.primary }}"/>
+        <text x="{{ cx }}" y="370" text-anchor="middle" font-family="{{ typography.body_family }}" font-size="20" font-weight="700" fill="{{ colors.text }}">{{ bullet.text }}</text>
+        {% if bullet.sub %}
+        <line x1="{{ x + 30 }}" y1="396" x2="{{ x + card_w - 30 }}" y2="396" stroke="{{ colors.border }}" stroke-width="1"/>
+        <text x="{{ cx }}" y="430" text-anchor="middle" font-family="{{ typography.body_family }}" font-size="{{ typography.body }}" fill="{{ colors.text_secondary }}">{{ bullet.sub }}</text>
+        {% endif %}
+    </g>
+    {% endfor %}
+
+    {% if teaching_goal %}
+    <rect x="60" y="580" width="1160" height="56" rx="10" fill="{{ colors.primary }}"/>
+    <text x="640" y="616" text-anchor="middle" font-family="{{ typography.body_family }}" font-size="18" fill="#FFFFFF">
+        <tspan font-weight="700">核心金句：</tspan>{{ teaching_goal }}
+    </text>
+    {% endif %}
+
+    <text x="60" y="706" font-family="{{ typography.body_family }}" font-size="12" fill="{{ colors.text_secondary }}" letter-spacing="1">{{ deck_title }}　·　章节小结</text>
+    <text x="1220" y="706" text-anchor="end" font-family="{{ typography.emphasis_family }}" font-size="12" fill="{{ colors.text_secondary }}" letter-spacing="2">{{ '%02d' % slide_id }} / {{ slide_count }}</text>
+</svg>

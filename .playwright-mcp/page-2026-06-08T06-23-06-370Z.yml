@@ -1,0 +1,198 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e5]:
+    - complementary [ref=e6]:
+      - generic [ref=e7]:
+        - img [ref=e9]
+        - generic [ref=e11]:
+          - strong [ref=e12]: 知微智课
+          - generic [ref=e13]: 让学习更高效
+      - navigation [ref=e14]:
+        - button "首页" [ref=e15] [cursor=pointer]:
+          - img [ref=e17]
+          - generic [ref=e19]: 首页
+        - button "我的课程" [ref=e20] [cursor=pointer]:
+          - img [ref=e22]
+          - generic [ref=e24]: 我的课程
+        - button "资源空间" [ref=e25] [cursor=pointer]:
+          - img [ref=e27]
+          - generic [ref=e29]: 资源空间
+        - button "题库练习" [ref=e30] [cursor=pointer]:
+          - img [ref=e32]
+          - generic [ref=e35]: 题库练习
+        - button "学习记录" [ref=e36] [cursor=pointer]:
+          - img [ref=e38]
+          - generic [ref=e40]: 学习记录
+        - button "成绩排行" [ref=e41] [cursor=pointer]:
+          - img [ref=e43]
+          - generic [ref=e46]: 成绩排行
+        - button "知识图谱" [ref=e47] [cursor=pointer]:
+          - img [ref=e49]
+          - generic [ref=e52]: 知识图谱
+        - button "学院分享" [ref=e53] [cursor=pointer]:
+          - img [ref=e55]
+          - generic [ref=e57]: 学院分享
+      - generic [ref=e58]:
+        - button "专注学习 · 每天进步一点点" [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+          - generic [ref=e63]: 专注学习 · 每天进步一点点
+        - button "退出登录" [ref=e64] [cursor=pointer]:
+          - img [ref=e66]
+          - generic [ref=e68]: 退出登录
+        - generic [ref=e69]: 知微智课 v2.1
+    - main [ref=e71]:
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - heading "上午好，王同学" [level=1] [ref=e75]: 上午好，王同学
+            - paragraph [ref=e81]: 今天是 2026年6月6日，周一
+          - generic [ref=e82]:
+            - button "搜索" [ref=e83] [cursor=pointer]:
+              - img [ref=e84]
+            - button "通知" [ref=e87] [cursor=pointer]:
+              - img [ref=e88]
+            - generic [ref=e92]: 王
+        - generic [ref=e93]:
+          - main [ref=e94]:
+            - generic [ref=e95]:
+              - generic [ref=e96]:
+                - generic [ref=e97]: 继续学习
+                - heading "人工智能导论" [level=2] [ref=e98]
+                - paragraph [ref=e99]: 第四章 机器学习基础
+                - generic [ref=e100]:
+                  - button "继续学习" [ref=e101] [cursor=pointer]
+                  - button "学习笔记" [ref=e102] [cursor=pointer]
+              - generic [ref=e103]:
+                - img [ref=e104]
+                - generic [ref=e107]:
+                  - strong [ref=e108]: 68%
+                  - generic [ref=e109]: 学习进度
+              - generic [ref=e110]:
+                - paragraph [ref=e112]: 今日目标：
+                - paragraph [ref=e113]: 完成第一节
+                - paragraph [ref=e114]: 基础概念学习
+                - img [ref=e115]
+              - generic [ref=e117]:
+                - generic [ref=e118]:
+                  - img [ref=e119]
+                  - text: 本周学习 12 小时
+                - generic [ref=e122]:
+                  - img [ref=e123]
+                  - text: 已完成 8 / 12 章
+                - generic [ref=e126]:
+                  - img [ref=e127]
+                  - text: AI 助学中
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - heading "我的课程" [level=3] [ref=e131]
+                - button "查看全部 →" [ref=e132] [cursor=pointer]
+              - generic [ref=e133]:
+                - article [ref=e134] [cursor=pointer]:
+                  - generic [ref=e135]:
+                    - img "机器学习基础" [ref=e136]
+                    - generic [ref=e137]: AI 热门
+                  - generic [ref=e138]:
+                    - heading "机器学习基础" [level=4] [ref=e139]
+                    - emphasis [ref=e143]: 42%
+                    - paragraph [ref=e144]: 本周学习 9 小时
+                - article [ref=e145] [cursor=pointer]:
+                  - img "数据结构与算法" [ref=e147]
+                  - generic [ref=e148]:
+                    - heading "数据结构与算法" [level=4] [ref=e149]
+                    - emphasis [ref=e153]: 15%
+                    - paragraph [ref=e154]: 本周学习 6 小时
+                - article [ref=e155] [cursor=pointer]:
+                  - img "Python 程序设计" [ref=e157]
+                  - generic [ref=e158]:
+                    - heading "Python 程序设计" [level=4] [ref=e159]
+                    - emphasis [ref=e163]: 34%
+                    - paragraph [ref=e164]: 本周学习 8 小时
+            - generic [ref=e165]:
+              - generic [ref=e166]:
+                - heading "学习建议" [level=3] [ref=e167]: 学习建议
+                - paragraph [ref=e169]: 子周的练习完成情况整体不错，正确率有提升（45%）。建议你优先复习错误较多的知识点，同时继续保持每日学习节奏，加油！
+                - button "去练习 →" [ref=e170] [cursor=pointer]:
+                  - text: 去练习
+                  - generic [ref=e171]: →
+              - generic [ref=e172]:
+                - generic [ref=e173]:
+                  - text: Keep
+                  - text: going!
+                - img [ref=e175]
+          - complementary [ref=e184]:
+            - generic [ref=e185]:
+              - generic [ref=e186]:
+                - heading "今日待办" [level=3] [ref=e187]
+                - button "•••" [ref=e188] [cursor=pointer]
+              - generic [ref=e189]:
+                - generic [ref=e190] [cursor=pointer]:
+                  - checkbox "完成人工智能导论第三章练习" [checked]
+                  - strong [ref=e192]: 完成人工智能导论第三章练习
+                - generic [ref=e193] [cursor=pointer]:
+                  - checkbox "复习机器学习核心概念 今天截止"
+                  - strong [ref=e195]: 复习机器学习核心概念
+                  - emphasis [ref=e196]: 今天截止
+                - generic [ref=e197] [cursor=pointer]:
+                  - checkbox "Python 课后编程作业 本周"
+                  - strong [ref=e199]: Python 课后编程作业
+                  - emphasis [ref=e200]: 本周
+                - generic [ref=e201] [cursor=pointer]:
+                  - checkbox "数据结构错题回顾 本周"
+                  - strong [ref=e203]: 数据结构错题回顾
+                  - emphasis [ref=e204]: 本周
+              - paragraph [ref=e205]: 已完成 1 / 4 项
+            - generic [ref=e206]:
+              - heading "本周学习数据" [level=3] [ref=e207]
+              - generic [ref=e208]:
+                - generic [ref=e209]:
+                  - strong [ref=e210]: "28.5"
+                  - text: 小时
+                  - paragraph [ref=e211]: 总学习时长
+                - generic [ref=e212]:
+                  - strong [ref=e213]: "4.3"
+                  - text: 小时
+                  - paragraph [ref=e214]:
+                    - text: 日均学习
+                    - emphasis [ref=e215]: 超过 85% 同学
+              - generic [ref=e216]:
+                - generic [ref=e217]:
+                  - generic [ref=e218]: "3.5"
+                  - generic [ref=e220]: 一
+                - generic [ref=e221]:
+                  - generic [ref=e222]: "5.2"
+                  - generic [ref=e224]: 二
+                - generic [ref=e225]:
+                  - generic [ref=e226]: "2.1"
+                  - generic [ref=e228]: 三
+                - generic [ref=e229]:
+                  - generic [ref=e230]: "6"
+                  - generic [ref=e232]: 四
+                - generic [ref=e233]:
+                  - generic [ref=e234]: "4.5"
+                  - generic [ref=e236]: 五
+                - generic [ref=e237]:
+                  - generic [ref=e238]: "4.8"
+                  - generic [ref=e240]: 六
+                - generic [ref=e241]:
+                  - generic [ref=e242]: "2.4"
+                  - generic [ref=e244]: 日
+            - generic [ref=e245]:
+              - heading "最近学习记录" [level=3] [ref=e246]
+              - generic [ref=e247]:
+                - article [ref=e248]:
+                  - img [ref=e250]
+                  - generic [ref=e252]:
+                    - strong [ref=e253]: 人工智能导论 · 第四章 机器学习基础
+                    - paragraph [ref=e254]: 学习 42 分钟 · 进度 68%
+                  - time [ref=e255]: 今天 10:24
+                - article [ref=e256]:
+                  - img [ref=e258]
+                  - generic [ref=e261]:
+                    - strong [ref=e262]: 数据结构 · 栈和队列
+                    - paragraph [ref=e263]: 错题 21 题 · 正确率 30%
+                  - time [ref=e264]: 昨天 16:15
+              - button "查看全部记录 →" [ref=e265] [cursor=pointer]
+  - generic [ref=e266]:
+    - generic "Toggle devtools panel" [ref=e267] [cursor=pointer]:
+      - img [ref=e268]
+    - generic "Toggle Component Inspector" [ref=e273] [cursor=pointer]:
+      - img [ref=e274]

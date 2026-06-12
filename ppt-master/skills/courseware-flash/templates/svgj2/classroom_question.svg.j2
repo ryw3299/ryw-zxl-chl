@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <defs>
+        <linearGradient id="qBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFFFFF"/>
+            <stop offset="100%" stop-color="{{ colors.info_bg }}"/>
+        </linearGradient>
+        <radialGradient id="bulbGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="{{ colors.accent }}" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="{{ colors.accent }}" stop-opacity="0"/>
+        </radialGradient>
+    </defs>
+
+    <rect width="1280" height="720" fill="url(#qBg)"/>
+
+    <g fill="{{ colors.primary }}" fill-opacity="0.06">
+        <circle cx="120" cy="130" r="4"/>
+        <circle cx="180" cy="170" r="3"/>
+        <circle cx="1160" cy="580" r="5"/>
+        <circle cx="1100" cy="620" r="3"/>
+        <circle cx="200" cy="600" r="4"/>
+    </g>
+
+    <g id="page-tag">
+        <rect x="60" y="50" width="6" height="32" fill="{{ colors.accent }}"/>
+        <text x="80" y="74" font-family="{{ typography.body_family }}" font-size="14" font-weight="600" fill="{{ colors.text_secondary }}" letter-spacing="3">课堂思考</text>
+    </g>
+
+    <g id="bulb-decor">
+        <circle cx="280" cy="360" r="160" fill="url(#bulbGlow)"/>
+        <circle cx="280" cy="360" r="110" fill="{{ colors.bg }}" stroke="{{ colors.accent }}" stroke-width="2"/>
+        <circle cx="280" cy="360" r="90" fill="{{ colors.panel_yellow }}"/>
+        <use data-icon="tabler-filled/bulb" x="232" y="312" width="96" height="96" fill="{{ colors.accent }}"/>
+        <text x="280" y="496" text-anchor="middle" font-family="{{ typography.emphasis_family }}" font-size="56" font-weight="800" fill="{{ colors.primary }}" letter-spacing="2">Q{{ question_number or '1' }}</text>
+    </g>
+
+    <g id="question-block">
+        <text x="450" y="220" font-family="{{ typography.body_family }}" font-size="16" font-weight="600" fill="{{ colors.accent }}" letter-spacing="2">互动讨论 — {{ interaction_time or '2 分钟' }}</text>
+
+        <text x="450" y="290" font-family="{{ typography.title_family }}" font-size="32" font-weight="700" fill="{{ colors.text }}">{{ title }}</text>
+        {% if subtitle %}
+        <text x="450" y="340" font-family="{{ typography.title_family }}" font-size="32" font-weight="700" fill="{{ colors.primary }}">{{ subtitle }}</text>
+        {% endif %}
+
+        {% if bullets %}
+        <g id="tag-area">
+            {% for bullet in bullets %}
+            {% set tx = 450 + (loop.index0 % 3) * 130 %}
+            {% set ty = 400 + (loop.index0 // 3) * 50 %}
+            <rect x="{{ tx }}" y="{{ ty }}" width="120" height="36" rx="18" fill="{{ colors.bg }}" stroke="{% if loop.index <= 3 %}{{ colors.primary }}{% else %}{{ colors.accent }}{% endif %}" stroke-width="1.5"/>
+            <text x="{{ tx + 60 }}" y="{{ ty + 24 }}" text-anchor="middle" font-family="{{ typography.body_family }}" font-size="16" font-weight="600" fill="{% if loop.index <= 3 %}{{ colors.primary }}{% else %}{{ colors.accent }}{% endif %}">{{ bullet.text }}</text>
+            {% endfor %}
+        </g>
+        {% endif %}
+    </g>
+
+    {% if teaching_goal %}
+    <g id="hint-strip">
+        <rect x="450" y="520" width="770" height="86" rx="12" fill="{{ colors.bg }}" stroke="{{ colors.border }}" stroke-width="1"/>
+        <rect x="450" y="520" width="6" height="86" fill="{{ colors.accent }}"/>
+        <use data-icon="tabler-filled/info-circle" x="476" y="538" width="22" height="22" fill="{{ colors.accent }}"/>
+        <text x="508" y="554" font-family="{{ typography.body_family }}" font-size="13" font-weight="700" fill="{{ colors.accent }}" letter-spacing="1">提示</text>
+        <text x="476" y="584" font-family="{{ typography.body_family }}" font-size="16" fill="{{ colors.text_secondary }}">{{ teaching_goal }}</text>
+    </g>
+    {% endif %}
+
+    <text x="640" y="656" text-anchor="middle" font-family="{{ typography.body_family }}" font-size="15" font-style="italic" fill="{{ colors.text_secondary }}">·　小组讨论，请代表回答　·</text>
+
+    <text x="60" y="700" font-family="{{ typography.body_family }}" font-size="12" fill="{{ colors.text_secondary }}" letter-spacing="1">{{ deck_title }}　·　课堂思考</text>
+    <text x="1220" y="700" text-anchor="end" font-family="{{ typography.emphasis_family }}" font-size="12" fill="{{ colors.text_secondary }}" letter-spacing="2">{{ '%02d' % slide_id }} / {{ slide_count }}</text>
+</svg>

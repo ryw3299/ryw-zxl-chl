@@ -1,0 +1,1389 @@
+{
+  "parser_output": {
+    "structured_content": {
+      "course_id": null,
+      "lesson_id": "LESSON_20260316_160101",
+      "source_asset_ids": [
+        "manual_asset_1"
+      ],
+      "lesson_summary": "本章介绍电路分析方法，包括等效变换、支路电流法、叠加原理等基本方法，以及非线性电阻电路分析。; 本部分介绍网络等效变换的注意要点，包括等效的定义、条件、适用范围，以及电阻电路的等效变换，涵盖串联、并联和混联电路的特点、公式、应用和计算示例。; 本部分继续讲解电路分析方法，包括滑动变阻器在不同位置的计算、电流估算和等效电阻计算。; 本部分介绍电阻星形联结与三角形联结的等效变换，包括定义、条件、公式推导和对称情况下的简化，最后通过一个计算总电阻的示例进行应用。; 本部分包含...",
+      "pages": [
+        {
+          "page_id": "page_1",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_1",
+          "page": 1,
+          "title": "电工学（电工技术）",
+          "content": "电工学（电工技术）\n第2章   电路的分析方法",
+          "summary": "电工学（电工技术） 第2章 电路的分析方法",
+          "key_points": [
+            "电工学（电工技术）"
+          ],
+          "knowledge_points": [
+            "电工学（电工技术）"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_1"
+          ],
+          "page_role": "cover",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_2",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_2",
+          "page": 2,
+          "title": "第2章  电路的分析方法",
+          "content": "第2章  电路的分析方法\n2.1 电路的等效变换\n2.2 支路电流法\n2.4 结点电压法\n2.5 叠加原理\n2.6戴维宁定理与诺顿定理\n2.7 受控源电路的分析\n2.8 非线性电阻电路的分析\n目录\n2.3 回路电流法",
+          "summary": "第2章 电路的分析方法 2.1 电路的等效变换 2.2 支路电流法 2.4 结点电压法 2.5 叠加原理 2.6戴维宁定理与诺顿定理 2.7 受控源电路的分析 2.8 非线性电阻电路的分析 目录 2.3 回路电流法",
+          "key_points": [
+            "第2章  电路的分析方法"
+          ],
+          "knowledge_points": [
+            "第2章  电路的分析方法"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_2"
+          ],
+          "page_role": "agenda",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_3",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_3",
+          "page": 3,
+          "title": "本章要求：",
+          "content": "本章要求：\n1. 掌握支路电流法、叠加原理和戴维宁定理等\n电路的基本分析方法;\n2. 掌握实际电源的两种模型及其等效变换;\n3. 了解非线性电阻元件的伏安特性及静态电阻、\n动态电阻的概念，以及简单非线性电阻电路\n的图解分析法。\n第2章  电路的分析方法",
+          "summary": "本章要求： 1. 掌握支路电流法、叠加原理和戴维宁定理等 电路的基本分析方法; 2. 掌握实际电源的两种模型及其等效变换; 3. 了解非线性电阻元件的伏安特性及静态电阻、 动态电阻的概念，以及简单非线性电阻电路 的图解分析法。 第2章 电路的分析方法",
+          "key_points": [
+            "本章要求："
+          ],
+          "knowledge_points": [
+            "本章要求："
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_3"
+          ],
+          "page_role": "definition",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_4",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_3",
+          "page": 4,
+          "title": "2.1  电路的等效变换",
+          "content": "2.1  电路的等效变换\n2.1.1  等效变换的概念\n实际电路中有时电路结构比较复杂，元器件数量较多，为了便于分析和计算，可以在一定条件下对电路进行化简。\n1.二端网络的概念\n二端网络:具有两个出线端的部分电路\nU1 = U2， I1 = I2\n则：N1 ，N2\n互为等效网络",
+          "summary": "2.1 电路的等效变换 2.1.1 等效变换的概念 实际电路中有时电路结构比较复杂，元器件数量较多，为了便于分析和计算，可以在一定条件下对电路进行化简。 1.二端网络的概念 二端网络:具有两个出线端的部分电路 U1 = U2， I1 = I2 则：N1 ，N2 互为等效网络",
+          "key_points": [
+            "2.1  电路的等效变换"
+          ],
+          "knowledge_points": [
+            "2.1  电路的等效变换"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_4"
+          ],
+          "page_role": "definition",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_5",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_3",
+          "page": 5,
+          "title": "二端网络的概念：",
+          "content": "二端网络的概念：\n二端网络：具有两个出线端的部分电路。\n无源二端网络：二端网络中没有电源。\n有源二端网络：二端网络中含有电源。\n无源二端网络\n有源二端网络",
+          "summary": "二端网络的概念： 二端网络：具有两个出线端的部分电路。 无源二端网络：二端网络中没有电源。 有源二端网络：二端网络中含有电源。 无源二端网络 有源二端网络",
+          "key_points": [
+            "二端网络的概念："
+          ],
+          "knowledge_points": [
+            "二端网络的概念："
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_5"
+          ],
+          "page_role": "definition",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_6",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_4",
+          "page": 6,
+          "title": "2.网络等效变换注意要点",
+          "content": "2.网络等效变换注意要点\n(1) 等效只是针对网络的端口而言，对外等效，对内并不要求等效。\n(3) 不同网络端口有不同的等效电路。如果外部各对应端点之间的伏安关系完全相同，这两个多端点网络互为等效。\n(2) 在等效条件下，两个互为等效的网络之间可以互相代换。\n(4) 等效变换只适合线性网络，非线性网络之间一般不能进行等效变换。",
+          "summary": "2.网络等效变换注意要点 (1) 等效只是针对网络的端口而言，对外等效，对内并不要求等效。 (3) 不同网络端口有不同的等效电路。如果外部各对应端点之间的伏安关系完全相同，这两个多端点网络互为等效。 (2) 在等效条件下，两个互为等效的网络之间可以互相代换。 (4) 等效变换只适合线性网络，非线性网络之间一般不能...",
+          "key_points": [
+            "2.网络等效变换注意要点"
+          ],
+          "knowledge_points": [
+            "2.网络等效变换注意要点"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_6",
+            "manual_asset_1_slide_7",
+            "manual_asset_1_slide_8",
+            "manual_asset_1_slide_9",
+            "manual_asset_1_slide_10",
+            "manual_asset_1_slide_11",
+            "manual_asset_1_slide_12"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_7",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_5",
+          "page": 7,
+          "title": "解: (2)在 c 点：",
+          "content": "解: (2)在 c 点：\n等效电阻 R 为Rca与RL并联，\n再与 Rec串联，即\n注意，这时滑动触点虽在变阻器的中点，但是\n输出电压不等于电源电压的一半，而是 73.5 V。",
+          "summary": "分析滑动变阻器在c、d、e点的电路情况，包括等效电阻计算和电流风险。",
+          "key_points": [
+            "解: (2)在 c 点："
+          ],
+          "knowledge_points": [
+            "解: (2)在 c 点："
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_13",
+            "manual_asset_1_slide_14",
+            "manual_asset_1_slide_15"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_8",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_6",
+          "page": 8,
+          "title": "例2:试估算图示电路中的电流。",
+          "content": "例2:试估算图示电路中的电流。",
+          "summary": "介绍两个电路计算示例：电流估算和等效电阻计算。",
+          "key_points": [
+            "例2:试估算图示电路中的电流。"
+          ],
+          "knowledge_points": [
+            "例2:试估算图示电路中的电流。"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_16",
+            "manual_asset_1_slide_17"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_9",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_7",
+          "page": 9,
+          "title": "3. 电阻星形联结与三角形联结的等效变换",
+          "content": "3. 电阻星形联结与三角形联结的等效变换\nY-等效变换\n电阻Y形联结",
+          "summary": "3. 电阻星形联结与三角形联结的等效变换 Y-等效变换 电阻Y形联结",
+          "key_points": [
+            "3. 电阻星形联结与三角形联结的等效变换"
+          ],
+          "knowledge_points": [
+            "3. 电阻星形联结与三角形联结的等效变换"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_19",
+            "manual_asset_1_slide_20",
+            "manual_asset_1_slide_21",
+            "manual_asset_1_slide_22",
+            "manual_asset_1_slide_23",
+            "manual_asset_1_slide_24",
+            "manual_asset_1_slide_25"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_10",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_8",
+          "page": 10,
+          "title": "例2：",
+          "content": "例2：\n计算下图电路中的电流 I1 。\n解：将联成形abc的电阻变换为Y形联结的等效电阻",
+          "summary": "例2： 计算下图电路中的电流 I1 。 解：将联成形abc的电阻变换为Y形联结的等效电阻",
+          "key_points": [
+            "例2："
+          ],
+          "knowledge_points": [
+            "例2："
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_26",
+            "manual_asset_1_slide_27",
+            "manual_asset_1_slide_28",
+            "manual_asset_1_slide_29",
+            "manual_asset_1_slide_30"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_11",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_9",
+          "page": 11,
+          "title": "（2）  电流源模型",
+          "content": "（2）  电流源模型\nU0=ISR0\n电流源的外特性\n理想电流源\nO\nIS\n电流源是由电流 IS 和内阻 R0 并联的电源的电路模型。\n由上图电路可得:\n若 R0 = \n理想电流源 :  I  IS\n若 R0 >>RL ，I  IS ，可近似认为是理想电流源。\n电流源",
+          "summary": "电流源模型由电流IS和内阻R0并联构成，理想电流源内阻无穷大，输出电流恒定，电压由外电路决定。",
+          "key_points": [
+            "（2）  电流源模型"
+          ],
+          "knowledge_points": [
+            "（2）  电流源模型"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_31",
+            "manual_asset_1_slide_32"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_12",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_10",
+          "page": 12,
+          "title": "由图a：U = E－ IR0",
+          "content": "由图a：U = E－ IR0\n由图b： U = （IS – I）R1\n= ISR1 – IR1\n等效变换要求对外电路输出的U, I值相等\n1.   电源的两种电模型之间的等效变换",
+          "summary": "电源等效变换要求对外电路输出U、I值相等，变换时需注意参考方向对应、理想电源间无等效关系，且等效仅对外电路有效。",
+          "key_points": [
+            "由图a：U = E－ IR0"
+          ],
+          "knowledge_points": [
+            "由图a：U = E－ IR0"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_33",
+            "manual_asset_1_slide_34"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_13",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_11",
+          "page": 13,
+          "title": "例1:",
+          "content": "例1:\n求下列各电路的等效电源\n解:\n与理想电压源并联的元件，当只考虑电压时，与其并联的元件不起作用(可以拿掉)，但要考虑电流时，其作用不可忽略\n与理想电流源串联的元件，当只考虑电流时，与其串联的元件不起作用(可以拿掉)，但要考虑电压时，其作用不可忽略",
+          "summary": "通过示例说明等效电源求解方法，强调与理想电压源并联或理想电流源串联的元件在特定条件下的处理方式。",
+          "key_points": [
+            "例1:"
+          ],
+          "knowledge_points": [
+            "例1:"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_35"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_14",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_12",
+          "page": 14,
+          "title": "例2:",
+          "content": "例2:\n试用电压源与电流源等效变换的方法\n计算2电阻中的电流。\n解:\n由图(d)可得",
+          "summary": "例2: 试用电压源与电流源等效变换的方法 计算2电阻中的电流。 解: 由图(d)可得",
+          "key_points": [
+            "例2:"
+          ],
+          "knowledge_points": [
+            "例2:"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_36",
+            "manual_asset_1_slide_37",
+            "manual_asset_1_slide_38",
+            "manual_asset_1_slide_39",
+            "manual_asset_1_slide_40",
+            "manual_asset_1_slide_41"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_15",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_13",
+          "page": 15,
+          "title": "各个电阻所消耗的功率分别是：",
+          "content": "各个电阻所消耗的功率分别是：\n两者平衡：\n(60+20)W=(36+16+8+20)W\n80W=80W",
+          "summary": "各个电阻所消耗的功率分别是： 两者平衡： (60+20)W=(36+16+8+20)W 80W=80W",
+          "key_points": [
+            "各个电阻所消耗的功率分别是："
+          ],
+          "knowledge_points": [
+            "各个电阻所消耗的功率分别是："
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_42",
+            "manual_asset_1_slide_43",
+            "manual_asset_1_slide_44",
+            "manual_asset_1_slide_45",
+            "manual_asset_1_slide_46"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_16",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_14",
+          "page": 16,
+          "title": "支路数b =4，但恒流源支路的电流已知，则未知电流只有3个，能否只列3个方程？",
+          "content": "支路数b =4，但恒流源支路的电流已知，则未知电流只有3个，能否只列3个方程？\n例3：试求各支路电流。\n可以。\n注意：\n(1) 当支路中含有恒流源时，若在列KVL方程时，所选回路中不包含恒流源支路，这时，电路中有几条支路含有恒流源，则可少列几个KVL方程。\n(2) 若所选回路中包含恒流源支路, 则因恒流源两端的电压未知，所以，有一个恒流源就出现一个未知电压，因此，在此种情况下不可少列KVL方程。\n1\n2\n支路中含有恒流源",
+          "summary": "支路数b =4，但恒流源支路的电流已知，则未知电流只有3个，能否只列3个方程？ 例3：试求各支路电流。 可以。 注意： (1) 当支路中含有恒流源时，若在列KVL方程时，所选回路中不包含恒流源支路，这时，电路中有几条支路含有恒流源，则可少列几个KVL方程。 (2) 若所选回路中包含恒流源支路, 则因恒流源两端的电...",
+          "key_points": [
+            "支路数b =4，但恒流源支路的电流已知，则未知电流只有3个，能否只列3个方程？"
+          ],
+          "knowledge_points": [
+            "支路数b =4，但恒流源支路的电流已知，则未知电流只有3个，能否只列3个方程？"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_47",
+            "manual_asset_1_slide_48",
+            "manual_asset_1_slide_49"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_17",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_15",
+          "page": 17,
+          "title": "2. 4  结点电压法",
+          "content": "2. 4  结点电压法\n结点电压的概念：\n任选电路中某一结点为零电位参考点(用  表示)，其它各结点对参考点的电压，称为结点电压。\n结点电压的参考方向从结点指向参考结点。\n结点电压法适用于支路数较多，结点数较少的电路。\n结点电压法：以结点电压为未知量，列方程求解。\n在求出结点电压后，可应用基尔霍夫定律或欧姆定\n律求出各支路的电流或电压。\n在左图电路中只含有两个结点，若设 b 为参考结点，则电路中只有一个未知的结点电压。",
+          "summary": "2. 4 结点电压法 结点电压的概念： 任选电路中某一结点为零电位参考点(用  表示)，其它各结点对参考点的电压，称为结点电压。 结点电压的参考方向从结点指向参考结点。 结点电压法适用于支路数较多，结点数较少的电路。 结点电压法：以结点电压为未知量，列方程求解。 在求出结点电压后，可应用基尔霍夫定律或欧姆定 律...",
+          "key_points": [
+            "2. 4  结点电压法"
+          ],
+          "knowledge_points": [
+            "2. 4  结点电压法"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_50",
+            "manual_asset_1_slide_51",
+            "manual_asset_1_slide_52"
+          ],
+          "page_role": "definition",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_18",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_16",
+          "page": 18,
+          "title": "例1：",
+          "content": "例1：\n试求各支路电流。\n解: (1) 求结点电压 Uab\n(2) 应用欧姆定律求各电流\n电路中有一条支路是\n理想电流源，故节点电压的公式要改为\nIS与Uab的参考方向相\n反取正号, 反之取负号。",
+          "summary": "例1： 试求各支路电流。 解: (1) 求结点电压 Uab (2) 应用欧姆定律求各电流 电路中有一条支路是 理想电流源，故节点电压的公式要改为 IS与Uab的参考方向相 反取正号, 反之取负号。",
+          "key_points": [
+            "例1："
+          ],
+          "knowledge_points": [
+            "例1："
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_53",
+            "manual_asset_1_slide_54",
+            "manual_asset_1_slide_55"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_19",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_17",
+          "page": 19,
+          "title": "2.5  叠加原理",
+          "content": "2.5  叠加原理\n叠加原理：对于线性电路，任何一条支路的电流，都可以看成是由电路中各个电源（电压源或电流源）分别作用时，在此支路中所产生的电流的代数和。\n原电路\n+\n=\n叠加原理\n线性电路是指完全由线性元件、独立源或线性受控源构成的电路",
+          "summary": "2.5 叠加原理 叠加原理：对于线性电路，任何一条支路的电流，都可以看成是由电路中各个电源（电压源或电流源）分别作用时，在此支路中所产生的电流的代数和。 原电路 + = 叠加原理 线性电路是指完全由线性元件、独立源或线性受控源构成的电路",
+          "key_points": [
+            "2.5  叠加原理"
+          ],
+          "knowledge_points": [
+            "2.5  叠加原理"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_56",
+            "manual_asset_1_slide_57",
+            "manual_asset_1_slide_58"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_20",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_18",
+          "page": 20,
+          "title": "①  叠加原理只适用于线性电路。",
+          "content": "①  叠加原理只适用于线性电路。\n③  不作用电源的处理：\nE = 0，即将E 短路； Is= 0，即将 Is 开路 。\n②  线性电路的电流或电压均可用叠加原理计算，\n但功率P不能用叠加原理计算。例：\n注意事项：\n⑤  应用叠加原理时可把电源分组求解 ，即每个分电路\n中的电源个数可以多于一个。\n④  解题时要标明各支路电流、电压的参考方向。\n若分电流、分电压与原电路中电流、电压的参考方\n向相反时，叠加时相应项前要带负号。",
+          "summary": "① 叠加原理只适用于线性电路。 ③ 不作用电源的处理： E = 0，即将E 短路； Is= 0，即将 Is 开路 。 ② 线性电路的电流或电压均可用叠加原理计算， 但功率P不能用叠加原理计算。例： 注意事项： ⑤ 应用叠加原理时可把电源分组求解 ，即每个分电路 中的电源个数可以多于一个。 ④ 解题时要标明各支路电...",
+          "key_points": [
+            "①  叠加原理只适用于线性电路。"
+          ],
+          "knowledge_points": [
+            "①  叠加原理只适用于线性电路。"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_59",
+            "manual_asset_1_slide_60",
+            "manual_asset_1_slide_61",
+            "manual_asset_1_slide_62",
+            "manual_asset_1_slide_63",
+            "manual_asset_1_slide_64"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_21",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_19",
+          "page": 21,
+          "title": "电压源",
+          "content": "电压源\n（戴维宁定理）\n电流源\n（诺顿定理）\n无源二端网络可化简为一个电阻\n有源二端网络可化简为一个电源",
+          "summary": "电压源 （戴维宁定理） 电流源 （诺顿定理） 无源二端网络可化简为一个电阻 有源二端网络可化简为一个电源",
+          "key_points": [
+            "电压源"
+          ],
+          "knowledge_points": [
+            "电压源"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_65",
+            "manual_asset_1_slide_66",
+            "manual_asset_1_slide_67",
+            "manual_asset_1_slide_68",
+            "manual_asset_1_slide_69",
+            "manual_asset_1_slide_70"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_22",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_20",
+          "page": 22,
+          "title": "例2：",
+          "content": "例2：\n已知：R1=5 、  R2=5 \nR3=10 、 R4=5 \nE=12V、RG=10 \n试用戴维宁定理求检流计中的电流IG。\n有源二端网络",
+          "summary": "例2： 已知：R1=5 、 R2=5  R3=10 、 R4=5  E=12V、RG=10  试用戴维宁定理求检流计中的电流IG。 有源二端网络",
+          "key_points": [
+            "例2："
+          ],
+          "knowledge_points": [
+            "例2："
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_71",
+            "manual_asset_1_slide_72",
+            "manual_asset_1_slide_73"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_23",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_21",
+          "page": 23,
+          "title": "例2: 求图示电路中的电流 I。",
+          "content": "例2: 求图示电路中的电流 I。\n已知R1 = R3 = 2,  R2= 5,\nR4= 8,  R5=14,  E1= 8V，\nE2= 5V,   IS= 3A。\n(1)求UOC\n解：\n(2)求 R0\n(3) 求 I\nR0 = (R1//R3)+R5+R2=20 ",
+          "summary": "例2: 求图示电路中的电流 I。 已知R1 = R3 = 2, R2= 5, R4= 8, R5=14, E1= 8V， E2= 5V, IS= 3A。 (1)求UOC 解： (2)求 R0 (3) 求 I R0 = (R1//R3)+R5+R2=20 ",
+          "key_points": [
+            "例2: 求图示电路中的电流 I。"
+          ],
+          "knowledge_points": [
+            "例2: 求图示电路中的电流 I。"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_74"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_24",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_22",
+          "page": 24,
+          "title": "2.6.2 诺顿定理",
+          "content": "2.6.2 诺顿定理\n任何一个有源二端线性网络都可以用一个电流为IS的理想电流源和内阻 R0 并联的电源来等效代替。\n等效电源的内阻R0等于有源二端网络中所有电源均除去（理想电压源短路，理想电流源开路）后所得到的无源二端网络 a 、b两端之间的等效电阻。\n等效电源的电流 IS 就是有源二端网络的短路电流，即将 a 、b两端短接后其中的电流。\n等效电源",
+          "summary": "2.6.2 诺顿定理 任何一个有源二端线性网络都可以用一个电流为IS的理想电流源和内阻 R0 并联的电源来等效代替。 等效电源的内阻R0等于有源二端网络中所有电源均除去（理想电压源短路，理想电流源开路）后所得到的无源二端网络 a 、b两端之间的等效电阻。 等效电源的电流 IS 就是有源二端网络的短路电流，即将 a...",
+          "key_points": [
+            "2.6.2 诺顿定理"
+          ],
+          "knowledge_points": [
+            "2.6.2 诺顿定理"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_75"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_25",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_23",
+          "page": 25,
+          "title": "例1：",
+          "content": "例1：\n已知：R1=5 、  R2=5 \nR3=10 、 R4=5 \nE=12V、RG=10 \n试用诺顿定理求检流计中的电流IG。\n有源二端网络",
+          "summary": "例1： 已知：R1=5 、 R2=5  R3=10 、 R4=5  E=12V、RG=10  试用诺顿定理求检流计中的电流IG。 有源二端网络",
+          "key_points": [
+            "例1："
+          ],
+          "knowledge_points": [
+            "例1："
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_76",
+            "manual_asset_1_slide_77",
+            "manual_asset_1_slide_78"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_26",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_24",
+          "page": 26,
+          "title": "2.7  受控源电路的分析",
+          "content": "2.7  受控源电路的分析\n独立电源：指电压源的电压或电流源的电流不受\n外电路的控制而独立存在的电源。\n受控源的特点：当控制电压或电流消失或等于零时，\n受控源的电压或电流也将为零。\n受控电源：指电压源的电压或电流源的电流受电路中\n其它部分的电流或电压控制的电源。\n对含有受控源的线性电路，可用前几节所讲的电路分析方法进行分析和计算 ，但要考虑受控的特性。\n应用：用于晶体管电路的分析。",
+          "summary": "2.7 受控源电路的分析 独立电源：指电压源的电压或电流源的电流不受 外电路的控制而独立存在的电源。 受控源的特点：当控制电压或电流消失或等于零时， 受控源的电压或电流也将为零。 受控电源：指电压源的电压或电流源的电流受电路中 其它部分的电流或电压控制的电源。 对含有受控源的线性电路，可用前几节所讲的电路分析方法...",
+          "key_points": [
+            "2.7  受控源电路的分析"
+          ],
+          "knowledge_points": [
+            "2.7  受控源电路的分析"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_79",
+            "manual_asset_1_slide_80"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_27",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "section_id": "sec_25",
+          "page": 27,
+          "title": "例1：试求电流 I1 。",
+          "content": "例1：试求电流 I1 。\n解法1：用支路电流法\n对大回路：\n解得： I1 = 1. 4 A\n2I1 – I2 +2I1 = 10\n对结点 a： I1+I2= – 3\n解法2：用叠加原理\n电压源作用：\n2I1'+ I1' +2I1' = 10\nI1' = 2A\n电流源作用：\n对大回路：\n2I1\" +(3– I1\")1+2I1\"= 0\nI1\"= – 0.6A\nI1 = I1' +I1\"= 2 – 0.6=1. 4A",
+          "summary": "例1：试求电流 I1 。 解法1：用支路电流法 对大回路： 解得： I1 = 1. 4 A 2I1 – I2 +2I1 = 10 对结点 a： I1+I2= – 3 解法2：用叠加原理 电压源作用： 2I1'+ I1' +2I1' = 10 I1' = 2A 电流源作用： 对大回路： 2I1\" +(3– I1\")...",
+          "key_points": [
+            "例1：试求电流 I1 。"
+          ],
+          "knowledge_points": [
+            "例1：试求电流 I1 。"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_81",
+            "manual_asset_1_slide_82",
+            "manual_asset_1_slide_83",
+            "manual_asset_1_slide_84",
+            "manual_asset_1_slide_85",
+            "manual_asset_1_slide_86"
+          ],
+          "page_role": "formula",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "sec_1",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "课程介绍与目录",
+          "summary": "介绍电工学第2章电路分析方法，列出本章主要内容目录。",
+          "page_range": [
+            1
+          ],
+          "key_points": [
+            "课程介绍与目录"
+          ],
+          "knowledge_points": [
+            "课程介绍与目录"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_1"
+          ],
+          "section_type": "intro",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_2",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "本章学习要求",
+          "summary": "明确本章需要掌握的基本分析方法和了解的非线性电阻电路概念。",
+          "page_range": [
+            2
+          ],
+          "key_points": [
+            "本章学习要求"
+          ],
+          "knowledge_points": [
+            "本章学习要求"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_2"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_3",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "电路的等效变换基础",
+          "summary": "介绍等效变换概念和二端网络的基本定义与分类。",
+          "page_range": [
+            3,
+            4,
+            5
+          ],
+          "key_points": [
+            "电路的等效变换基础"
+          ],
+          "knowledge_points": [
+            "电路的等效变换基础"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_3",
+            "manual_asset_1_slide_4",
+            "manual_asset_1_slide_5"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_4",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "网络等效变换注意要点",
+          "summary": "网络等效变换注意要点",
+          "page_range": [
+            6
+          ],
+          "key_points": [
+            "网络等效变换注意要点"
+          ],
+          "knowledge_points": [
+            "网络等效变换注意要点"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_6",
+            "manual_asset_1_slide_7",
+            "manual_asset_1_slide_8",
+            "manual_asset_1_slide_9",
+            "manual_asset_1_slide_10",
+            "manual_asset_1_slide_11",
+            "manual_asset_1_slide_12"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_5",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "滑动变阻器电路分析",
+          "summary": "计算滑动变阻器在c、d、e点的输出电压、等效电阻和电流风险。",
+          "page_range": [
+            7
+          ],
+          "key_points": [
+            "滑动变阻器电路分析"
+          ],
+          "knowledge_points": [
+            "滑动变阻器电路分析"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_13",
+            "manual_asset_1_slide_14",
+            "manual_asset_1_slide_15"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_6",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "电路计算示例",
+          "summary": "通过例2和例3演示电流估算和等效电阻的计算方法。",
+          "page_range": [
+            8
+          ],
+          "key_points": [
+            "电路计算示例"
+          ],
+          "knowledge_points": [
+            "电路计算示例"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_16",
+            "manual_asset_1_slide_17"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_7",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "电阻星形与三角形联结等效变换概述",
+          "summary": "介绍电阻星形联结和三角形联结的基本概念，以及Y-Δ等效变换的主题。",
+          "page_range": [
+            9
+          ],
+          "key_points": [
+            "电阻星形与三角形联结等效变换概述"
+          ],
+          "knowledge_points": [
+            "电阻星形与三角形联结等效变换概述"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_19",
+            "manual_asset_1_slide_20",
+            "manual_asset_1_slide_21",
+            "manual_asset_1_slide_22",
+            "manual_asset_1_slide_23",
+            "manual_asset_1_slide_24",
+            "manual_asset_1_slide_25"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_8",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "电路计算示例",
+          "summary": "通过Δ-Y变换计算电路电流I1的示例。",
+          "page_range": [
+            10
+          ],
+          "key_points": [
+            "电路计算示例"
+          ],
+          "knowledge_points": [
+            "电路计算示例"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_26",
+            "manual_asset_1_slide_27",
+            "manual_asset_1_slide_28",
+            "manual_asset_1_slide_29",
+            "manual_asset_1_slide_30"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_9",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "电流源模型与理想电流源",
+          "summary": "介绍电流源模型结构、外特性及理想电流源的定义、特点和示例。",
+          "page_range": [
+            11
+          ],
+          "key_points": [
+            "电流源模型与理想电流源"
+          ],
+          "knowledge_points": [
+            "电流源模型与理想电流源"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_31",
+            "manual_asset_1_slide_32"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_10",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "电源等效变换原理与注意事项",
+          "summary": "阐述电压源与电流源等效变换的条件、注意事项，包括参考方向、理想电源限制和等效范围。",
+          "page_range": [
+            12
+          ],
+          "key_points": [
+            "电源等效变换原理与注意事项"
+          ],
+          "knowledge_points": [
+            "电源等效变换原理与注意事项"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_33",
+            "manual_asset_1_slide_34"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_11",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "等效变换示例",
+          "summary": "通过具体例子演示等效电源的求解过程，说明并联和串联元件的处理规则。",
+          "page_range": [
+            13
+          ],
+          "key_points": [
+            "等效变换示例"
+          ],
+          "knowledge_points": [
+            "等效变换示例"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_35"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_12",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "例2：电压源与电流源等效变换计算电阻电流",
+          "summary": "例2：电压源与电流源等效变换计算电阻电流",
+          "page_range": [
+            14
+          ],
+          "key_points": [
+            "例2：电压源与电流源等效变换计算电阻电流"
+          ],
+          "knowledge_points": [
+            "例2：电压源与电流源等效变换计算电阻电流"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_36",
+            "manual_asset_1_slide_37",
+            "manual_asset_1_slide_38",
+            "manual_asset_1_slide_39",
+            "manual_asset_1_slide_40",
+            "manual_asset_1_slide_41"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_13",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "功率平衡验证",
+          "summary": "功率平衡验证",
+          "page_range": [
+            15
+          ],
+          "key_points": [
+            "功率平衡验证"
+          ],
+          "knowledge_points": [
+            "功率平衡验证"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_42",
+            "manual_asset_1_slide_43",
+            "manual_asset_1_slide_44",
+            "manual_asset_1_slide_45",
+            "manual_asset_1_slide_46"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_14",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "含有恒流源的支路电流法示例",
+          "summary": "通过例3展示支路数b=4时，因恒流源电流已知，可减少KVL方程数量，具体取决于回路是否包含恒流源支路。",
+          "page_range": [
+            16
+          ],
+          "key_points": [
+            "含有恒流源的支路电流法示例"
+          ],
+          "knowledge_points": [
+            "含有恒流源的支路电流法示例"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_47",
+            "manual_asset_1_slide_48",
+            "manual_asset_1_slide_49"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_15",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "结点电压法介绍",
+          "summary": "介绍结点电压法的概念、适用条件，以及两结点电路的结点电压方程推导和注意事项。",
+          "page_range": [
+            17
+          ],
+          "key_points": [
+            "结点电压法介绍"
+          ],
+          "knowledge_points": [
+            "结点电压法介绍"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_50",
+            "manual_asset_1_slide_51",
+            "manual_asset_1_slide_52"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_16",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "电路分析示例",
+          "summary": "电路分析示例",
+          "page_range": [
+            18
+          ],
+          "key_points": [
+            "电路分析示例"
+          ],
+          "knowledge_points": [
+            "电路分析示例"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_53",
+            "manual_asset_1_slide_54",
+            "manual_asset_1_slide_55"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_17",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "叠加原理",
+          "summary": "叠加原理",
+          "page_range": [
+            19
+          ],
+          "key_points": [
+            "叠加原理"
+          ],
+          "knowledge_points": [
+            "叠加原理"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_56",
+            "manual_asset_1_slide_57",
+            "manual_asset_1_slide_58"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_18",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "叠加原理注意事项",
+          "summary": "叠加原理注意事项",
+          "page_range": [
+            20
+          ],
+          "key_points": [
+            "叠加原理注意事项"
+          ],
+          "knowledge_points": [
+            "叠加原理注意事项"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_59",
+            "manual_asset_1_slide_60",
+            "manual_asset_1_slide_61",
+            "manual_asset_1_slide_62",
+            "manual_asset_1_slide_63",
+            "manual_asset_1_slide_64"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_19",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "戴维宁定理基础",
+          "summary": "戴维宁定理基础",
+          "page_range": [
+            21
+          ],
+          "key_points": [
+            "戴维宁定理基础"
+          ],
+          "knowledge_points": [
+            "戴维宁定理基础"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_65",
+            "manual_asset_1_slide_66",
+            "manual_asset_1_slide_67",
+            "manual_asset_1_slide_68",
+            "manual_asset_1_slide_69",
+            "manual_asset_1_slide_70"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_20",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "戴维宁定理示例1",
+          "summary": "通过戴维宁定理求解检流计电流IG，包括求开路电压U0、等效内阻R0和等效电路。",
+          "page_range": [
+            22
+          ],
+          "key_points": [
+            "戴维宁定理示例1"
+          ],
+          "knowledge_points": [
+            "戴维宁定理示例1"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_71",
+            "manual_asset_1_slide_72",
+            "manual_asset_1_slide_73"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_21",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "戴维宁定理示例2",
+          "summary": "应用戴维宁定理求解电路中的电流I，涉及UOC和R0的计算。",
+          "page_range": [
+            23
+          ],
+          "key_points": [
+            "戴维宁定理示例2"
+          ],
+          "knowledge_points": [
+            "戴维宁定理示例2"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_74"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_22",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "诺顿定理介绍",
+          "summary": "介绍诺顿定理，包括等效电流源和内阻的定义。",
+          "page_range": [
+            24
+          ],
+          "key_points": [
+            "诺顿定理介绍"
+          ],
+          "knowledge_points": [
+            "诺顿定理介绍"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_75"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_23",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "诺顿定理应用示例",
+          "summary": "诺顿定理应用示例",
+          "page_range": [
+            25
+          ],
+          "key_points": [
+            "诺顿定理应用示例"
+          ],
+          "knowledge_points": [
+            "诺顿定理应用示例"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_76",
+            "manual_asset_1_slide_77",
+            "manual_asset_1_slide_78"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_24",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "受控源电路分析介绍",
+          "summary": "受控源电路分析介绍",
+          "page_range": [
+            26
+          ],
+          "key_points": [
+            "受控源电路分析介绍"
+          ],
+          "knowledge_points": [
+            "受控源电路分析介绍"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_79",
+            "manual_asset_1_slide_80"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_25",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_160101",
+          "name": "电路分析例题",
+          "summary": "通过支路电流法和叠加原理求解电流I1的例题。",
+          "page_range": [
+            27
+          ],
+          "key_points": [
+            "电路分析例题"
+          ],
+          "knowledge_points": [
+            "电路分析例题"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_81",
+            "manual_asset_1_slide_82",
+            "manual_asset_1_slide_83",
+            "manual_asset_1_slide_84",
+            "manual_asset_1_slide_85",
+            "manual_asset_1_slide_86"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        }
+      ],
+      "knowledge_points": [
+        "电路分析方法包括支路电流法、叠加原理、戴维宁定理等",
+        "实际电源的两种模型及其等效变换",
+        "非线性电阻元件的伏安特性及静态电阻、动态电阻概念",
+        "等效变换的概念与二端网络的定义",
+        "无源二端网络与有源二端网络的区别",
+        "课程介绍与目录",
+        "本章学习要求",
+        "电路的等效变换基础",
+        "电工学（电工技术）",
+        "第2章 电路的分析方法",
+        "本章要求：",
+        "2.1 电路的等效变换",
+        "二端网络的概念：",
+        "等效变换仅针对网络端口，对外等效对内不等效",
+        "不同网络端口可能有不同等效电路，伏安关系相同则等效",
+        "等效网络可互相代换",
+        "等效变换适用于线性网络，非线性网络一般不适用",
+        "电阻串联特点：顺序相联、同一电流、等效电阻为各电阻之和",
+        "两电阻串联分压公式及应用：降压、限流、调节电压",
+        "电阻并联特点：联接于公共结点、电压相同、等效电阻倒数等于各电阻倒数之和",
+        "两电阻并联分流公式及应用：分流、调节电流",
+        "负载并联应用时工作互不影响",
+        "电阻混联电路计算方法",
+        "变阻器分压电路示例及安全分析",
+        "网络等效变换注意要点",
+        "2.网络等效变换注意要点",
+        "滑动变阻器在c点的等效电阻计算和输出电压分析",
+        "ed段电流过大可能导致烧毁的风险",
+        "滑动变阻器在d点和e点的电路状态",
+        "电路电流估算方法",
+        "等效电阻Rab的计算公式和应用",
+        "滑动变阻器电路分析",
+        "电路计算示例",
+        "解: (2)在 c 点：",
+        "例2:试估算图示电路中的电流。",
+        "电阻星形联结与三角形联结的定义",
+        "Y-Δ等效变换的基本概念",
+        "等效变换的条件：电流和电压对应相等",
+        "Y形与Δ形转换关系的推导",
+        "对称电阻情况下的简化公式",
+        "应用等效变换计算电路总电阻",
+        "电阻星形与三角形联结等效变换概述",
+        "3. 电阻星形联结与三角形联结的等效变换",
+        "Δ-Y电阻变换方法",
+        "电压源模型的定义和公式U = E – IR0",
+        "理想电压源的特点：内阻为零、电压恒定、电流由外电路决定",
+        "例2：",
+        "电流源模型由电流IS和内阻R0并联组成",
+        "理想电流源内阻无穷大，输出电流恒定，电压由负载决定",
+        "电源等效变换基于对外电路输出U、I值相等的原则",
+        "等效变换时需确保参考方向一一对应",
+        "理想电压源与理想电流源之间无等效关系",
+        "等效变换仅对外电路有效，对电源内部不等效",
+        "与理想电压源并联的元件在考虑电压时可忽略，但考虑电流时不可忽略",
+        "与理想电流源串联的元件在考虑电流时可忽略，但考虑电压时不可忽略",
+        "电流源模型与理想电流源",
+        "电源等效变换原理与注意事项",
+        "等效变换示例",
+        "（2） 电流源模型",
+        "由图a：U = E－ IR0",
+        "例1:",
+        "电压源与电流源等效变换方法",
+        "电阻电流计算步骤",
+        "理想电压源电流和理想电流源电压计算",
+        "电路功率平衡分析",
+        "例2：电压源与电流源等效变换计算电阻电流",
+        "例2:",
+        "功率平衡验证：电阻功率总和等于电源功率总和",
+        "支路电流法定义：以支路电流为未知量，应用基尔霍夫定律列方程组求解",
+        "独立KCL方程数量：对于n个结点的电路，只能得到(n-1)个独立方程",
+        "支路电流法解题步骤：标出电流参考方向和回路循行方向，应用KCL和KVL列方程，联立求解",
+        "支路电流法局限性：支路数较多时方程个数多，求解不便",
+        "功率平衡验证",
+        "各个电阻所消耗的功率分别是：",
+        "恒流源支路在支路电流法中的处理：回路不含恒流源时可少列KVL方程，包含时需考虑未知电压。",
+        "结点电压法的定义：以结点电压为未知量，适用于支路多、结点少的电路。",
+        "两结点电路的结点电压公式推导和应用条件。",
+        "含有恒流源的支路电流法示例",
+        "结点电压法介绍",
+        "支路数b =4，但恒流源支路的电流已知，则未知电流只有3个，能否只列3个方程？",
+        "2. 4 结点电压法",
+        "节点电压法在含理想电流源电路中的应用",
+        "KCL和欧姆定律求解电路电位",
+        "叠加原理的定义和线性电路条件",
+        "叠加原理的图示和证明方法",
+        "电路分析示例",
+        "叠加原理",
+        "例1：",
+        "2.5 叠加原理",
+        "叠加原理适用于线性电路，电流和电压可叠加，功率不能叠加。",
+        "不作用电源的处理方法：电压源短路，电流源开路。",
+        "解题时需标明参考方向，方向相反时叠加项带负号。",
+        "叠加原理可分组求解，分电路中电源个数可多于一个。",
+        "例1展示了叠加原理求解电流和电压的步骤。",
+        "例2通过叠加原理建立方程求解未知电压。",
+        "齐性定理：单一电源线性电路中，电压或电流与电源成正比。",
+        "戴维宁定理与诺顿定理涉及二端网络的概念：无源和有源二端网络。",
+        "叠加原理注意事项",
+        "① 叠加原理只适用于线性电路。",
+        "电压源与电流源的等效化简",
+        "戴维宁定理的定义与等效条件",
+        "等效电源内阻的计算方法",
+        "戴维宁定理求解电路电流的步骤",
+        "戴维宁定理基础",
+        "电压源",
+        "戴维宁定理的应用步骤：求开路电压、等效内阻、等效电路。",
+        "诺顿定理的基本概念：等效电流源和内阻的确定方法。",
+        "戴维宁定理示例1",
+        "戴维宁定理示例2",
+        "诺顿定理介绍",
+        "例2: 求图示电路中的电流 I。",
+        "2.6.2 诺顿定理",
+        "诺顿定理求解电流的步骤：求短路电流IS、等效内阻R0、等效电路计算IG",
+        "受控源的定义、特点、分类及其在晶体管电路中的应用",
+        "诺顿定理应用示例",
+        "受控源电路分析介绍",
+        "2.7 受控源电路的分析",
+        "支路电流法求解电路电流",
+        "叠加原理在电路分析中的应用",
+        "线性电阻与非线性电阻的区别",
+        "非线性电阻的静态电阻和动态电阻",
+        "非线性电阻电路的图解法步骤",
+        "复杂非线性电阻电路的等效电源求解方法",
+        "电路分析例题",
+        "例1：试求电流 I1 。"
+      ],
+      "parse_instruction": null,
+      "metadata": {
+        "merged_from_chunks": 15,
+        "normalized": true,
+        "page_count": 27,
+        "section_count": 25
+      }
+    }
+  }
+}

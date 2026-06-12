@@ -1,0 +1,104 @@
+name: courseware_flash
+content: |
+  课件设计规范(content_blocks 版):
+
+  ## Slide 类型(共 7 种)
+  - title_slide:仅用于第 1 页。课程名称 + 副标题(如章节号、教师姓名)。
+  - chapter_transition:章节过渡页。展示章节编号、标题,以及本节 2-3 个核心要点预览。
+  - lesson_objectives:学习目标页。objectives ≤ 4 条,动词开头("理解…"、"掌握…"、"能够…")。
+  - concept_explanation:知识点讲解页,最常用。**优先使用 content_blocks**(见下)。
+  - comparison:两个概念对比。左右面板各一组要点,形成对照。
+  - classroom_question:思考题。question 是问题本身,hint 给出引导方向。
+  - summary_slide:课程末尾总结。3-5 个核心要点,按时间线或逻辑顺序。
+
+  ## rhythm(密度,3 选 1)
+  - anchor:封面 / 章节过渡页,信息少、视觉冲击强。
+  - dense:知识点页,信息密集。
+  - breathing:思考题 / 总结页,留白多,给学生消化时间。
+
+  ## 字段规则
+  - filename 必须是 `{NN}_{slug}.svg`,例如 `01_title_slide.svg`。NN 是两位数字序号。
+  - teaching_goal 必须是**可验证**的一句话学习成果。
+    - ✅ "学生能在给定 L 和 I 下计算电感储能 W = ½LI²"
+    - ❌ "了解电感"(空话)
+  - content_blocks 是**优先字段**;bullets 是兼容字段(≤4),仅在没有更合适结构时使用。
+
+  ## content_blocks(8 种 block 类型)
+  每个块有 `type` 鉴别字段,以及类型特定字段:
+
+  | type     | 必填字段                              | 何时用                                   |
+  |----------|---------------------------------------|------------------------------------------|
+  | hook     | text                                  | 开篇一句话问题或注意力抓手               |
+  | bullets  | items[].text(≤6,可选 sub)           | 无内在顺序的离散要点                     |
+  | steps    | items[].text(≤6,可选 detail)        | 有序步骤 / 推导大纲                      |
+  | formula  | latex(可选 caption、where[])         | 任何公式                                 |
+  | example  | solve(可选 title、given、result)     | 带数值的例题                             |
+  | analogy  | text(可选 title)                     | 把陌生概念类比到熟悉事物                 |
+  | pitfall  | text                                  | 常见误区 / 学生易错点                    |
+  | image    | source_type("path")、source         | 用户上传源文件中提取出的图片(必)         |
+
+  ## 授权规则(硬约束)
+  1. 每张 concept_explanation 必须**至少有一个非 bullets 块**。纯堆 4 个 bullets 是错误用法。
+  2. 教数量关系 → 必含 formula 块。
+     教过程 → 必含 steps 块。
+     教概念 → 整个 deck 至少一处 example 块。
+  3. **图片只能来自 `<project>/images/manifest.json`** 列出的文件。
+     - ❌ 不许用 web URL
+     - ❌ 不许编造文件名
+     - ❌ 不许 base64
+     - manifest 里没有合适的图片就**不要放 image 块**
+     - `source_type` 必须是字符串 `"path"`,`source` 必须等于 manifest 里某条 `filename`
+  4. 单页 3-5 个 block 最佳。每行文字 ≤ 30 个中文字符或 ≤ 60 个拉丁字符(SVG `<text>` 不会自动换行)。
+  5. 块顺序建议:hook → 定义/bullets → formula/steps → example → pitfall → analogy(不适用就跳过)。
+     渲染器把文字类块从上往下堆在左侧,image 块自动放在右侧栏。
+
+  6. If the manifest contains same-page or semantically matched teaching figures, prefer adding one `image` block to relevant `concept_explanation` slides.
+  7. Prefer pedagogically meaningful figures over decorative assets: prioritize entries with concrete heading/context and avoid icon-like or obviously decorative images unless they are explicitly relevant to the teaching point.
+  8. A deck should not end up with zero `image` blocks when the manifest clearly contains usable teaching figures for the chosen concepts.
+  ## 单页完整示例
+  ```json
+  {
+    "slide_id": 4,
+    "slug": "inductor_energy",
+    "filename": "04_inductor_energy.svg",
+    "type": "concept_explanation",
+    "rhythm": "anchor",
+    "title": "电感储能",
+    "subtitle": "Energy stored in an inductor",
+    "teaching_goal": "学生能在给定 L 和 I 下计算电感储能 W = ½LI²",
+    "content_blocks": [
+      { "type": "hook", "text": "电感为何能在断电瞬间维持电流?" },
+      {
+        "type": "formula",
+        "latex": "W = (1/2) L I^2",
+        "caption": "磁场中存储的能量",
+        "where": [
+          { "symbol": "L", "meaning": "电感 (H)" },
+          { "symbol": "I", "meaning": "瞬时电流 (A)" }
+        ]
+      },
+      {
+        "type": "example",
+        "title": "10 mH 电感储能",
+        "given": "L = 10 mH, I = 2 A",
+        "solve": "W = 0.5 × 0.01 × 2² = 0.02 J",
+        "result": "W = 20 mJ"
+      },
+      { "type": "pitfall", "text": "不要把 mH 直接代入,需先换算成 H。" },
+      {
+        "type": "image",
+        "source_type": "path",
+        "source": "lecture_p7_2.png",
+        "caption": "RL 电路断电时的电流衰减曲线"
+      }
+    ]
+  }
+  ```
+
+  ## 页面结构建议(10-20 页)
+  - 第 1 页:title_slide(封面)
+  - 第 2 页:lesson_objectives(学习目标)
+  - 第 3 页起:concept_explanation 为主,中间穿插 chapter_transition / comparison / classroom_question
+  - 末页:summary_slide(总结回顾)
+
+  根据实际内容量调整,确保每页都有明确的 teaching_goal。

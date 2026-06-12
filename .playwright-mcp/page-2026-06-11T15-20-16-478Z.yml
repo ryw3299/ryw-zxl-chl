@@ -1,0 +1,170 @@
+- generic [ref=e1]:
+  - generic [ref=e17]:
+    - complementary [ref=e18]:
+      - img "知微智课 AI 智能教学" [ref=e20]
+      - navigation [ref=e21]:
+        - generic [ref=e22]:
+          - paragraph [ref=e23]: 教学工作
+          - button "首页" [ref=e24] [cursor=pointer]:
+            - img [ref=e26]
+            - generic [ref=e28]: 首页
+          - button "我的课程" [ref=e29] [cursor=pointer]:
+            - img [ref=e31]
+            - generic [ref=e33]: 我的课程
+          - button "课程创建" [ref=e34] [cursor=pointer]:
+            - img [ref=e36]
+            - generic [ref=e38]: 课程创建
+          - button "备课中心" [ref=e39] [cursor=pointer]:
+            - img [ref=e41]
+            - generic [ref=e44]: 备课中心
+          - button "资源空间" [ref=e45] [cursor=pointer]:
+            - img [ref=e47]
+            - generic [ref=e49]: 资源空间
+        - generic [ref=e50]:
+          - paragraph [ref=e51]: 分析与支持
+          - button "AI 助教" [ref=e52] [cursor=pointer]:
+            - img [ref=e54]
+            - generic [ref=e57]: AI 助教
+          - button "学情数据" [ref=e58] [cursor=pointer]:
+            - img [ref=e60]
+            - generic [ref=e62]: 学情数据
+          - button "成绩排行" [ref=e63] [cursor=pointer]:
+            - img [ref=e65]
+            - generic [ref=e68]: 成绩排行
+      - generic [ref=e69]:
+        - button "退出登录" [ref=e71] [cursor=pointer]:
+          - img [ref=e73]
+          - generic [ref=e75]: 退出登录
+        - generic [ref=e76]: 知微智课 v2.1
+    - main [ref=e78]:
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - heading "多节奏讲稿编辑台" [level=1] [ref=e82]
+            - paragraph [ref=e83]: 一页 PPT，对应多页讲稿，支持查看与本地微调
+          - generic [ref=e84]:
+            - generic [ref=e85]: 当前智课
+            - combobox "当前智课" [ref=e86]:
+              - option "第1章-计算机网络和因特网-v2025" [selected]
+              - option "第1章-计算机网络和因特网-v2025"
+              - option "第1章-计算机网络和因特网-v2025"
+              - option "第1章-计算机网络和因特网-v2025"
+              - option "第1章-计算机网络和因特网-v2025"
+              - option "第1章-计算机网络和因特网-v2025"
+          - generic [ref=e87]:
+            - button "保存修改" [ref=e88] [cursor=pointer]
+            - button "发布到课堂" [ref=e89] [cursor=pointer]
+        - main [ref=e90]:
+          - complementary [ref=e91]:
+            - generic [ref=e92]:
+              - generic [ref=e93]:
+                - strong [ref=e94]: PPT 第01页
+                - generic [ref=e95]: / 共16页
+                - button "‹" [disabled] [ref=e96] [cursor=pointer]
+                - button "›" [ref=e97] [cursor=pointer]
+              - img "第 1 页 PPT 预览" [ref=e99]
+              - generic [ref=e100]:
+                - button "01" [ref=e101] [cursor=pointer]:
+                  - generic [ref=e102]: "01"
+                - button "02" [ref=e103] [cursor=pointer]:
+                  - generic [ref=e104]: "02"
+                - button "03" [ref=e105] [cursor=pointer]:
+                  - generic [ref=e106]: "03"
+            - generic [ref=e107]:
+              - generic [ref=e108]:
+                - heading "本页教学要点" [level=3] [ref=e109]
+                - button "编辑" [ref=e110]
+              - list [ref=e111]:
+                - listitem [ref=e112]: 计算机网络系统
+                - listitem [ref=e113]: 当前讲稿：拓展版 · 最快 / 最精炼
+                - listitem [ref=e114]: 课件状态：completed
+          - generic [ref=e115]:
+            - generic [ref=e116]:
+              - button "A 基础版 最慢 / 最详细 适合学情 基础薄弱 / 初学者 预计时长 12-15 分钟 讲稿页数 约15页" [ref=e189] [cursor=pointer]:
+                - generic [ref=e118]: A
+                - strong [ref=e119]: 基础版
+                - emphasis [ref=e120]: 最慢 / 最详细
+                - paragraph [ref=e121]:
+                  - generic [ref=e122]: 适合学情
+                  - text: 基础薄弱 / 初学者
+                - paragraph [ref=e123]:
+                  - generic [ref=e124]: 预计时长
+                  - text: 12-15 分钟
+                - paragraph [ref=e125]:
+                  - generic [ref=e126]: 讲稿页数
+                  - text: 约15页
+              - button "B 标准版 适中 / 平衡 适合学情 一般水平学生 预计时长 7-9 分钟 讲稿页数 约10页" [ref=e188] [cursor=pointer]:
+                - generic [ref=e128]: B
+                - strong [ref=e129]: 标准版
+                - emphasis [ref=e130]: 适中 / 平衡
+                - paragraph [ref=e131]:
+                  - generic [ref=e132]: 适合学情
+                  - text: 一般水平学生
+                - paragraph [ref=e133]:
+                  - generic [ref=e134]: 预计时长
+                  - text: 7-9 分钟
+                - paragraph [ref=e135]:
+                  - generic [ref=e136]: 讲稿页数
+                  - text: 约10页
+              - button "C 进阶版 较快 / 精练 适合学情 中等偏上 / 进阶学习者 预计时长 5-6 分钟 讲稿页数 约6页" [ref=e138] [cursor=pointer]:
+                - generic [ref=e139]: C
+                - strong [ref=e140]: 进阶版
+                - emphasis [ref=e141]: 较快 / 精练
+                - paragraph [ref=e142]:
+                  - generic [ref=e143]: 适合学情
+                  - text: 中等偏上 / 进阶学习者
+                - paragraph [ref=e144]:
+                  - generic [ref=e145]: 预计时长
+                  - text: 5-6 分钟
+                - paragraph [ref=e146]:
+                  - generic [ref=e147]: 讲稿页数
+                  - text: 约6页
+              - button "D 拓展版 最快 / 最精炼 适合学情 高水平 / 拓展提升 预计时长 3-4 分钟 讲稿页数 约3页 ✓" [active] [ref=e190] [cursor=pointer]:
+                - generic [ref=e149]: D
+                - strong [ref=e150]: 拓展版
+                - emphasis [ref=e151]: 最快 / 最精炼
+                - paragraph [ref=e152]:
+                  - generic [ref=e153]: 适合学情
+                  - text: 高水平 / 拓展提升
+                - paragraph [ref=e154]:
+                  - generic [ref=e155]: 预计时长
+                  - text: 3-4 分钟
+                - paragraph [ref=e156]:
+                  - generic [ref=e157]: 讲稿页数
+                  - text: 约3页
+                - generic [ref=e191]: ✓
+            - generic [ref=e158]:
+              - generic [ref=e159]:
+                - combobox [ref=e160]:
+                  - option "正文" [selected]
+                - button "↶" [ref=e162]
+                - button "↷" [ref=e163]
+                - button "B" [ref=e164]
+                - button "I" [ref=e165]
+                - button "U" [ref=e166]
+                - button "☷" [ref=e167]
+                - button "☰" [ref=e168]
+                - paragraph [ref=e169]: 自动保存未接入
+              - article [ref=e170]:
+                - generic [ref=e171]:
+                  - heading "1、计算机网络系统" [level=2] [ref=e172]
+                  - generic [ref=e173]: 第 1 / 16 页
+                - textbox "该页暂无讲稿内容" [ref=e174]: 同学们好，今天学习计算机网络系统，核心是分层、协议、路由三大主题。
+              - generic [ref=e175]:
+                - button "上一页" [disabled] [ref=e176] [cursor=pointer]
+                - button "1" [ref=e177] [cursor=pointer]
+                - button "2" [ref=e178] [cursor=pointer]
+                - button "3" [ref=e179] [cursor=pointer]
+                - generic [ref=e180]: ...
+                - button "16" [ref=e181] [cursor=pointer]
+                - button "下一页" [ref=e182] [cursor=pointer]
+                - generic [ref=e183]:
+                  - text: 跳转到
+                  - spinbutton "跳转到 / 16 页" [ref=e184]: "1"
+                  - text: / 16 页
+            - generic [ref=e185]: 当前版本（拓展版）：1 个 PPT 页面对应 16 页讲稿内容
+  - generic [ref=e4]:
+    - generic "Toggle devtools panel" [ref=e5] [cursor=pointer]:
+      - img [ref=e6]
+    - generic "Toggle Component Inspector" [ref=e11] [cursor=pointer]:
+      - img [ref=e12]

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>知识点关键词可视化分析</title>
+    <link rel="stylesheet" href="./va.css" />
+  </head>
+  <body>
+    <div class="va-app">
+      <header class="va-header">
+        <div>
+          <h1>知识点关键词可视化分析</h1>
+          <p>默认加载 points.json；可导入 JSON 知识点 · n-gram + 短语 · 共现边权 = 同条知识点内共现次数</p>
+        </div>
+        <div class="va-toolbar">
+          <input type="file" id="va-import-json" accept=".json,application/json" hidden />
+          <button type="button" class="va-btn" id="va-import-btn" title="支持 knowledge_points / knowledgePoints / points 或根数组">导入 JSON</button>
+          <label>
+            最小文档频次
+            <input type="range" id="va-min-df" min="1" max="8" value="2" />
+            <span id="va-min-df-v">2</span>
+          </label>
+          <label>
+            词表上限
+            <input type="range" id="va-max-vocab" min="30" max="150" value="80" />
+            <span id="va-max-vocab-v">80</span>
+          </label>
+          <label>
+            每条最多关键词
+            <input type="range" id="va-max-kw" min="4" max="20" value="12" />
+            <span id="va-max-kw-v">12</span>
+          </label>
+          <button type="button" class="va-btn" id="va-rerun">重新分析</button>
+        </div>
+      </header>
+      <main class="va-main">
+        <p class="va-status" id="va-status"></p>
+        <p class="va-error" id="va-error"></p>
+        <div class="va-row">
+          <section class="va-panel">
+            <h2>饼图 · 高频关键词占比（Top10 + 其余）</h2>
+            <div class="va-chart-wrap">
+              <canvas id="va-chart-pie"></canvas>
+            </div>
+            <p class="va-legend">扇区面积 ∝ 文档频次；概率 = 该词频次 / 全部词频次之和（同一词在多条知识点中重复计数）。</p>
+          </section>
+          <section class="va-panel">
+            <h2>柱状图 · 文档频次（Top20）</h2>
+            <div class="va-chart-wrap">
+              <canvas id="va-chart-bar"></canvas>
+            </div>
+          </section>
+        </div>
+        <section class="va-panel va-panel--wide">
+          <h2>折线图 · 按频次排序的概率与累计概率（前 40 位）</h2>
+          <div class="va-chart-wrap va-chart-wrap--tall">
+            <canvas id="va-chart-line"></canvas>
+          </div>
+          <p class="va-legend">绿线：单关键词 P(k)×100%；蓝线：前 n 位累计占比。悬停可查看具体词。</p>
+        </section>
+        <section class="va-panel va-panel--wide">
+          <h2>关键词关联网络（力导向 · 边粗 = 共现次数）</h2>
+          <div class="va-network-wrap">
+            <div id="va-network"></div>
+          </div>
+          <p class="va-legend">节点：关键词；无向边：两词曾在同一条知识点中同时被选为关键词，标签为共现次数。拖动节点时重叠会被软排斥（果冻感），松手后力导向会继续收敛。整颗节点可拖（文字不挡拖动）。</p>
+        </section>
+
+        <section class="va-panel va-ai-panel" id="va-ai-section">
+          <h2>AI 数据分析助手（DeepSeek）</h2>
+          <p class="va-ai-hint">
+            对话经本目录的 <code>va-chat-server.mjs</code> 转发至 DeepSeek；密钥写在同目录的 <code>.env</code>（由 <code>.env.example</code> 复制改名，不要只改 example）。在终端进入本目录执行 <code>node va-chat-server.mjs</code>，再用终端里打印的 <code>http://127.0.0.1:端口/</code> 打开页面。不要用 file:// 或 npx serve，否则没有 <code>/api/va-chat</code>。
+          </p>
+          <p class="va-ai-meta" id="va-ai-meta">接口：<span id="va-ai-endpoint-label">/api/va-chat</span> · 模型由环境变量 <code>DEEPSEEK_MODEL</code> 决定（默认 deepseek-chat）</p>
+          <div class="va-ai-messages" id="va-ai-messages" aria-live="polite"></div>
+          <div class="va-ai-compose">
+            <textarea id="va-ai-input" class="va-ai-textarea" rows="3" placeholder="例如：当前最高频的关键词说明了什么？共现最强的几对词有什么教学含义？"></textarea>
+            <div class="va-ai-actions">
+              <button type="button" class="va-btn" id="va-ai-send">发送</button>
+              <button type="button" class="va-btn va-btn-ghost" id="va-ai-clear">清空对话</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/@antv/g6@4.8.24/dist/g6.min.js"></script>
+    <script src="./va.js"></script>
+    <script>
+      function bindRange(id, outId) {
+        var el = document.getElementById(id);
+        var o = document.getElementById(outId);
+        function sync() {
+          o.textContent = el.value;
+        }
+        el.addEventListener("input", sync);
+        sync();
+      }
+      bindRange("va-min-df", "va-min-df-v");
+      bindRange("va-max-vocab", "va-max-vocab-v");
+      bindRange("va-max-kw", "va-max-kw-v");
+    </script>
+  </body>
+</html>

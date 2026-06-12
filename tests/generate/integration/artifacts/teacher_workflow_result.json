@@ -1,0 +1,7 @@
+{
+  "status": "success",
+  "message": "teacher workflow finished",
+  "lesson_id": "LESSON_CLI",
+  "artifact_file": "/Users/kilo/Documents/GitHub/ChaoXingAgent/tests/generate/integration/artifacts/artifact.json",
+  "rendered_ppt_file": "/Users/kilo/Documents/GitHub/ChaoXingAgent/tests/generate/integration/artifacts/rendered.pptx"
+}

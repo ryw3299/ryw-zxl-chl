@@ -1,0 +1,448 @@
+{
+  "parser_output": {
+    "structured_content": {
+      "course_id": null,
+      "lesson_id": "LESSON_20260316_163313",
+      "source_asset_ids": [
+        "manual_asset_1"
+      ],
+      "lesson_summary": "本章介绍工业企业供电与用电安全，重点讲解安全用电的基本常识、触电事故的原因及电流对人体的危害。; 本部分介绍安全用电的关键因素，包括人体电阻、电压、电流的影响，以及触电方式。; 本部分介绍接地和接零的类型、原理及应用，包括工作接地、保护接地、保护接零以及工作零线与保护零线的区别，强调安全用电措施。",
+      "pages": [
+        {
+          "page_id": "page_1",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "section_id": "sec_1",
+          "page": 1,
+          "title": "电工学（电工技术）",
+          "content": "电工学（电工技术）\n第12章  工业企业供电与用电安全",
+          "summary": "课程介绍与本章要求",
+          "key_points": [
+            "电工学（电工技术）"
+          ],
+          "knowledge_points": [
+            "电工学（电工技术）"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_1",
+            "manual_asset_1_slide_2",
+            "manual_asset_1_slide_3"
+          ],
+          "page_role": "cover",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_2",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "section_id": "sec_2",
+          "page": 2,
+          "title": "12. 3  安全用电",
+          "content": "12. 3  安全用电\n在生产中，不仅要提高劳动生产率，减轻繁重的体力劳动，而且要尽一切可能保护劳动者的人身安全。\n以下介绍安全用电的几个问题。\n12.3.1 触电事故\n1. 电气事故的原因\n1) 违章操作\n(1) 违反“停电检修安全工作制度”，因误合闸造成\n维修人员触电。\n(2) 违反“带电检修安全操作规程”，使操作人员触及电器的带电部分。\n(3) 带电移动电器设备。",
+          "summary": "安全用电概述与触电事故原因",
+          "key_points": [
+            "12. 3  安全用电"
+          ],
+          "knowledge_points": [
+            "12. 3  安全用电"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_4",
+            "manual_asset_1_slide_5",
+            "manual_asset_1_slide_6"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_3",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "section_id": "sec_3",
+          "page": 3,
+          "title": "12.3.2 电流对人体的危害",
+          "content": "12.3.2 电流对人体的危害\n人体触电时，电流对人体会造成两种伤害：\n电击：是指电流通过人体，影响呼吸系统、心脏和神经系统，造成人体内部组织的破坏乃至死亡。\n电伤：是指在电弧作用下或熔断丝熔断时，对人体外部的伤害，如烧伤、金属溅伤等。\n电击所引起的伤害程度与下列因素有关：\n4) 偶然条件\n电力线突然断裂使行人触电；狂风吹断树枝将电线砸断；雨水进入家用电器使机壳漏电等偶然事件均会造成触电事故。",
+          "summary": "电流对人体的危害",
+          "key_points": [
+            "12.3.2 电流对人体的危害"
+          ],
+          "knowledge_points": [
+            "12.3.2 电流对人体的危害"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_7"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_4",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "section_id": "sec_4",
+          "page": 4,
+          "title": "1. 人体电阻的大小",
+          "content": "1. 人体电阻的大小\n人体电阻因人而异，通常为 104 ~ 105 ，当角质外\n层破坏时，则降到800~1000。\n2. 电压对人体的伤害\n电压对生命的威胁取决于每个人不同的身体电阻和心脏功能。触电电压越高，通过人体的电流越大就越危险。\n在我国一般把 36 V以下的电压定为安全电压。工厂进行设备检修使用的手灯及机床照明都采用安全电压。\n安全电压\n不带任何防护设备，对人体各部分组织均不造成伤害的电压值，称为安全电压。",
+          "summary": "人体电阻与安全电压",
+          "key_points": [
+            "1. 人体电阻的大小"
+          ],
+          "knowledge_points": [
+            "1. 人体电阻的大小"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_8"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_5",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "section_id": "sec_5",
+          "page": 5,
+          "title": "3. 电流",
+          "content": "3. 电流\n不用很大的电流就可以导致疼痛或致命的电击。\n对于工频电流\n1）当1毫安左右的电流通过人体时，会产生麻刺等不舒服的感觉；\n2）10~30毫安的电流通过人体，会产生麻痹、剧痛、痉挛、血压升高、呼吸困难等症状，但通常不致有生命危险；\n3）电流达到50毫安以上，就会引起心室颤动而有生命危险；\n4）100毫安以上的电流，足以致人死亡。\n人体允许的安全工频电流:  30mA\n工频危险电流:  50mA",
+          "summary": "电流对人体的影响",
+          "key_points": [
+            "3. 电流"
+          ],
+          "knowledge_points": [
+            "3. 电流"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_9"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_6",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "section_id": "sec_6",
+          "page": 6,
+          "title": "4. 电流持续时间与路径对人体的伤害",
+          "content": "4. 电流持续时间与路径对人体的伤害\n电流频率对人体的伤害\n电流频率在40Hz ~ 60Hz对人体的伤害最大。\n实践证明，直流电对血液有分解作用，而高频电流不仅没有危害还可以用于医疗保健等。\n3. 电流\n电流通过人体的时间愈长，则伤害愈大。\n电流的路径通过心脏会导致神经失常、心跳停\n止、血液循环中断，危险性最大。其中电流的流经从右手到左脚的路径是最危险的。",
+          "summary": "电流持续时间、频率与路径",
+          "key_points": [
+            "4. 电流持续时间与路径对人体的伤害"
+          ],
+          "knowledge_points": [
+            "4. 电流持续时间与路径对人体的伤害"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_10"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_7",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "section_id": "sec_7",
+          "page": 7,
+          "title": "12.3.2 触电方式",
+          "content": "12.3.2 触电方式\n1. 接触正常带电体\n(1) 电源中性点接地的单相触电\n通过人体电流:\n式中:\nUP: 电源相电压 (220V)\nRo: 接地电阻  4\nRb: 人体电阻 1000\n这时人体处于相电压下，危险较大。",
+          "summary": "接触正常带电体的触电方式",
+          "key_points": [
+            "12.3.2 触电方式"
+          ],
+          "knowledge_points": [
+            "12.3.2 触电方式"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_11",
+            "manual_asset_1_slide_12",
+            "manual_asset_1_slide_13"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_8",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "section_id": "sec_7",
+          "page": 8,
+          "title": "3. 跨步电压触电",
+          "content": "3. 跨步电压触电\n电位分布\n接地点\n跨步电压\n在高压输电线断线落地时，有强大的电流流入大地，在接地点周围产生电压降。如图所示。\n当人体接近接地点时，两脚之间承受跨步电压而触电。跨步电压的大小与人和接地点距离，两脚之间的跨距，接地电流大小等因素有关。\n双脚跨步\n一般在20m之外，跨步电压就降为零。如果误入接地点附近，应双脚并拢或单脚跳出危险区。",
+          "summary": "跨步电压触电",
+          "key_points": [
+            "3. 跨步电压触电"
+          ],
+          "knowledge_points": [
+            "3. 跨步电压触电"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_14"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        },
+        {
+          "page_id": "page_9",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "section_id": "sec_8",
+          "page": 9,
+          "title": "12.3.4  接地和接零",
+          "content": "12.3.4  接地和接零\n为了人身安全和电力系统工作的需要，要求电气设备采取接地措施。按接地目的的不同，主要分为工作接地、保护接地和保护接零。\n1. 工作接地\n即将中性点接地。\n目的：\n(1) 降低触电电压\n(2) 迅速切断故障\n在中性点接地的系统中，一相接地后的电流较大，保护装置迅速动作，断开故障点。\n(3) 降低电气设备对地的绝缘水平",
+          "summary": "12.3.4 接地和接零 为了人身安全和电力系统工作的需要，要求电气设备采取接地措施。按接地目的的不同，主要分为工作接地、保护接地和保护接零。 1. 工作接地 即将中性点接地。 目的： (1) 降低触电电压 (2) 迅速切断故障 在中性点接地的系统中，一相接地后的电流较大，保护装置迅速动作，断开故障点。 (3) ...",
+          "key_points": [
+            "12.3.4  接地和接零"
+          ],
+          "knowledge_points": [
+            "12.3.4  接地和接零"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_15",
+            "manual_asset_1_slide_16",
+            "manual_asset_1_slide_17",
+            "manual_asset_1_slide_18",
+            "manual_asset_1_slide_19",
+            "manual_asset_1_slide_20"
+          ],
+          "page_role": "content",
+          "file_id": "manual_asset_1",
+          "file_type": "pptx"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "sec_1",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "name": "课程介绍与目标",
+          "summary": "介绍电工学课程和本章主题，明确学习目标为了解安全用电基本常识。",
+          "page_range": [
+            1
+          ],
+          "key_points": [
+            "课程介绍与目标"
+          ],
+          "knowledge_points": [
+            "课程介绍与目标"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_1",
+            "manual_asset_1_slide_2",
+            "manual_asset_1_slide_3"
+          ],
+          "section_type": "intro",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_2",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "name": "安全用电与触电事故",
+          "summary": "阐述安全用电的重要性，详细分析触电事故的原因，包括违章操作、施工不规范和产品质量不合格。",
+          "page_range": [
+            2
+          ],
+          "key_points": [
+            "安全用电与触电事故"
+          ],
+          "knowledge_points": [
+            "安全用电与触电事故"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_4",
+            "manual_asset_1_slide_5",
+            "manual_asset_1_slide_6"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_3",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "name": "电流危害",
+          "summary": "解释电流对人体的两种伤害（电击和电伤），并讨论影响伤害程度的因素。",
+          "page_range": [
+            3
+          ],
+          "key_points": [
+            "电流危害"
+          ],
+          "knowledge_points": [
+            "电流危害"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_7"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_4",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "name": "人体电阻与电压",
+          "summary": "人体电阻范围和安全电压定义",
+          "page_range": [
+            4
+          ],
+          "key_points": [
+            "人体电阻与电压"
+          ],
+          "knowledge_points": [
+            "人体电阻与电压"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_8"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_5",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "name": "电流影响",
+          "summary": "工频电流对人体的不同效应和安全阈值",
+          "page_range": [
+            5
+          ],
+          "key_points": [
+            "电流影响"
+          ],
+          "knowledge_points": [
+            "电流影响"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_9"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_6",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "name": "电流特性",
+          "summary": "电流持续时间、频率和路径对伤害的影响",
+          "page_range": [
+            6
+          ],
+          "key_points": [
+            "电流特性"
+          ],
+          "knowledge_points": [
+            "电流特性"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_10"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_7",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "name": "触电方式",
+          "summary": "接触正常带电体和不带电金属体的触电类型",
+          "page_range": [
+            7,
+            8
+          ],
+          "key_points": [
+            "触电方式"
+          ],
+          "knowledge_points": [
+            "触电方式"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_11",
+            "manual_asset_1_slide_12",
+            "manual_asset_1_slide_13",
+            "manual_asset_1_slide_14"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        },
+        {
+          "section_id": "sec_8",
+          "course_id": null,
+          "lesson_id": "LESSON_20260316_163313",
+          "name": "接地和接零概述",
+          "summary": "接地和接零概述",
+          "page_range": [
+            9
+          ],
+          "key_points": [
+            "接地和接零概述"
+          ],
+          "knowledge_points": [
+            "接地和接零概述"
+          ],
+          "source_unit_ids": [
+            "manual_asset_1_slide_15",
+            "manual_asset_1_slide_16",
+            "manual_asset_1_slide_17",
+            "manual_asset_1_slide_18",
+            "manual_asset_1_slide_19",
+            "manual_asset_1_slide_20"
+          ],
+          "section_type": "content",
+          "parent_section_id": null
+        }
+      ],
+      "knowledge_points": [
+        "安全用电的基本常识",
+        "触电事故的原因：违章操作、施工不规范、产品质量不合格",
+        "电流对人体的危害：电击和电伤",
+        "课程介绍与目标",
+        "安全用电与触电事故",
+        "电流危害",
+        "电工学（电工技术）",
+        "12. 3 安全用电",
+        "12.3.2 电流对人体的危害",
+        "人体电阻通常为104~105Ω，角质外层破坏时降至800~1000Ω",
+        "安全电压为36V以下，用于手灯和机床照明",
+        "工频电流：1mA产生麻刺感，10~30mA致麻痹，50mA以上致心室颤动，100mA以上致命",
+        "安全工频电流为30mA，危险电流为50mA",
+        "电流频率40~60Hz伤害最大，直流电分解血液，高频电流可用于医疗",
+        "电流持续时间越长伤害越大，路径从右手到左脚最危险",
+        "触电方式包括单相触电（中性点接地和不接地）、双相触电和跨步电压触电",
+        "跨步电压触电发生在高压线落地时，20米外电压降为零",
+        "人体电阻与电压",
+        "电流影响",
+        "电流特性",
+        "触电方式",
+        "1. 人体电阻的大小",
+        "3. 电流",
+        "4. 电流持续时间与路径对人体的伤害",
+        "12.3.2 触电方式",
+        "3. 跨步电压触电",
+        "工作接地的目的包括降低触电电压、迅速切断故障和降低绝缘水平。",
+        "保护接地通过分流作用减少通过人体的电流，适用于中性点不接地的低压系统。",
+        "保护接零用于三相四线制系统，将外壳接零线以触发保护设备动作。",
+        "中性点接地系统不允许同时使用保护接地和保护接零。",
+        "保护零线（PE）确保设备外壳对地电压为零，需正确接零。",
+        "接地和接零概述",
+        "12.3.4 接地和接零"
+      ],
+      "parse_instruction": null,
+      "metadata": {
+        "merged_from_chunks": 3,
+        "normalized": true,
+        "page_count": 9,
+        "section_count": 8
+      }
+    }
+  }
+}

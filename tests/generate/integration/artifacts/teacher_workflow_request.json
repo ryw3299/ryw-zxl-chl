@@ -1,0 +1,16 @@
+{
+  "course_id": "COURSE_CLI",
+  "lesson_id": "LESSON_CLI",
+  "lesson_name": "CLI Lesson",
+  "assets": [
+    {
+      "asset_id": "asset_1",
+      "file_path": "E:\\demo\\lesson.pdf",
+      "file_type": "pdf",
+      "file_name": "lesson.pdf"
+    }
+  ],
+  "parse_instruction": "Focus on key concepts.",
+  "teacher_notes": "Speak clearly.",
+  "generate_instruction": "Keep slides concise."
+}
