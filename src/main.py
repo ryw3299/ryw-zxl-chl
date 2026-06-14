@@ -1,90 +1,93 @@
-import argparse
-import json
-from collections.abc import Sequence
-from pathlib import Path
-from typing import Optional
+"""智学工坊 FastAPI 应用入口。"""
 
-from src.workflows import run_teacher_workflow
+from contextlib import asynccontextmanager
 
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
-def main(argv: Optional[Sequence[str]] = None) -> int:
-    parser = _build_argument_parser()
-    args = parser.parse_args(list(argv) if argv is not None else None)
-
-    if args.command == "teacher-workflow":
-        return _run_teacher_workflow_command(args)
-
-    parser.print_help()
-    return 1
+from src.core.config import settings
+from src.core.database import init_db
+from src.core.deps import generate_request_id
 
 
-def _build_argument_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="ChaoXingAgent command-line entrypoint")
-    subparsers = parser.add_subparsers(dest="command")
-
-    teacher_parser = subparsers.add_parser(
-        "teacher-workflow",
-        help="Run the teacher workflow from a JSON request file.",
-    )
-    teacher_parser.add_argument(
-        "--request-file", required=True, help="Path to the teacher workflow request JSON file."
-    )
-    teacher_parser.add_argument(
-        "--output-file", required=True, help="Path to write the workflow result JSON."
-    )
-    teacher_parser.add_argument("--env-path", help="Optional .env file path for LLM configuration.")
-    teacher_parser.add_argument("--parser-log-file", help="Optional parser log file path.")
-    teacher_parser.add_argument("--generate-log-file", help="Optional generate log file path.")
-    teacher_parser.add_argument("--artifact-file", help="Optional workflow artifact JSON file path.")
-    teacher_parser.add_argument("--rendered-ppt-file", help="Optional rendered PPTX output path.")
-    teacher_parser.add_argument(
-        "--parser-max-workers", type=int, help="Optional parser max_workers override."
-    )
-    teacher_parser.add_argument("--parser-batch-size", type=int, help="Optional parser batch_size override.")
-    teacher_parser.add_argument(
-        "--generate-max-sections", type=int, help="Optional preview max_sections limit."
-    )
-    teacher_parser.add_argument(
-        "--generate-max-workers", type=int, help="Optional generate max_workers override."
-    )
-    teacher_parser.add_argument(
-        "--generate-batch-size", type=int, help="Optional generate batch_size override."
-    )
-    teacher_parser.add_argument(
-        "--skip-render-ppt",
-        action="store_true",
-        help="Skip PPT rendering and only produce parser/generate artifacts.",
-    )
-    return parser
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    yield
 
 
-def _run_teacher_workflow_command(args: argparse.Namespace) -> int:
-    request_path = Path(args.request_file)
-    if not request_path.exists():
-        raise FileNotFoundError(f"Teacher workflow request file does not exist: {request_path}")
+app = FastAPI(
+    title=settings.APP_NAME,
+    description="基于大模型的工科生个性化学习资源生成与多智能体学习辅助系统",
+    version="0.1.0",
+    lifespan=lifespan,
+)
 
-    teacher_request = json.loads(request_path.read_text(encoding="utf-8"))
-    result = run_teacher_workflow(
-        teacher_request,
-        parser_log_file=args.parser_log_file,
-        generate_log_file=args.generate_log_file,
-        artifact_file=args.artifact_file,
-        rendered_ppt_file=args.rendered_ppt_file,
-        env_path=args.env_path,
-        parser_max_workers=args.parser_max_workers,
-        parser_batch_size=args.parser_batch_size,
-        generate_max_sections=args.generate_max_sections,
-        generate_max_workers=args.generate_max_workers,
-        generate_batch_size=args.generate_batch_size,
-        render_ppt=not args.skip_render_ppt,
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ── 全局异常处理 ────────────────────────────────────────────────
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(request: Request, exc: StarletteHTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "code": exc.status_code,
+            "msg": str(exc.detail),
+            "data": None,
+            "requestId": generate_request_id(),
+        },
     )
 
-    output_path = Path(args.output_file)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(output_path)
-    return 0
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    return JSONResponse(
+        status_code=500,
+        content={
+            "code": 500,
+            "msg": "服务端内部错误",
+            "data": None,
+            "requestId": generate_request_id(),
+        },
+    )
 
 
-if __name__ == "__main__":
-    raise SystemExit(main())
+# ── 路由注册 ────────────────────────────────────────────────────
+
+from src.api.routers import auth, profile, path, resource, generated_resource, event, assistant, quiz, task, announcement, study_record  # noqa: E402
+
+prefix = settings.API_V1_PREFIX
+app.include_router(auth.router, prefix=prefix)
+app.include_router(profile.router, prefix=prefix)
+app.include_router(path.router, prefix=prefix)
+app.include_router(resource.router, prefix=prefix)
+app.include_router(generated_resource.router, prefix=prefix)
+app.include_router(event.router, prefix=prefix)
+app.include_router(assistant.router, prefix=prefix)
+app.include_router(quiz.router, prefix=prefix)
+app.include_router(task.router, prefix=prefix)
+app.include_router(announcement.router, prefix=prefix)
+app.include_router(study_record.router, prefix=prefix)
+
+
+# ── 系统端点 ────────────────────────────────────────────────────
+
+
+@app.get("/health", tags=["系统"])
+def health_check():
+    return {
+        "status": "ok",
+        "service": settings.APP_NAME,
+        "debug": settings.DEBUG,
+    }

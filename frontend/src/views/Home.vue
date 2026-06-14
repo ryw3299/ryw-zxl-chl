@@ -1,1364 +1,1670 @@
-<script setup>
-import { computed, onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { listLessons } from '@/api/lesson'
-import { syncUser } from '@/api/platform'
-import { trackProgress } from '@/api/progress'
-import { useLessonStore } from '@/store/lessonStore'
-import { useUserStore } from '@/store/userStore'
-
-const router = useRouter()
-const route = useRoute()
-const lessonStore = useLessonStore()
-const userStore = useUserStore()
-
-const lessons = ref([])
-const loadingLessons = ref(false)
-
-const courseCoverUrls = {
-  'machine-learning': '/images/course-machine-learning.png',
-  '机器学习基础': '/images/course-machine-learning.png',
-  algorithm: '/images/course-data-structure.png',
-  '数据结构与算法': '/images/course-data-structure.png',
-  python: '/images/course-python.png',
-  'Python 程序设计': '/images/course-python.png',
-}
-
-const fallbackLessons = [
-  {
-    lessonId: 'ai-intro',
-    lessonName: '人工智能导论',
-    courseDesc: '第四章 机器学习基础',
-    tag: '继续学习',
-    progress: 68,
-    lessonsDone: 8,
-    lessonsTotal: 12,
-    weeklyHours: 12,
-    coverType: 'python',
-  },
-  {
-    lessonId: 'machine-learning',
-    lessonName: '机器学习基础',
-    courseDesc: '本周学习 9 小时',
-    tag: 'AI 热门',
-    progress: 42,
-    weeklyHours: 9,
-    coverType: 'code',
-  },
-  {
-    lessonId: 'algorithm',
-    lessonName: '数据结构与算法',
-    courseDesc: '本周学习 6 小时',
-    progress: 15,
-    weeklyHours: 6,
-    accent: '#ff7d79',
-    coverType: 'math',
-  },
-  {
-    lessonId: 'python',
-    lessonName: 'Python 程序设计',
-    courseDesc: '本周学习 8 小时',
-    progress: 34,
-    weeklyHours: 8,
-    coverType: 'python',
-  },
-]
-
-const tasks = ref([
-  { id: 1, text: '完成人工智能导论第三章练习', done: true, badge: '' },
-  { id: 2, text: '复习机器学习核心概念', done: false, badge: '今天截止', urgent: true },
-  { id: 3, text: 'Python 课后编程作业', done: false, badge: '本周' },
-  { id: 4, text: '数据结构错题回顾', done: false, badge: '本周' },
-])
-
-const weeklyBars = [
-  { day: '一', value: 3.5 },
-  { day: '二', value: 5.2 },
-  { day: '三', value: 2.1 },
-  { day: '四', value: 6.0 },
-  { day: '五', value: 4.5 },
-  { day: '六', value: 4.8, active: true },
-  { day: '日', value: 2.4 },
-]
-
-const completedCount = computed(() => tasks.value.filter((task) => task.done).length)
-
-const userName = computed(() => {
-  const queryName = normalizeString(route.query.userName)
-  const raw = queryName || userStore.userInfo.userName || userStore.userInfo.userId || '王同学'
-  return String(Array.isArray(raw) ? raw[0] : raw).trim() || '王同学'
-})
-
-const userInitial = computed(() => userName.value.slice(0, 1) || '王')
-
-const todayText = computed(() => {
-  const date = new Date()
-  const week = ['日', '一', '二', '三', '四', '五', '六'][date.getDay()]
-  return `今天是 ${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日，周${week}`
-})
-
-const normalizedLessons = computed(() => {
-  const source = lessons.value.length ? lessons.value : fallbackLessons
-  return source.map((item, index) => normalizeLesson(item, index))
-})
-
-const mainCourse = computed(() => normalizedLessons.value[0] || normalizeLesson(fallbackLessons[0], 0))
-const courseCards = computed(() => normalizedLessons.value.slice(1, 4))
-
-const recentRecords = computed(() => {
-  const records = normalizedLessons.value.slice(0, 2)
-  if (!records.length) return []
-  return records.map((lesson, index) => ({
-    ...lesson,
-    icon: index === 0 ? 'play' : 'doc',
-    time: index === 0 ? '今天 10:24' : '昨天 16:15',
-    meta: index === 0 ? `学习 42 分钟 · 进度 ${lesson.progress}%` : '错题 21 题 · 正确率 30%',
-  }))
-})
-
-const totalWeeklyHours = computed(() => weeklyBars.reduce((sum, item) => sum + item.value, 0).toFixed(1))
-const averageDailyHours = computed(() => (Number(totalWeeklyHours.value) / 7).toFixed(1))
-
-const normalizeString = (value, fallback = '') => {
-  if (Array.isArray(value)) return normalizeString(value[0], fallback)
-  return typeof value === 'string' && value.trim() ? value.trim() : fallback
-}
-
-function getCourseCoverUrl({ lessonId, name }) {
-  return courseCoverUrls[lessonId] || courseCoverUrls[name] || ''
-}
-
-function inferProgress(item) {
-  if (Number.isFinite(Number(item.progress))) return Number(item.progress)
-  const status = normalizeString(item.coursewareStatus || item.status).toLowerCase()
-  if (['published', 'completed'].includes(status)) return 68
-  if (['rendering', 'generating', 'processing'].includes(status)) return 45
-  if (['planning', 'plan_ready', 'draft'].includes(status)) return 30
-  if (status === 'failed') return 12
-  return 34
-}
-
-function normalizeLesson(item, index) {
-  const fallback = fallbackLessons[index % fallbackLessons.length]
-  const lessonId = normalizeString(item.lessonId || item.id, fallback.lessonId)
-  const name = normalizeString(item.lessonName || item.name, fallback.lessonName)
-  const desc = normalizeString(item.courseDesc || item.desc || item.chapter, fallback.courseDesc)
-  const progress = Math.max(0, Math.min(100, Math.round(inferProgress(item))))
-  const mappedCoverUrl = getCourseCoverUrl({ lessonId, name })
-
-  return {
-    id: lessonId,
-    lessonId,
-    name,
-    chapter: desc,
-    tag: normalizeString(item.tag, fallback.tag || ''),
-    progress,
-    lessonsDone: Number(item.lessonsDone || fallback.lessonsDone || Math.max(1, Math.round(progress / 10))),
-    lessonsTotal: Number(item.lessonsTotal || fallback.lessonsTotal || 12),
-    weeklyHours: Number(item.weeklyHours || fallback.weeklyHours || Math.max(3, Math.round(progress / 8))),
-    accent: normalizeString(item.accent, fallback.accent || '#2f6bf6'),
-    coverUrl: mappedCoverUrl || normalizeString(item.coverUrl, fallback.coverUrl || ''),
-    coverType: normalizeString(item.coverType, fallback.coverType || ['code', 'math', 'python'][index % 3]),
-    status: normalizeString(item.status || item.coursewareStatus, ''),
-    renderedPptUrl: normalizeString(item.renderedPptUrl, ''),
-  }
-}
-
-const barHeight = (value) => `${Math.max(27, value * 12)}px`
-
-async function loadLessons() {
-  loadingLessons.value = true
-  try {
-    const result = await listLessons('', { silent: true })
-    lessons.value = Array.isArray(result?.lessons) ? result.lessons : Array.isArray(result) ? result : []
-  } catch {
-    lessons.value = []
-  } finally {
-    loadingLessons.value = false
-  }
-}
-
-async function syncCurrentUser() {
-  if (!userStore.userInfo.userId || !userStore.token) return
-  try {
-    await syncUser({
-      silent: true,
-      platformId: normalizeString(route.query.platformId, 'chaoxing'),
-      userInfo: {
-        userId: userStore.userInfo.userId,
-        userName: userStore.userInfo.userName,
-        role: userStore.userInfo.role || 'student',
-        schoolId: userStore.userInfo.schoolId,
-      },
-    })
-  } catch {
-    // The home page can render without platform sync; request.js already surfaces failures.
-  }
-}
-
-async function enterLesson(course = mainCourse.value) {
-  lessonStore.setCourseInfo({
-    courseId: course.id,
-    courseName: course.name,
-    courseDesc: course.chapter || '',
-  })
-
-  lessonStore.setLessonInfo({
-    lessonId: course.lessonId,
-  })
-
-  try {
-    await trackProgress({
-      silent: true,
-      schoolId: userStore.userInfo.schoolId || route.query.schoolId,
-      userId: userStore.userInfo.userId || route.query.userId,
-      courseId: course.id,
-      lessonId: course.lessonId,
-      progressPercent: course.progress,
-    })
-  } catch {
-    // Do not block navigation if progress tracking is unavailable.
-  }
-
-  router.push({
-    path: '/pc/lesson/player',
-    query: {
-      ...route.query,
-      courseId: course.id,
-      courseName: course.name,
-      lessonId: course.lessonId,
-    },
-  })
-}
-
-onMounted(() => {
-  syncCurrentUser()
-  loadLessons()
-})
-</script>
-
 <template>
-  <div class="study-home">
-    <header class="study-header">
-      <div>
-        <h1>
-          上午好，{{ userName }}
-          <svg class="sun" viewBox="0 0 64 38" aria-hidden="true">
-            <path d="M15 29a17 17 0 0 1 34 0" />
-            <path d="M6 29h10M48 29h10M32 3v10M12 10l7 7M52 10l-7 7" />
+  <div class="home-page">
+    <aside class="home-sidebar">
+      <div class="sidebar-brand" @click="router.push('/')">
+        <div class="brand-mark">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+            <rect x="2" y="2" width="26" height="26" rx="8" fill="#2563eb" />
+            <path d="M9.5 15.5L13 19L20.5 11.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-        </h1>
+        </div>
+        <div class="brand-copy">
+          <div class="brand-name">智学工坊</div>
+          <div class="brand-tagline">AI赋能学习，成长看得见</div>
+        </div>
       </div>
-      <div class="header-tools">
-        <button class="plain-icon" type="button" aria-label="搜索">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.7-3.7" /></svg>
-        </button>
-        <button class="plain-icon bell" type="button" aria-label="通知">
-          <span></span>
-          <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" /><path d="M13.7 21a2 2 0 0 1-3.4 0" /></svg>
-        </button>
-        <div class="user-badge">{{ userInitial }}</div>
-      </div>
-    </header>
 
-    <div class="dashboard-grid">
-      <main class="dashboard-main">
-        <section class="continue-card">
-          <div class="continue-copy">
-            <span class="section-label">继续学习</span>
-            <h2>{{ mainCourse.name }}</h2>
-            <p>{{ mainCourse.chapter }}</p>
-            <div class="continue-actions">
-              <button class="primary-btn" type="button" @click="enterLesson(mainCourse)">
-                <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="10" fill="rgba(255,255,255,0.22)" stroke="none" /><path d="M10 8l6 4-6 4V8z" fill="#fff" /></svg>
-                继续学习
-              </button>
-              <button class="secondary-btn" type="button">
-                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="13" y2="17" /></svg>
-                学习笔记
-              </button>
+      <nav class="sidebar-nav">
+        <button
+          v-for="item in navItems"
+          :key="item.label"
+          type="button"
+          :class="['nav-item', { active: item.active }]"
+          @click="router.push(item.to)"
+        >
+          <el-icon><component :is="item.icon" /></el-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="streak-card">
+          <div class="streak-heading">
+            <span>连续学习</span>
+            <span class="streak-fire">热</span>
+          </div>
+          <div class="streak-main">
+            <strong>16</strong>
+            <span>天</span>
+          </div>
+          <div class="streak-meta">
+            <span>累计学习</span>
+            <strong>128 小时</strong>
+          </div>
+          <button type="button" class="ghost-wide-button" @click="goDashboard">学习日历</button>
+        </div>
+        <button type="button" class="logout-btn" @click="handleLogout">
+          <el-icon><Switch /></el-icon>
+          <span>退出登录</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="page-shell">
+      <header class="page-header">
+        <div class="header-search">
+          <el-icon><Search /></el-icon>
+          <input
+            v-model="searchText"
+            type="text"
+            placeholder="搜索课程、资源、题目或知识点"
+            @keyup.enter="onSearch"
+          />
+        </div>
+
+        <div class="header-actions">
+          <div class="header-user" @click="router.push(userStore.isLogin ? '/settings' : '/login')">
+            <div class="user-avatar">{{ (userStore.username || '')[0] || '同' }}</div>
+            <div class="user-meta">
+              <span class="user-name">{{ userStore.username || '同学' }}</span>
+              <span class="user-level">Lv.6</span>
             </div>
+            <el-icon class="user-arrow"><ArrowDown /></el-icon>
           </div>
+        </div>
+      </header>
 
-          <div class="continue-visual" aria-hidden="true">
-            <img src="/images/progress-goal-card.png" alt="" />
-          </div>
-
-          <div class="continue-meta">
-            <span>
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
-              本周学习 {{ mainCourse.weeklyHours }} 小时
-            </span>
-            <span>
-              <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></svg>
-              已完成 {{ mainCourse.lessonsDone }} / {{ mainCourse.lessonsTotal }} 章
-            </span>
-            <span class="ai-status">
-              <i class="ai-badge">
-                <svg viewBox="0 0 24 24" width="14" height="14">
-                  <rect x="5" y="8" width="14" height="11" rx="2.5" fill="#fff" />
-                  <circle cx="9.5" cy="13" r="1.5" fill="#8b6cef" />
-                  <circle cx="14.5" cy="13" r="1.5" fill="#8b6cef" />
-                  <line x1="9" y1="8" x2="9" y2="5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
-                  <line x1="15" y1="8" x2="15" y2="5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
-                </svg>
-              </i>
-              AI 助学中
-            </span>
-          </div>
-        </section>
-
-        <section class="course-section">
-          <div class="section-title-row">
-            <h3>我的课程</h3>
-            <button type="button" @click="router.push({ path: '/pc/my-courses', query: route.query })">查看全部 <span>→</span></button>
-          </div>
-          <div class="course-grid" :class="{ loading: loadingLessons }">
-            <article
-              v-for="course in courseCards"
-              :key="course.id"
-              class="course-card"
-              @click="enterLesson(course)"
-            >
-              <div class="course-cover" :class="`cover-${course.coverType}`">
-                <img v-if="course.coverUrl" :src="course.coverUrl" :alt="course.name" />
-                <template v-else>
-                  <span v-if="course.tag" class="course-tag">{{ course.tag }}</span>
-                  <div v-if="course.coverType === 'math'" class="math-lines">
-                    x<sub>1</sub> + x<sub>2</sub> - 3x<sub>3</sub> = -10<br />
-                    6x<sub>2</sub> - 2x<sub>3</sub> + x<sub>4</sub> = 7<br />
-                    2x<sub>2</sub> - 3x<sub>4</sub> = 13
-                  </div>
-                  <div v-if="course.coverType === 'python'" class="python-paper">PYTHON</div>
-                </template>
-              </div>
-              <div class="course-body">
-                <h4>{{ course.name }}</h4>
-                <div class="course-progress">
-                  <div><i :style="{ width: `${course.progress}%`, backgroundColor: course.accent }"></i></div>
-                  <em>{{ course.progress }}%</em>
-                </div>
-                <p>本周学习 {{ course.weeklyHours }} 小时</p>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section class="suggest-card">
-          <div class="suggest-copy">
-            <h3>
-              <span class="bulb-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M8.2 10.1a4.8 4.8 0 1 1 7.6 3.9c-.7.5-1.1 1.2-1.2 2H9.4c-.1-.8-.5-1.5-1.2-2a4.7 4.7 0 0 1-2-3.9Z" />
-                  <path d="M9.5 18h5" />
-                  <path d="M10.2 20h3.6" />
-                  <path d="M12 13v3" />
-                </svg>
-              </span>
-              学习建议
-            </h3>
-            <p>
-              子网划分专项练习完成情况整体不错，正确率有提升（45%）。<br />
-              建议你优先复习错题较多的知识点，同时继续保持每日学习节奏。
+      <main class="page-content">
+        <section class="hero-card">
+          <div class="hero-content">
+            <p class="hero-label">学习总览</p>
+            <h1>AI 让学习更懂你</h1>
+            <p class="hero-description">
+              基于你的学习数据和兴趣偏好，智能推荐合适的内容与路径，让每一次学习都更高效，更有收获。
             </p>
-            <div class="suggest-actions">
-              <button class="suggest-practice" type="button" @click="router.push({ path: '/pc/lesson/game', query: route.query })">
-                去练习 <span>→</span>
-              </button>
-              <button class="suggest-errors" type="button" @click="router.push({ path: '/pc/lesson/game', query: { ...route.query, mode: 'mistakes' } })">
-                查看错题本 <span>›</span>
+            <div class="hero-actions">
+              <router-link :to="userStore.isLogin ? '/dashboard' : '/login'" class="primary-button">
+                开始学习
+              </router-link>
+              <button type="button" class="secondary-button" @click="scrollToRecommendations">
+                制定学习计划
               </button>
             </div>
           </div>
-          <div class="student-art" aria-hidden="true">
-            <img src="/images/study-suggestion.png" alt="" />
+
+          <div class="hero-illustration" aria-hidden="true">
+            <div class="illustration-chart">
+              <span class="chart-label">学习进度</span>
+              <svg viewBox="0 0 180 94" fill="none">
+                <path d="M10 68C22 66 31 46 46 43C60 40 63 62 78 61C92 60 100 24 117 22C135 20 141 45 170 30" stroke="#4f8bff" stroke-width="4" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div class="illustration-stat">
+              <span>知识掌握度</span>
+              <div class="stat-ring">
+                <div class="stat-ring-inner">72%</div>
+              </div>
+            </div>
+            <div class="robot-stage">
+              <div class="robot-hat"></div>
+              <div class="robot-head">
+                <span class="robot-eye"></span>
+                <span class="robot-eye"></span>
+              </div>
+              <div class="robot-body"></div>
+            </div>
+            <div class="illustration-card"></div>
+            <div class="illustration-card small"></div>
           </div>
+        </section>
+
+        <section class="feature-grid" ref="recommendationsRef">
+          <button
+            v-for="feature in features"
+            :key="feature.title"
+            type="button"
+            class="feature-card"
+            @click="feature.action"
+          >
+            <div class="feature-icon" :style="{ background: feature.tint }">
+              <el-icon><component :is="feature.icon" /></el-icon>
+            </div>
+            <div class="feature-text">
+              <strong>{{ feature.title }}</strong>
+              <span>{{ feature.desc }}</span>
+            </div>
+          </button>
+        </section>
+
+        <section class="content-grid">
+          <article class="surface-card section-card">
+            <div class="section-head">
+              <h2>推荐学习资源</h2>
+              <button type="button" class="text-button" @click="router.push('/resources')">更多</button>
+            </div>
+
+            <div class="resource-list">
+              <button
+                v-for="resource in displayedResources"
+                :key="resource.id"
+                type="button"
+                class="resource-item"
+                @click="openResource(resource)"
+              >
+                <div class="resource-cover" :style="{ background: getCoverBg(resource.resource_type) }">
+                  <span>{{ resource.typeLabel }}</span>
+                </div>
+                <div class="resource-body">
+                  <div class="resource-title">{{ resource.title }}</div>
+                  <div class="resource-meta">
+                    <span>{{ resource.typeLabel }}</span>
+                    <span>4.8</span>
+                    <span>{{ resource.learners }}</span>
+                  </div>
+                  <div class="resource-progress-row">
+                    <div class="resource-progress">
+                      <div class="resource-progress-bar" :style="{ width: resource.progress + '%' }"></div>
+                    </div>
+                    <span>{{ resource.progress }}%</span>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </article>
+
+          <article class="surface-card section-card">
+            <div class="section-head">
+              <h2>今日任务</h2>
+              <button type="button" class="text-button" @click="goDashboard">更多</button>
+            </div>
+
+            <div class="task-list">
+              <div v-for="task in tasks" :key="task.title" class="task-item">
+                <div :class="['task-status', { done: task.done }]">
+                  <el-icon v-if="task.done"><Check /></el-icon>
+                </div>
+                <div class="task-main">
+                  <div class="task-title-row">
+                    <span class="task-title">{{ task.title }}</span>
+                    <el-tag :type="task.done ? 'success' : task.tagType" effect="plain" size="small">
+                      {{ task.tag }}
+                    </el-tag>
+                  </div>
+                  <div class="task-subline">
+                    <span>预计 {{ task.time }}</span>
+                    <span>{{ task.finished }}/{{ task.total }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="calendar-card">
+              <div class="calendar-head">
+                <span>学习日历</span>
+                <div class="calendar-nav">
+                  <button type="button" @click="changeMonth(-1)">
+                    <el-icon><ArrowLeft /></el-icon>
+                  </button>
+                  <span>{{ calYear }}年{{ calMonth }}月</span>
+                  <button type="button" @click="changeMonth(1)">
+                    <el-icon><ArrowRight /></el-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="calendar-grid">
+                <span v-for="weekday in weekdays" :key="weekday" class="calendar-weekday">{{ weekday }}</span>
+                <button
+                  v-for="(day, index) in calendarDays"
+                  :key="`${index}-${day || 'empty'}`"
+                  type="button"
+                  :disabled="!day"
+                  :class="['calendar-day', { active: day === todayDate }]"
+                  @click="day && goDashboard()"
+                >
+                  {{ day || '' }}
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="surface-card section-card">
+            <div class="section-head">
+              <h2>最近学习记录</h2>
+              <button type="button" class="text-button" @click="router.push('/resources')">更多</button>
+            </div>
+
+            <div class="recent-list">
+              <div v-for="item in recentRecords" :key="item.name" class="recent-item" @click="goToResource(item)">
+                <div class="recent-icon" :style="{ background: item.iconBg }">
+                  <span style="color:white;font-weight:600">{{ (item.name || '?')[0] }}</span>
+                </div>
+                <div class="recent-main">
+                  <div class="recent-name">{{ item.name }}</div>
+                  <div class="recent-subline">上次学习：{{ item.chapter }}</div>
+                </div>
+                <div class="recent-side">
+                  <span class="recent-link">继续学</span>
+                  <span class="recent-percent">{{ item.percent }}%</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="advice-bar">
+          <div class="advice-copy">
+            <div class="advice-icon">
+              <el-icon><Sunny /></el-icon>
+            </div>
+            <div>
+              <strong>学习建议</strong>
+              <p>基于你的学习情况，我们为你生成了本周学习建议。</p>
+            </div>
+          </div>
+          <button type="button" class="advice-button" @click="router.push(userStore.isLogin ? '/learning-path' : '/login')">
+            查看建议
+          </button>
         </section>
       </main>
 
-      <aside class="dashboard-side">
-        <section class="side-card todo-card">
-          <div class="side-title">
-            <h3>今日待办</h3>
-            <button type="button">...</button>
-          </div>
-          <div class="todo-list">
-            <label v-for="task in tasks" :key="task.id" class="todo-item">
-              <input v-model="task.done" type="checkbox" />
-              <span class="fake-check"></span>
-              <strong>{{ task.text }}</strong>
-              <em v-if="task.badge" :class="{ urgent: task.urgent }">{{ task.badge }}</em>
-            </label>
-          </div>
-          <p class="task-count">已完成 {{ completedCount }} / {{ tasks.length }} 项</p>
-        </section>
-
-        <section class="side-card stats-card">
-          <h3>本周学习数据</h3>
-          <div class="stats-numbers">
-            <div><strong>{{ totalWeeklyHours }}</strong><span>小时</span><p>总学习时长</p></div>
-            <div><strong>{{ averageDailyHours }}</strong><span>小时</span><p>日均学习<br /><em>超过 85% 同学</em></p></div>
-          </div>
-          <div class="bar-chart">
-            <div v-for="bar in weeklyBars" :key="bar.day" class="bar-item" :class="{ active: bar.active }">
-              <span>{{ bar.value }}</span>
-              <i :style="{ height: barHeight(bar.value) }"></i>
-              <b>{{ bar.day }}</b>
-            </div>
-          </div>
-        </section>
-
-        <section class="side-card recent-card">
-          <h3>最近学习记录</h3>
-          <div class="record-list">
-            <article v-for="record in recentRecords" :key="record.id" class="record-item">
-              <div class="record-icon" :class="record.icon">
-                <svg v-if="record.icon === 'play'" viewBox="0 0 24 24"><path d="M9 7v10l8-5-8-5Z" /></svg>
-                <svg v-else viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z" /><path d="M14 3v5h5" /></svg>
-              </div>
-              <div>
-                <strong>{{ record.name }} <span>· {{ record.chapter }}</span></strong>
-                <p>{{ record.meta }}</p>
-              </div>
-              <time>{{ record.time }}</time>
-            </article>
-          </div>
-          <button class="record-link" type="button">查看全部记录 <span>→</span></button>
-        </section>
-      </aside>
+    <AssistantPanel />
     </div>
   </div>
 </template>
 
+<script setup>
+import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Collection,
+  Compass,
+  DataAnalysis,
+  FolderOpened,
+  Histogram,
+  HomeFilled,
+  MagicStick,
+  Management,
+  Opportunity,
+  Promotion,
+  Reading,
+  RefreshRight,
+  Search,
+  Setting,
+  Sunny,
+  Switch,
+} from '@element-plus/icons-vue'
+import { useUserStore } from '@/store/userStore'
+import { getResources } from '@/api/resource'
+import AssistantPanel from '@/components/AssistantPanel.vue'
+
+const router = useRouter()
+const userStore = useUserStore()
+
+const recommendationsRef = ref(null)
+const searchText = ref('')
+const assistantDraft = ref('')
+const resourceItems = ref([])
+const tasks = ref([])
+const recentRecords = ref([])
+
+const navItems = computed(() => [
+  { label: '首页', to: '/', icon: HomeFilled, active: true },
+  { label: '工作台', to: '/dashboard', icon: Histogram },
+  { label: '个性化路径', to: '/learning-path', icon: Compass },
+  { label: '资源中心', to: '/resources', icon: FolderOpened },
+  { label: '学习报告', to: '/profile', icon: DataAnalysis },
+  { label: '设置', to: '/settings', icon: Setting },
+])
+
+const features = [
+  {
+    title: '智能推荐',
+    desc: '为你推荐个性化学习内容',
+    icon: Opportunity,
+    tint: 'rgba(37, 99, 235, 0.10)',
+    action: () => router.push('/resources'),
+  },
+  {
+    title: 'AI答疑',
+    desc: '7x24小时智能解答问题',
+    icon: Promotion,
+    tint: 'rgba(16, 185, 129, 0.12)',
+    action: () => goAssistant(),
+  },
+  {
+    title: '学习报告',
+    desc: '学习数据可视化分析',
+    icon: DataAnalysis,
+    tint: 'rgba(139, 92, 246, 0.12)',
+    action: () => router.push('/profile'),
+  },
+  {
+    title: '个性化路径',
+    desc: '定制专属学习路线',
+    icon: Compass,
+    tint: 'rgba(245, 158, 11, 0.14)',
+    action: () => router.push('/learning-path'),
+  },
+]
+
+const helperQuestionGroups = [
+  ['如何提高数学解题速度？', '推荐一些机器学习入门资料', '今天的学习重点是什么？'],
+  ['帮我规划本周的学习任务', '这门课程应该先学哪部分？', '能根据我的进度推荐资源吗？'],
+  ['给我出3道复习检测题', '这段知识点能再讲一遍吗？', '我适合先做题还是先看视频？'],
+]
+const questionGroupIndex = ref(0)
+const helperQuestions = computed(() => helperQuestionGroups[questionGroupIndex.value])
+
+const fallbackResources = [
+  { id: 'fallback-course-1', title: 'Python基础入门', resource_type: 'course' },
+  { id: 'fallback-course-2', title: '机器学习经典算法', resource_type: 'course' },
+  { id: 'fallback-course-3', title: '数据结构与算法（Python版）', resource_type: 'course' },
+]
+
+const resourceTypeMap = {
+  course: '课程',
+  document: '文档',
+  video: '视频',
+  quiz: '题库',
+  project: '项目',
+  ppt: 'PPT',
+  mindmap: '思维导图',
+}
+
+const resourceTypeCovers = {
+  course: 'linear-gradient(135deg, #3b82f6 0%, #5b8cff 100%)',
+  document: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)',
+  video: 'linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)',
+  quiz: 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)',
+  project: 'linear-gradient(135deg, #0f766e 0%, #14b8a6 100%)',
+  ppt: 'linear-gradient(135deg, #2563eb 0%, #60a5fa 100%)',
+  mindmap: 'linear-gradient(135deg, #4f46e5 0%, #818cf8 100%)',
+}
+
+const resourceStats = [
+  { progress: 65, learners: '32.5万人学习' },
+  { progress: 40, learners: '18.7万人学习' },
+  { progress: 20, learners: '25.1万人学习' },
+]
+
+const displayedResources = computed(() => {
+  const source = resourceItems.value.length ? resourceItems.value.slice(0, 3) : fallbackResources
+  return source.map((item, index) => ({
+    ...item,
+    typeLabel: resourceTypeMap[item.resource_type] || '课程',
+    progress: resourceStats[index]?.progress || 30,
+    learners: resourceStats[index]?.learners || '12.6万人学习',
+  }))
+})
+
+const now = new Date()
+const weekdays = ['日', '一', '二', '三', '四', '五', '六']
+const calYear = ref(now.getFullYear())
+const calMonth = ref(now.getMonth() + 1)
+const todayDate = now.getDate()
+
+const calendarDays = computed(() => {
+  const firstWeekday = new Date(calYear.value, calMonth.value - 1, 1).getDay()
+  const totalDays = new Date(calYear.value, calMonth.value, 0).getDate()
+  const days = []
+
+  for (let i = 0; i < firstWeekday; i += 1) days.push(null)
+  for (let day = 1; day <= totalDays; day += 1) days.push(day)
+
+  return days
+})
+
+function scrollToRecommendations() {
+  recommendationsRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+function onSearch() {
+  const keyword = searchText.value.trim()
+  if (!keyword) return
+  router.push(`/resources?keyword=${encodeURIComponent(keyword)}`)
+}
+
+function goDashboard() {
+  router.push(userStore.isLogin ? '/dashboard' : '/login')
+}
+
+function handleLogout() {
+  userStore.logout()
+  router.push('/login')
+}
+
+function goAssistant() {
+  router.push(userStore.isLogin ? '/dashboard' : '/login')
+}
+
+function goToResource(item) {
+  if (item.resource_id) {
+    // Store last position
+    localStorage.setItem('lastRead_' + item.resource_id, JSON.stringify({ chapter: item.chapter, percent: item.percent }))
+    router.push('/resources/' + item.resource_id + '/read')
+  } else {
+    router.push('/resources')
+  }
+}
+
+function fillQuestion(question) {
+  assistantDraft.value = question
+}
+
+function rotateQuestions() {
+  questionGroupIndex.value = (questionGroupIndex.value + 1) % helperQuestionGroups.length
+}
+
+function changeMonth(step) {
+  const current = new Date(calYear.value, calMonth.value - 1 + step, 1)
+  calYear.value = current.getFullYear()
+  calMonth.value = current.getMonth() + 1
+}
+
+function getCoverBg(resourceType) {
+  return resourceTypeCovers[resourceType] || resourceTypeCovers.course
+}
+
+function openResource(resource) {
+  if (typeof resource.id === 'number') {
+    router.push(`/resources/${resource.id}`)
+    return
+  }
+  router.push('/resources')
+}
+
+onMounted(async () => {
+  try {
+    const [res, taskRes, recordRes] = await Promise.allSettled([
+      getResources({ page_size: 6 }),
+      import('@/api/task').then(m => m.getTasks()),
+      import('@/api/studyRecord').then(m => m.getStudyRecords()),
+    ])
+    if (res.status === 'fulfilled') resourceItems.value = res.value.items || []
+    if (taskRes.status === 'fulfilled') tasks.value = taskRes.value.slice(0, 3)
+    if (recordRes.status === 'fulfilled') {
+      recentRecords.value = (recordRes.value || []).slice(0, 4).map(r => ({
+        name: r.resource_title || '',
+        chapter: r.chapter || '',
+        percent: r.progress_percent || 0,
+        iconBg: 'rgba(37, 99, 235, 0.14)',
+        resource_id: r.resource_id || null,
+      }))
+    }
+  } catch {}
+})
+</script>
+
 <style scoped>
-:global(.app-shell--pc) {
-  padding: 0;
-  background: #f6f8fc;
-}
-
-:global(body:has(.study-home)) {
-  overflow: hidden;
-}
-
-.study-home {
-  width: 100%;
-  height: calc(100vh / var(--design-scale, 1));
+.home-page {
+  min-height: 100vh;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  row-gap: clamp(12px, calc(1.6vh / var(--design-scale, 1)), 17px);
-  overflow: hidden;
-  padding: clamp(18px, calc(2.1vh / var(--design-scale, 1)), 23px) 44px 24px 52px;
-  color: #111827;
-  background: #ecf0f8;
-  letter-spacing: 0;
-  -webkit-font-smoothing: antialiased;
+  grid-template-columns: 220px minmax(0, 1fr);
+  background: #f5f7fb;
+  color: var(--text-primary);
 }
 
-.study-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1760px;
-  margin: 0;
-}
-
-.study-header h1 {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0;
-  color: #0f172a;
-  font-size: 29px;
-  font-weight: 850;
-  line-height: 1;
-  overflow: visible;
-}
-
-.study-header p {
-  margin: 8px 0 0;
-  color: #667286;
-  font-size: 13px;
-  font-weight: 560;
-}
-
-.sun {
-  display: block;
-  flex: 0 0 48px;
-  width: 48px;
-  height: 29px;
-  margin-left: 2px;
-  color: #f5aa1b;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 3.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transform: translateY(1px);
-}
-
-.header-tools {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  color: #556176;
-  padding-top: 0;
-}
-
-.plain-icon {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  padding: 0;
-  color: inherit;
-  background: transparent;
-}
-
-.plain-icon svg,
-.continue-meta > span > svg,
-.record-icon svg {
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.plain-icon svg {
-  width: 24px;
-  height: 24px;
-  stroke-width: 2.1;
-}
-
-.ai-badge svg {
-  fill: revert;
-  stroke: revert;
-}
-
-.bell span {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ff3b30;
-  box-shadow: 0 0 0 2px #f6f9fd;
-}
-
-.user-badge {
-  width: 43px;
-  height: 43px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  color: #1f2937;
-  background: #e7ebf2;
-  font-size: 19px;
-  font-weight: 800;
-}
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: minmax(860px, 1fr) 520px;
-  gap: 28px;
-  align-items: stretch;
-  width: 100%;
-  height: 100%;
-  min-height: 0;
-  max-width: 1760px;
-}
-
-.dashboard-main,
-.dashboard-side {
-  display: grid;
-  gap: clamp(11px, calc(1.35vh / var(--design-scale, 1)), 14px);
-  min-height: 0;
-}
-
-.dashboard-main {
-  grid-template-rows: minmax(220px, 0.86fr) minmax(290px, 1.12fr) minmax(170px, 0.66fr);
-}
-
-.dashboard-side {
-  grid-template-rows: minmax(205px, 0.82fr) minmax(265px, 1fr) minmax(190px, 0.74fr);
-}
-
-.continue-card,
-.side-card,
-.course-card,
-.suggest-card {
-  border: 1px solid #e0e6ef;
-  border-radius: 12px;
+.home-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   background: #fff;
-  box-shadow: 0 4px 20px rgba(30, 50, 90, 0.04);
-}
-
-.continue-card {
-  position: relative;
-  height: 100%;
-  min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(360px, 1fr) minmax(460px, 0.92fr);
-  align-items: center;
-  overflow: hidden;
-  background: #fff;
-}
-
-.continue-copy {
-  align-self: stretch;
+  border-right: 1px solid #e8edf5;
+  padding: 18px 14px 16px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 26px 32px 58px;
-}
-
-.section-label {
-  color: #6b7a8d;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.continue-copy h2 {
-  margin: 0 0 8px;
-  color: #0f172a;
-  font-size: 26px;
-  line-height: 1.2;
-  font-weight: 800;
-}
-
-.continue-copy p {
-  margin: 0 0 20px;
-  color: #64748b;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.continue-actions {
-  display: flex;
   gap: 14px;
 }
 
-.primary-btn,
-.secondary-btn {
-  height: 40px;
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.brand-copy {
   min-width: 0;
-  padding: 0 20px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 }
 
-.primary-btn {
-  color: #fff;
-  border: 0;
-  background: #3b82f6;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+.brand-name {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #2b6cff;
+  line-height: 1.1;
 }
 
-.primary-btn svg {
-  flex-shrink: 0;
+.brand-tagline {
+  margin-top: 3px;
+  font-size: 0.75rem;
+  color: #98a2b3;
 }
 
-.secondary-btn {
-  color: #475569;
-  border: 1px solid #d1d9e4;
-  background: #f8fafc;
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.secondary-btn svg {
-  fill: none;
-  stroke: #64748b;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  flex-shrink: 0;
-}
-
-.continue-visual {
-  justify-self: end;
-  align-self: center;
-  width: min(520px, 100%);
-  padding: 0 30px 46px 0;
-}
-
-.continue-visual img {
-  display: block;
+.nav-item {
   width: 100%;
-  height: auto;
-}
-
-.continue-meta {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 48px;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #4f5f79;
   display: flex;
   align-items: center;
-  gap: 0;
-  padding: 0 32px;
-  border-top: 1px solid #edf1f7;
-  color: #64748b;
-  font-size: 13px;
-  font-weight: 500;
+  gap: 12px;
+  padding: 0 12px;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
 }
 
-.continue-meta > span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-right: 22px;
-  margin-right: 22px;
-  border-right: 1px solid #e2e8f1;
+.nav-item:hover {
+  background: #f5f8ff;
+  color: #2b6cff;
 }
 
-.continue-meta > span:last-child {
-  border-right: 0;
-  padding-right: 0;
-  margin-right: 0;
+.nav-item.active {
+  background: #edf3ff;
+  color: #2b6cff;
+  font-weight: 600;
 }
 
-.continue-meta > span svg {
-  width: 16px;
-  height: 16px;
-  stroke-width: 2;
-  flex-shrink: 0;
+.nav-item .el-icon {
+  font-size: 16px;
 }
 
-.continue-meta > span:nth-child(1) svg {
-  color: #3b82f6;
+.sidebar-bottom {
+  margin-top: auto;
 }
 
-.continue-meta > span:nth-child(2) svg {
-  color: #22c55e;
-  stroke-width: 2.5;
+.streak-card {
+  border: 1px solid #e8edf5;
+  border-radius: 16px;
+  background: #fff;
+  padding: 14px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
 }
 
-.ai-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ai-badge {
-  width: 26px;
-  height: 26px;
-  display: grid;
-  place-items: center;
-  border-radius: 7px;
-  background: linear-gradient(135deg, #a78bfa, #7c3aed);
-  font-style: normal;
-  flex-shrink: 0;
-}
-
-.ai-badge svg line {
-  stroke-linecap: round;
-}
-
-.section-title-row {
+.streak-heading,
+.streak-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 4px;
 }
 
-.course-section {
-  min-height: 0;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: 2px;
+.streak-heading {
+  font-size: 0.78rem;
+  color: #7b8798;
 }
 
-.section-title-row h3,
-.side-card h3 {
-  margin: 0;
-  color: #05070d;
-  font-size: 20px;
-  font-weight: 860;
+.streak-fire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff3df;
+  color: #e08c1a;
+  font-size: 0.72rem;
 }
 
-.section-title-row h3 {
-  font-size: 19px;
-  font-weight: 820;
+.streak-main {
+  margin: 10px 0 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
 }
 
-.section-title-row button,
-.record-link {
-  border: 0;
-  padding: 0;
-  color: #2f6bf6;
-  background: transparent;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 820;
-  cursor: pointer;
+.streak-main strong {
+  font-size: 2.25rem;
+  line-height: 1;
+  color: #16223b;
 }
 
-.section-title-row button {
-  color: #536075;
-  font-size: 13px;
-  font-weight: 650;
+.streak-main span {
+  color: #7b8798;
 }
 
-.course-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  min-height: 0;
-  margin-top: -2px;
+.streak-meta {
+  font-size: 0.78rem;
+  color: #7b8798;
 }
 
-.course-grid.loading {
-  opacity: 0.72;
+.streak-meta strong {
+  color: #35445d;
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
-.course-card {
-  min-height: 0;
-  height: 100%;
-  display: grid;
-  grid-template-rows: minmax(138px, 56%) minmax(112px, 1fr);
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.course-cover {
-  position: relative;
-  height: auto;
-  min-height: 0;
-  overflow: hidden;
-}
-
-.course-cover img {
+.ghost-wide-button {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  margin-top: 14px;
+  height: 36px;
+  border: 1px solid #e0e7f2;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #4f5f79;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease;
 }
 
-.cover-code {
-  background:
-    linear-gradient(160deg, rgba(14, 32, 53, 0.32), transparent 42%),
-    repeating-linear-gradient(172deg, transparent 0 10px, rgba(89, 230, 190, 0.35) 10px 12px),
-    linear-gradient(135deg, #0b2537, #10131d 45%, #544532);
+.ghost-wide-button:hover {
+  border-color: #2b6cff;
+  color: #2b6cff;
 }
 
-.cover-code::after {
-  content: "function coffee_speed_eggteee_timer() \A   canvas.draw('#008cc') \A   return data.output to cne nc_ooo";
-  white-space: pre;
+.logout-btn {
+  width: 100%; height: 36px; margin-top: 8px;
+  border: 1px solid #fee2e2; border-radius: 10px;
+  background: #fff; color: #ef4444; font: inherit; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-size: 0.82rem;
+}
+.logout-btn:hover { background: #fef2f2; }
+
+.page-shell {
+  min-width: 0;
+}
+
+.page-header {
+  grid-column: 1 / -1;
+  height: 74px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: rgba(245, 247, 251, 0.92);
+  backdrop-filter: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header-search {
+  width: min(560px, 100%);
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid #dde5f0;
+  border-radius: 999px;
+  background: #fff;
+  color: #8b98ab;
+  box-shadow: 0 8px 20px rgba(59, 86, 145, 0.04);
+}
+
+.header-search input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  color: #334155;
+}
+
+.header-search input::placeholder {
+  color: #98a2b3;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notify-badge {
   position: absolute;
-  left: 32px;
-  top: 28px;
-  color: #ffffff;
-  font: 700 12px/1.45 "SFMono-Regular", Consolas, monospace;
-  transform: rotate(-17deg);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  top: -3px;
+  right: -1px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #ff5b6e;
+  color: #fff;
+  font-size: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cover-math {
-  background:
-    linear-gradient(0deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)),
-    repeating-linear-gradient(0deg, transparent 0 31px, rgba(60, 60, 60, 0.06) 31px 32px),
-    #d9d9d9;
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 4px;
 }
 
-.math-lines {
-  padding: 10px 34px;
-  color: #1c2430;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 23px;
-  line-height: 1.42;
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #89a9ff, #5b8cff);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
 }
 
-.cover-python {
-  background:
-    radial-gradient(circle at 16% 40%, rgba(230, 160, 112, 0.85), transparent 22%),
-    radial-gradient(circle at 86% 36%, rgba(47, 107, 246, 0.2), transparent 18%),
-    linear-gradient(130deg, #172334, #0b1826 55%, #172338);
+.user-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
-.python-paper {
-  position: absolute;
-  left: 94px;
-  top: 10px;
-  width: 74px;
-  height: 70px;
+.user-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.user-level {
+  width: fit-content;
+  margin-top: 3px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #2b6cff;
+  color: #fff;
+  font-size: 0.68rem;
+}
+
+.user-arrow {
+  color: #94a3b8;
+}
+
+.page-content {
+  padding: 6px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero-card,
+.surface-card,
+.assistant-card,
+.advice-bar {
+  background: #fff;
+  border: 1px solid #e7edf6;
+  box-shadow: 0 14px 36px rgba(52, 72, 108, 0.05);
+}
+
+.hero-card {
+  border-radius: 22px;
+  padding: 24px;
   display: grid;
-  place-items: center;
-  transform: rotate(7deg);
-  background: #fff1c8;
-  color: #24506a;
-  font-size: 24px;
-  font-family: Georgia, serif;
-  letter-spacing: 2px;
-  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 20px;
+  background: linear-gradient(135deg, #edf4ff 0%, #f5f9ff 55%, #eef5ff 100%);
 }
 
-.course-tag {
-  position: absolute;
-  left: 14px;
-  bottom: 8px;
-  z-index: 2;
-  padding: 4px 10px;
-  border-radius: 5px;
-  color: #2f6bf6;
-  background: #eaf1ff;
-  font-size: 12px;
-  font-weight: 750;
-}
-
-.course-body {
-  min-height: 0;
+.hero-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 13px 20px 14px;
 }
 
-.course-body h4 {
-  margin: 0 0 13px;
-  color: #111827;
-  font-size: 16px;
-  font-weight: 820;
-}
-
-.course-progress {
-  display: grid;
-  grid-template-columns: 1fr 44px;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 13px;
-}
-
-.course-progress div {
-  height: 5px;
+.hero-label {
+  width: fit-content;
+  padding: 5px 10px;
   border-radius: 999px;
-  background: #e6ebf2;
-  overflow: hidden;
+  background: rgba(43, 108, 255, 0.08);
+  color: #5b7bc8;
+  font-size: 0.74rem;
+  margin-bottom: 12px;
 }
 
-.course-progress i {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
+.hero-content h1 {
+  font-size: 2.6rem;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  color: #16223b;
 }
 
-.course-progress em {
-  color: #49566b;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 650;
-  text-align: right;
+.hero-description {
+  max-width: 450px;
+  margin-top: 14px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #5e6d84;
 }
 
-.course-body p {
-  margin: 0;
-  color: #687589;
-  font-size: 13px;
+.hero-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.primary-button,
+.secondary-button,
+.advice-button {
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.92rem;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
 }
 
-.suggest-card {
+.primary-button {
+  background: #2b6cff;
+  color: #fff !important;
+  box-shadow: 0 12px 24px rgba(43, 108, 255, 0.22);
+}
+
+.primary-button:hover {
+  background: #1f5ff1;
+}
+
+.secondary-button {
+  border: 1px solid #bad0ff;
+  background: #fff;
+  color: #2b6cff;
+}
+
+.secondary-button:hover {
+  border-color: #2b6cff;
+}
+
+.hero-illustration {
   position: relative;
-  min-height: 0;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 390px;
-  align-items: end;
-  padding: 0 0 0 32px;
-  overflow: hidden;
+  min-height: 250px;
 }
 
-.suggest-copy {
-  align-self: center;
-  padding: 22px 0;
+.illustration-chart,
+.illustration-stat,
+.illustration-card {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(204, 219, 245, 0.9);
+  border-radius: 18px;
+  box-shadow: 0 18px 34px rgba(91, 123, 200, 0.10);
 }
 
-.suggest-copy h3 {
+.illustration-chart {
+  top: 0;
+  left: 12px;
+  width: 220px;
+  padding: 14px 14px 10px;
+}
+
+.chart-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.72rem;
+  color: #6d7b92;
+}
+
+.illustration-chart svg {
+  width: 100%;
+  height: 90px;
+}
+
+.illustration-stat {
+  left: 28px;
+  bottom: 34px;
+  width: 120px;
+  padding: 12px;
   display: flex;
   align-items: center;
-  gap: 13px;
-  margin: 0 0 18px;
-  color: #05070d;
-  font-size: 18px;
-  font-weight: 830;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: #597089;
 }
 
-.bulb-icon {
-  width: 34px;
-  height: 34px;
+.stat-ring {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
+  background: conic-gradient(#2b6cff 0 72%, #d9e8ff 72% 100%);
+}
+
+.stat-ring-inner {
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  color: #fff;
-  background:
-    radial-gradient(circle at center, #ffad2f 0 49%, transparent 50%),
-    #fff3df;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  color: #2b6cff;
+  font-size: 0.66rem;
+  font-weight: 700;
 }
 
-.bulb-icon svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.robot-stage {
+  position: absolute;
+  right: 28px;
+  top: 28px;
+  width: 190px;
+  height: 200px;
 }
 
-.suggest-copy p {
-  max-width: 690px;
-  margin: 0 0 18px;
-  color: #59667a;
-  font-size: 15px;
-  line-height: 1.75;
-  font-weight: 560;
+.robot-head,
+.robot-body {
+  margin: 0 auto;
+  border: 1px solid rgba(185, 206, 244, 0.9);
+  background: linear-gradient(180deg, #ffffff, #eef4ff);
+  box-shadow: 0 20px 34px rgba(84, 124, 217, 0.14);
 }
 
-.suggest-actions {
+.robot-hat {
+  position: absolute;
+  right: 10px;
+  top: -4px;
+  width: 58px;
+  height: 22px;
+  border-radius: 8px 8px 18px 18px;
+  background: linear-gradient(135deg, #6f96ff, #3c72ff);
+  transform: rotate(22deg);
+}
+
+.robot-head {
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 34px;
+  justify-content: center;
+  gap: 18px;
 }
 
-.suggest-practice,
-.suggest-errors {
-  height: 38px;
-  border: 0;
-  border-radius: 4px;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 650;
-  cursor: pointer;
+.robot-eye {
+  width: 18px;
+  height: 24px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 50%, #77deff 0, #77deff 28%, #275bff 78%, #275bff 100%);
+  box-shadow: 0 0 18px rgba(72, 195, 255, 0.45);
 }
 
-.suggest-practice {
-  min-width: 128px;
-  padding: 0 24px;
-  color: #fff;
-  background: linear-gradient(180deg, #3f7cff, #2f6bf6);
-  box-shadow: 0 5px 12px rgba(47, 107, 246, 0.22);
+.robot-body {
+  width: 134px;
+  height: 52px;
+  margin-top: 10px;
+  border-radius: 18px;
 }
 
-.suggest-errors {
-  padding: 0;
-  color: #4777df;
-  background: transparent;
+.illustration-card {
+  right: 2px;
+  bottom: 42px;
+  width: 90px;
+  height: 72px;
 }
 
-.suggest-practice span,
-.suggest-errors span {
-  margin-left: 6px;
+.illustration-card::before,
+.illustration-card::after,
+.illustration-card.small::before,
+.illustration-card.small::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(84, 124, 217, 0.18);
 }
 
-.student-art {
-  width: 390px;
-  height: 100%;
-  align-self: end;
+.illustration-card::before {
+  top: 18px;
+}
+
+.illustration-card::after {
+  top: 34px;
+}
+
+.illustration-card.small {
+  width: 68px;
+  height: 54px;
+  right: 56px;
+  top: 74px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.feature-card,
+.assistant-question {
+  border: 1px solid #e7edf6;
+  background: #fff;
+  font: inherit;
+}
+
+.feature-card {
+  min-width: 0;
+  border-radius: 16px;
+  padding: 16px;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  overflow: hidden;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
-.student-art img {
-  display: block;
-  width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  object-position: right bottom;
+.feature-card:hover {
+  transform: translateY(-1px);
+  border-color: #d4e0f6;
+  box-shadow: 0 12px 28px rgba(45, 68, 110, 0.06);
 }
 
-.side-card {
-  padding: 20px 30px 18px;
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2b6cff;
+  flex: none;
 }
 
-.todo-card {
-  height: 100%;
-  min-height: 0;
-  overflow: hidden;
+.feature-icon .el-icon {
+  font-size: 20px;
 }
 
-.side-title {
+.feature-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+
+.feature-text strong {
+  font-size: 0.9rem;
+  color: #1e293b;
+}
+
+.feature-text span {
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: #7b8798;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr) minmax(0, 0.94fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.surface-card {
+  border-radius: 18px;
+}
+
+.section-card {
+  padding: 18px;
+}
+
+.section-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.side-title button {
-  border: 0;
-  color: #59667a;
-  background: transparent;
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-.todo-item {
-  height: 38px;
-  display: grid;
-  grid-template-columns: 28px 1fr auto;
   gap: 10px;
-  align-items: center;
-  border-bottom: 1px solid #e8edf4;
-  color: #202938;
-  font-size: 14px;
-  font-weight: 620;
+  margin-bottom: 16px;
+}
+
+.section-head h2 {
+  font-size: 1.02rem;
+  color: #1e293b;
+}
+
+.text-button {
+  border: 0;
+  background: transparent;
+  color: #6d7b92;
+  font: inherit;
   cursor: pointer;
 }
 
-.todo-item input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
+.text-button:hover {
+  color: #2b6cff;
 }
 
-.fake-check {
-  width: 19px;
-  height: 19px;
-  border-radius: 5px;
-  border: 1px solid #d3dce8;
-  background: #fff;
-}
-
-.todo-item input:checked + .fake-check {
-  display: grid;
-  place-items: center;
-  border: 0;
-  color: #fff;
-  background: #2f6bf6;
-}
-
-.todo-item input:checked + .fake-check::after {
-  content: "✓";
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.todo-item strong {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.todo-item em {
-  padding: 6px 10px;
-  border-radius: 5px;
-  color: #6a7484;
-  background: #f0f3f8;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 780;
-}
-
-.todo-item em.urgent {
-  color: #ff514f;
-  background: #fff0ef;
-}
-
-.task-count {
-  margin: 9px 0 0;
-  color: #657186;
-  font-size: 13px;
-  font-weight: 650;
-}
-
-.stats-card {
-  min-height: 0;
-  height: 100%;
-  padding-bottom: 17px;
+.resource-list,
+.task-list,
+.recent-list {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
-.stats-numbers {
+.resource-item {
+  border: 0;
+  background: transparent;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  margin: 18px 0 16px;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 12px;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
 }
 
-.stats-numbers strong {
-  color: #090d15;
-  font-size: 26px;
-  line-height: 1;
-  font-weight: 860;
+.resource-cover {
+  height: 72px;
+  border-radius: 14px;
+  padding: 14px;
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 600;
+  display: flex;
+  align-items: flex-start;
 }
 
-.stats-numbers span {
-  margin-left: 4px;
-  color: #4b5668;
-  font-size: 13px;
-  font-weight: 700;
+.resource-body {
+  min-width: 0;
 }
 
-.stats-numbers p {
-  margin: 8px 0 0;
-  color: #7a8595;
-  font-size: 12px;
-  font-weight: 650;
+.resource-title {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: #1e293b;
 }
 
-.stats-numbers em {
-  color: #22b95f;
-  font-style: normal;
-  font-weight: 800;
+.resource-meta,
+.resource-progress-row,
+.task-subline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.bar-chart {
+.resource-meta {
+  margin-top: 6px;
+  font-size: 0.74rem;
+  color: #7b8798;
+}
+
+.resource-progress-row {
+  margin-top: 10px;
+  font-size: 0.72rem;
+  color: #8b98ab;
+}
+
+.resource-progress {
   flex: 1;
-  min-height: 118px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 18px;
-  align-items: end;
-}
-
-.bar-item {
-  display: grid;
-  justify-items: center;
-  gap: 9px;
-  color: #59667a;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.bar-item i {
-  width: 34px;
-  display: block;
-  border-radius: 5px;
-  background: linear-gradient(180deg, #e4e9f1, #d8dee8);
-}
-
-.bar-item span {
-  color: #697589;
-  font-size: 12px;
-  font-weight: 650;
-}
-
-.bar-item.active,
-.bar-item.active span,
-.bar-item.active b {
-  color: #2f6bf6;
-}
-
-.bar-item.active i {
-  background: linear-gradient(180deg, #3d79ff, #145cf1);
-  box-shadow: 0 8px 16px rgba(47, 107, 246, 0.22);
-}
-
-.recent-card {
-  height: 100%;
-  min-height: 0;
-  margin-top: 0;
+  height: 6px;
+  border-radius: 999px;
+  background: #ebf0f7;
   overflow: hidden;
 }
 
-.record-list {
-  margin-top: 12px;
+.resource-progress-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2b6cff, #6f96ff);
 }
 
-.record-item {
+.task-item {
   display: grid;
-  grid-template-columns: 38px 1fr auto;
-  gap: 13px;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.task-status {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid #d5deeb;
+  background: #fff;
+  display: inline-flex;
   align-items: center;
-  padding: 8px 0;
-  border-bottom: 1px solid #e7ecf4;
+  justify-content: center;
+  color: #fff;
 }
 
-.record-item:last-of-type {
-  border-bottom: 0;
+.task-status.done {
+  background: #22c55e;
+  border-color: #22c55e;
 }
 
-.record-icon {
-  width: 33px;
-  height: 33px;
+.task-main {
+  min-width: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #edf2f8;
+}
+
+.task-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.task-title {
+  font-size: 0.88rem;
+  color: #27364f;
+}
+
+.task-subline {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #8b98ab;
+}
+
+.calendar-card {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #edf2f8;
+}
+
+.calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.calendar-head span {
+  font-size: 0.85rem;
+  color: #1e293b;
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  color: #7b8798;
+}
+
+.calendar-nav button {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #e1e8f2;
+  border-radius: 50%;
+  background: #fff;
+  color: #7b8798;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px 6px;
+}
+
+.calendar-weekday {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #98a2b3;
+}
+
+.calendar-day {
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #4f5f79;
+  font: inherit;
+  cursor: pointer;
+}
+
+.calendar-day:disabled {
+  cursor: default;
+}
+
+.calendar-day.active {
+  background: #2b6cff;
+  color: #fff;
+}
+
+.recent-item {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.recent-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  color: #2b6cff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.recent-main {
+  min-width: 0;
+}
+
+.recent-name {
+  font-size: 0.88rem;
+  color: #22324b;
+  font-weight: 600;
+}
+
+.recent-subline {
+  margin-top: 5px;
+  font-size: 0.74rem;
+  color: #8b98ab;
+}
+
+.recent-side {
+  min-width: 58px;
+  text-align: right;
+}
+
+.recent-link {
+  font-size: 0.74rem;
+}
+
+.recent-percent {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: #8b98ab;
+}
+
+.advice-bar {
+  border-radius: 16px;
+  padding: 16px 18px;
+  background: #fffaf2;
+  border-color: #f6dfb5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.advice-copy {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.advice-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffe4b7;
+  color: #dd8a12;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.advice-copy strong {
+  display: block;
+  margin-bottom: 2px;
+  color: #7b4d00;
+}
+
+.advice-copy p {
+  color: #9a6a14;
+  font-size: 0.84rem;
+}
+
+.advice-button {
+  border: 1px solid #efc67b;
+  background: #fff;
+  color: #7b4d00;
+}
+
+.assistant-panel {
+  padding: 6px 24px 24px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.assistant-card {
+  border-radius: 20px;
+  padding: 18px;
+}
+
+.assistant-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.assistant-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #27364f;
+}
+
+.assistant-star,
+.assistant-collapse {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assistant-star {
+  background: rgba(43, 108, 255, 0.10);
+  color: #2b6cff;
+}
+
+.assistant-collapse {
+  border: 0;
+  background: #f1f5fb;
+  color: #8b98ab;
+}
+
+.assistant-body {
+  border: 1px solid #edf2f8;
+  border-radius: 18px;
+  background: #fafcff;
+  padding: 14px;
+}
+
+.assistant-greeting {
+  margin-bottom: 12px;
+  font-size: 0.84rem;
+  line-height: 1.7;
+  color: #5a6b84;
+}
+
+.assistant-question {
+  width: 100%;
+  min-height: 40px;
+  border-radius: 12px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2b6cff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.assistant-question + .assistant-question {
+  margin-top: 10px;
+}
+
+.assistant-refresh {
+  width: 100%;
+  height: 38px;
+  margin-top: 12px;
+  border: 1px solid #e1e8f2;
+  border-radius: 12px;
+  background: #fff;
+  color: #5f7190;
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.assistant-input {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e1e8f2;
+  border-radius: 14px;
+  background: #fff;
+  padding: 10px 10px 10px 14px;
+}
+
+.assistant-input input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  color: #334155;
+}
+
+.assistant-input button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 10px;
+  background: #2b6cff;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.assistant-fab {
+  margin-left: auto;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #f8fbff, #d8e7ff 70%);
+  border: 1px solid #d6e2f5;
+  box-shadow: 0 16px 36px rgba(81, 120, 202, 0.18);
   display: grid;
   place-items: center;
-  border-radius: 8px;
-  color: #fff;
-  background: #5b8dff;
 }
 
-.record-icon.doc {
-  background: #ffc064;
+.assistant-fab-core {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fff, #eef4ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: inset 0 -8px 14px rgba(43, 108, 255, 0.08);
 }
 
-.record-icon svg {
-  width: 17px;
-  height: 17px;
-  stroke-width: 2.4;
+.assistant-fab-core span {
+  width: 8px;
+  height: 12px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 50%, #77deff 0, #77deff 30%, #275bff 80%, #275bff 100%);
 }
 
-.record-item strong {
-  display: block;
-  max-width: 245px;
-  margin-bottom: 5px;
-  color: #273142;
-  font-size: 13px;
-  font-weight: 820;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.record-item strong span {
-  color: #596579;
-  font-weight: 650;
-}
-
-.record-item p {
-  margin: 0;
-  color: #687589;
-  font-size: 12px;
-  font-weight: 630;
-}
-
-.record-item time {
-  color: #5f6b7e;
-  font-size: 13px;
-  font-weight: 650;
-  white-space: nowrap;
-}
-
-.record-link {
-  margin-top: 7px;
-}
-
-button {
-  font-family: inherit;
-}
-
-@media (max-width: 1280px) {
-  :global(body:has(.study-home)) {
-    overflow: auto;
+@media (max-width: 1220px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .study-home {
-    height: auto;
-    min-height: 100vh;
-    overflow: visible;
-    padding: 28px;
+  .content-grid {
+    grid-template-columns: 1fr;
   }
+}
 
-  .dashboard-grid {
+@media (max-width: 980px) {
+  .home-page {
     grid-template-columns: 1fr;
   }
 
-  .dashboard-side {
+  .home-sidebar {
+    position: static;
+    height: auto;
+    border-right: 0;
+    border-bottom: 1px solid #e8edf5;
+  }
+
+  .sidebar-nav {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .recent-card {
-    grid-column: 1 / -1;
+  .hero-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .page-header {
+    height: auto;
+    padding: 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-search {
+    width: 100%;
+  }
+
+  .header-actions {
+    justify-content: space-between;
+  }
+
+  .page-content,
+  .assistant-panel {
+    padding: 0 16px 16px;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-actions,
+  .advice-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .recent-item,
+  .resource-item {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-cover {
+    height: 60px;
   }
 }
 </style>

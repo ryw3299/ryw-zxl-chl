@@ -1,36 +1,17 @@
 import request from '@/utils/request'
 
-const normalizeString = (value, fallback = '') => {
-  if (Array.isArray(value)) {
-    return normalizeString(value[0], fallback)
-  }
-  return typeof value === 'string' && value.trim() ? value.trim() : fallback
+export function login(data) {
+  return request.post('/auth/login', data)
 }
 
-export const login = (payload = {}) => request({
-  url: '/auth/login',
-  method: 'post',
-  data: {
-    userId: normalizeString(payload.userId),
-    password: normalizeString(payload.password),
-    role: normalizeString(payload.role),
-  },
-})
+export function register(data) {
+  return request.post('/auth/register', data)
+}
 
-export const register = (payload = {}) => request({
-  url: '/auth/register',
-  method: 'post',
-  data: {
-    userId: normalizeString(payload.userId),
-    password: normalizeString(payload.password),
-    role: 'student',
-    userName: normalizeString(payload.userName),
-    schoolId: normalizeString(payload.schoolId),
-  },
-})
+export function getMe() {
+  return request.get('/auth/me')
+}
 
-export const getCurrentUser = () => request({
-  url: '/auth/me',
-  method: 'get',
-  params: {},
-})
+export function updateMe(data) {
+  return request.put('/user/me', data)
+}

@@ -1,31 +1,26 @@
 {
-  "name": "smart-class",
-  "version": "0.0.0",
+  "name": "ai-study-platform",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 127.0.0.1 --port 3000",
     "build": "vite build",
-    "preview": "vite preview",
-    "sync:scgame": "node ./scripts/sync-scgame.mjs",
-    "sync:scgame:mobile": "node ./scripts/sync-scgame.mjs web-mobile",
-    "sync:scgame:desktop": "node ./scripts/sync-scgame.mjs web-desktop"
+    "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.13.6",
+    "echarts": "^5.5.1",
     "element-plus": "^2.13.5",
+    "html2canvas": "^1.4.1",
+    "markdown-it": "^14.1.0",
+    "mermaid": "^11.6.0",
     "pinia": "^3.0.4",
-    "vant": "^4.9.24",
     "vue": "^3.5.29",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.4",
-    "vite": "^7.3.1",
-    "vite-plugin-pwa": "^1.2.0",
-    "vite-plugin-vue-devtools": "^8.0.6"
-  },
-  "engines": {
-    "node": "^20.19.0 || >=22.12.0"
+    "vite": "^7.3.1"
   }
 }
