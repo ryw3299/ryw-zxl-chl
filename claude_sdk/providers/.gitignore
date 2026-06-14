@@ -1,5 +1,0 @@
-# 忽略所有 provider 配置文件（含敏感信息）
-*.env
-
-# 但保留模板文件
-!example_providers.env
