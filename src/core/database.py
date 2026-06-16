@@ -43,6 +43,7 @@ def init_db() -> None:
         LearningEvent,
         LearningPath,
         PlatformResource,
+        ProfileGenerationRecord,
         QuizRecord,
         StudentProfile,
         StudyRecord,

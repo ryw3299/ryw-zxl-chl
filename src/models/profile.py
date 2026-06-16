@@ -23,3 +23,6 @@ class StudentProfile(Base):
     )
 
     user = relationship("User", back_populates="profiles")
+    generation_records = relationship(
+        "ProfileGenerationRecord", back_populates="profile", lazy="dynamic"
+    )

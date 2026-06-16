@@ -1,4 +1,4 @@
-"""AI 服务：通过 DeepSeek API 生成画像、路径、资源。"""
+"""AI 服务：通过 Dify 和 DeepSeek 生成画像、路径、资源。"""
 
 import json
 import re
@@ -11,6 +11,11 @@ from src.core.config import settings
 LLM_API_URL = f"{settings.LLM_BASE_URL.rstrip('/')}/chat/completions"
 HEADERS = {
     "Authorization": f"Bearer {settings.LLM_API_KEY}",
+    "Content-Type": "application/json",
+}
+DIFY_CHAT_MESSAGES_URL = f"{settings.DIFY_BASE_URL.rstrip('/')}/chat-messages"
+DIFY_HEADERS = {
+    "Authorization": f"Bearer {settings.DIFY_API_KEY}",
     "Content-Type": "application/json",
 }
 
@@ -47,78 +52,106 @@ async def _call_llm(system_prompt: str, user_prompt: str) -> str:
         return content
 
 
-async def generate_profile(chat_history: list[dict]) -> dict:
-    """根据对话历史生成六维学生画像。"""
+async def generate_profile(
+    chat_history: list[dict], user_id: int, conversation_id: str = ""
+) -> dict:
+    """调用 Dify Chatflow 生成或追问学生画像。"""
     if settings.DIFY_MOCK_MODE:
-        return _mock_profile()
+        payload = _wrap_mock_profile(chat_history, user_id, conversation_id)
+        return payload
 
-    chat_text = "\n".join(
-        f"{'学生' if m['role'] == 'user' else '系统'}: {m['content']}"
-        for m in chat_history
-    )
-
-    system_prompt = """你是一位教育数据分析专家。根据学生与系统的对话内容，生成该学生的六维学习画像。
-
-必须严格按照以下 JSON 格式输出，不要包含任何其他文字：
-
-{
-  "summary": "对该学生整体情况的自然语言总结（200字以内）",
-  "dimensions": {
-    "basic_knowledge": {
-      "score": 0-100的整数,
-      "level": "较弱/中等/较好/优秀",
-      "strengths": ["优势1", "优势2"],
-      "weaknesses": ["薄弱1", "薄弱2"],
-      "evidence": ["依据1", "依据2"]
-    },
-    "engineering_ability": {
-      "score": 整数,
-      "level": "较弱/中等/较好/优秀",
-      "strengths": [],
-      "weaknesses": [],
-      "evidence": []
-    },
-    "ai_data_ability": {
-      "score": 整数,
-      "level": "较弱/中等/较好/优秀",
-      "strengths": [],
-      "weaknesses": [],
-      "evidence": []
-    },
-    "learning_goal": {
-      "score": 整数,
-      "level": "较模糊/较清晰/很清晰",
-      "directions": ["方向1", "方向2"]
-    },
-    "resource_preference": {
-      "score": 整数,
-      "preferred_types": ["文档", "视频", "项目任务书"],
-      "style": "案例驱动/理论系统/简洁步骤"
-    },
-    "learning_behavior": {
-      "score": 整数,
-      "level": "待观察/良好/优秀",
-      "risk_flags": [],
-      "mastery": {}
+    latest_user_query = _get_latest_user_query(chat_history)
+    query = latest_user_query or _build_profile_query(chat_history, conversation_id)
+    payload = {
+        "inputs": {
+            "user_id": str(user_id),
+            "userinput": {
+                "query": query,
+                "files": [],
+            },
+        },
+        "query": query,
+        "response_mode": "streaming",
+        "conversation_id": conversation_id,
+        "user": str(user_id),
     }
-  }
-}
+    dify_response = await _call_dify_chat_streaming(payload)
 
-六维说明：
-1. basic_knowledge：编程语言、数据结构、网络、数据库等基础掌握度
-2. engineering_ability：Web开发、部署、Git、工程实践能力
-3. ai_data_ability：机器学习、深度学习、大模型、RAG 等 AI 能力
-4. learning_goal：学习目标清晰度与发展方向
-5. resource_preference：学习风格偏好
-6. learning_behavior：学习行为特征（初始可给中等分）
-"""
-    user_prompt = f"以下是学生与系统的对话记录，请分析并生成六维画像：\n\n{chat_text}"
+    profile_payload = _extract_profile_payload(dify_response)
+    return {
+        "provider": "dify_chatflow",
+        "request_payload": payload,
+        "http_response": dify_response,
+        "profile_payload": profile_payload,
+        "conversation_id": dify_response.get("conversation_id", conversation_id or ""),
+        "message_id": dify_response.get("message_id") or dify_response.get("id", ""),
+        "answer_text": dify_response.get("answer", ""),
+    }
 
-    raw = await _call_llm(system_prompt, user_prompt)
-    # 清理可能的 markdown 包裹
-    raw = re.sub(r"^```(?:json)?\s*", "", raw.strip())
-    raw = re.sub(r"\s*```$", "", raw.strip())
-    return json.loads(raw)
+
+async def _call_dify_chat_streaming(payload: dict) -> dict:
+    timeout = httpx.Timeout(
+        connect=30.0,
+        read=settings.DIFY_TIMEOUT_SECONDS,
+        write=30.0,
+        pool=30.0,
+    )
+    answer_parts: list[str] = []
+    events: list[dict] = []
+    conversation_id = payload.get("conversation_id", "")
+    message_id = ""
+    task_id = ""
+    created_at = None
+    metadata = {}
+
+    async with httpx.AsyncClient(timeout=timeout) as client:
+        async with client.stream(
+            "POST",
+            DIFY_CHAT_MESSAGES_URL,
+            json=payload,
+            headers={**DIFY_HEADERS, "Accept": "text/event-stream"},
+        ) as resp:
+            resp.raise_for_status()
+            async for raw_line in resp.aiter_lines():
+                line = raw_line.strip()
+                if not line or not line.startswith("data:"):
+                    continue
+                data_str = line[5:].strip()
+                if not data_str or data_str == "[DONE]":
+                    continue
+                try:
+                    event_data = json.loads(data_str)
+                except json.JSONDecodeError:
+                    continue
+
+                events.append(event_data)
+                event_type = event_data.get("event", "")
+                conversation_id = event_data.get("conversation_id", conversation_id)
+                message_id = (
+                    event_data.get("message_id")
+                    or event_data.get("id")
+                    or message_id
+                )
+                task_id = event_data.get("task_id", task_id)
+                created_at = event_data.get("created_at", created_at)
+
+                if event_type == "message":
+                    answer_parts.append(event_data.get("answer", ""))
+                elif event_type == "message_end":
+                    metadata = event_data.get("metadata", metadata)
+
+    return {
+        "event": "message",
+        "task_id": task_id,
+        "id": message_id,
+        "message_id": message_id,
+        "conversation_id": conversation_id,
+        "mode": "advanced-chat",
+        "answer": "".join(answer_parts),
+        "metadata": metadata,
+        "created_at": created_at,
+        "stream_events": events,
+    }
 
 
 async def generate_path(profile: dict, preferences: dict) -> dict:
@@ -199,6 +232,37 @@ async def generate_resource(params: dict) -> dict:
 
 def _mock_profile() -> dict:
     return {
+        "profile_ready": True,
+        "profile_type": "initial_student_profile",
+        "user_id": "",
+        "profile_summary": "该学生具备一定的 Python 和 Web 基础，但在数据结构与算法、计算机网络和 AI 应用开发方面仍有提升空间。学习目标偏向就业和项目实践，适合项目驱动式学习路径。",
+        "dialogue_summary": "用户具备 Python 和 Web 基础，希望提升 AI 应用开发能力，偏好项目驱动学习。",
+        "collected_info": {
+            "user_id": "",
+            "name": "",
+            "grade": "",
+            "major": "",
+            "current_courses": [],
+            "learning_goal": "提升 AI 应用开发能力",
+            "target_direction": "AI 应用开发",
+            "expected_output": "完成一个项目并用于求职展示",
+            "learning_situation": "",
+            "weak_points": ["数据结构与算法", "计算机网络"],
+            "technical_foundation": ["Python", "数据库基础", "Web 开发基础"],
+            "daily_study_time": "",
+            "planning_preference": "项目驱动",
+            "resource_preference": ["文档", "视频", "项目任务书"],
+            "learning_style": "案例驱动",
+            "project_experience": "有简单 Web 项目经验",
+            "exam_or_competition": "",
+            "deadline": "",
+            "preferred_difficulty": "",
+            "learning_constraints": [],
+            "motivation": "",
+            "device_or_tools": [],
+            "evidence": ["用户表示算法题训练较少", "用户有简单 Web 项目经验"],
+        },
+        "frontend_message": "你的初始学生画像已生成。接下来可以查看画像，或继续生成个性化学习路径。",
         "summary": "该学生具备一定的 Python 和 Web 基础，但在数据结构与算法、计算机网络和 AI 应用开发方面仍有提升空间。学习目标偏向就业和项目实践，适合项目驱动式学习路径。",
         "dimensions": {
             "basic_knowledge": {"score": 60, "level": "中等", "strengths": ["Python 基础", "数据库基础"], "weaknesses": ["数据结构与算法", "计算机网络"], "evidence": ["用户表示算法题训练较少"]},
@@ -236,3 +300,190 @@ def _mock_resource(params: dict) -> dict:
     }
     content = contents.get(rtype, contents["document"])
     return {"title": f"{kp_str} {'笔记' if rtype == 'document' else '练习' if rtype == 'quiz' else '导图'}", "content": content, "content_json": {"type": rtype, "knowledge_points": kps}, "related_knowledge_points": kps}
+
+
+def _wrap_mock_profile(
+    chat_history: list[dict], user_id: int, conversation_id: str = ""
+) -> dict:
+    payload = _normalize_profile_payload(_mock_profile())
+    return {
+        "provider": "mock_dify_chatflow",
+        "request_payload": {
+            "inputs": {
+                "user_id": str(user_id),
+                "userinput": {
+                    "query": _get_latest_user_query(chat_history)
+                    or _build_profile_query(chat_history, conversation_id),
+                    "files": [],
+                },
+            },
+            "query": _get_latest_user_query(chat_history)
+            or _build_profile_query(chat_history, conversation_id),
+            "response_mode": "blocking",
+            "conversation_id": conversation_id,
+            "user": str(user_id),
+        },
+        "http_response": {"answer": json.dumps(payload, ensure_ascii=False)},
+        "profile_payload": payload,
+        "conversation_id": conversation_id,
+        "message_id": "",
+        "answer_text": json.dumps(payload, ensure_ascii=False),
+    }
+
+
+def _build_profile_query(chat_history: list[dict], conversation_id: str = "") -> str:
+    user_messages = _get_user_messages(chat_history)
+    if conversation_id and user_messages:
+        return user_messages[-1]
+
+    lines = []
+    for item in chat_history:
+        content = str(item.get("content", "")).strip()
+        if not content:
+            continue
+        role = "学生" if item.get("role") == "user" else "助手"
+        lines.append(f"{role}: {content}")
+
+    transcript = "\n".join(lines) if lines else (user_messages[-1] if user_messages else "")
+    return (
+        "以下是围绕学生学习画像收集的完整对话，请基于全部上下文继续进行信息抽取。"
+        "如果信息不足，请明确指出下一轮最需要补充的内容；如果信息足够，请输出完整画像结果。\n\n"
+        f"{transcript}"
+    )
+
+
+def _get_user_messages(chat_history: list[dict]) -> list[str]:
+    return [
+        str(item.get("content", "")).strip()
+        for item in chat_history
+        if item.get("role") == "user" and str(item.get("content", "")).strip()
+    ]
+
+
+def _get_latest_user_query(chat_history: list[dict]) -> str:
+    user_messages = _get_user_messages(chat_history)
+    return user_messages[-1] if user_messages else ""
+
+
+def _extract_profile_payload(dify_response: dict) -> dict:
+    candidates = [
+        dify_response,
+        dify_response.get("answer"),
+        dify_response.get("outputs"),
+        dify_response.get("data"),
+        (dify_response.get("metadata") or {}).get("outputs"),
+        (dify_response.get("metadata") or {}).get("workflow_run", {}).get("outputs"),
+        (dify_response.get("workflow_run") or {}).get("outputs"),
+    ]
+
+    for candidate in candidates:
+        parsed = _parse_profile_candidate(candidate)
+        if _looks_like_profile_payload(parsed):
+            return _normalize_profile_payload(parsed)
+
+    answer_text = _strip_think_text(str(dify_response.get("answer", "")).strip())
+    if answer_text:
+        return {
+            "profile_ready": False,
+            "profile_type": "incomplete_student_profile",
+            "user_id": "",
+            "profile_summary": "",
+            "dialogue_summary": "",
+            "collected_info": {},
+            "student_profile": None,
+            "missing_information": [],
+            "frontend_message": answer_text,
+            "raw_answer": answer_text,
+        }
+
+    raise ValueError("Dify 返回中未找到可解析的画像结果")
+
+
+def _parse_profile_candidate(candidate) -> dict | None:
+    if not candidate:
+        return None
+    if isinstance(candidate, dict):
+        return candidate
+    if not isinstance(candidate, str):
+        return None
+
+    text = _clean_json_text(candidate)
+    if not text:
+        return None
+
+    try:
+        parsed = json.loads(text)
+        return parsed if isinstance(parsed, dict) else None
+    except json.JSONDecodeError:
+        start = text.find("{")
+        end = text.rfind("}")
+        if start == -1 or end == -1 or end <= start:
+            return None
+        try:
+            parsed = json.loads(text[start : end + 1])
+            return parsed if isinstance(parsed, dict) else None
+        except json.JSONDecodeError:
+            return None
+
+
+def _clean_json_text(text: str) -> str:
+    text = text.strip()
+    text = _strip_think_text(text)
+    text = text.replace("“", '"').replace("”", '"')
+    text = re.sub(r"^```(?:json)?\s*", "", text)
+    text = re.sub(r"\s*```$", "", text)
+    return text.strip()
+
+
+def _strip_think_text(text: str) -> str:
+    return re.sub(r"<think>[\s\S]*?</think>", "", text or "", flags=re.IGNORECASE).strip()
+
+
+def _looks_like_profile_payload(payload: dict | None) -> bool:
+    if not isinstance(payload, dict):
+        return False
+    return any(
+        key in payload
+        for key in ("profile_ready", "profile_type", "collected_info", "student_profile")
+    )
+
+
+def _normalize_profile_payload(payload: dict) -> dict:
+    normalized = dict(payload)
+    student_profile = normalized.get("student_profile")
+
+    if not student_profile and "dimensions" in normalized:
+        student_profile = {
+            "summary": normalized.get("summary", ""),
+            "dimensions": normalized.get("dimensions", {}),
+            "strengths_summary": normalized.get("strengths_summary", []),
+            "weaknesses_summary": normalized.get("weaknesses_summary", []),
+            "recommended_next_actions": normalized.get("recommended_next_actions", []),
+            "missing_information": normalized.get("missing_information", []),
+            "profile_confidence": normalized.get("profile_confidence", {}),
+        }
+        normalized["student_profile"] = student_profile
+
+    normalized["profile_ready"] = _to_bool(
+        normalized.get("profile_ready", bool(student_profile))
+    )
+    normalized.setdefault("profile_type", "initial_student_profile")
+    normalized.setdefault("user_id", normalized.get("collected_info", {}).get("user_id", ""))
+    normalized.setdefault("collected_info", {})
+    normalized.setdefault("dialogue_summary", "")
+    normalized.setdefault("frontend_message", "")
+    normalized.setdefault("missing_information", [])
+    normalized["profile_summary"] = (
+        normalized.get("profile_summary")
+        or (student_profile or {}).get("summary", "")
+        or normalized.get("summary", "")
+    )
+    return normalized
+
+
+def _to_bool(value) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"1", "true", "yes", "y"}
+    return bool(value)

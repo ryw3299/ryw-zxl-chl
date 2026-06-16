@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getProfile, initProfile, getProfileHistory } from '@/api/profile'
+import { getProfile, initProfile, getProfileHistory, getProfileInitState } from '@/api/profile'
 
 export const useProfileStore = defineStore('profile', () => {
   const profile = ref(null)
@@ -18,11 +18,17 @@ export const useProfileStore = defineStore('profile', () => {
     }
   }
 
-  async function init(chatHistory) {
+  async function init(chatHistory, conversationId = '') {
     loading.value = true
     try {
-      profile.value = await initProfile({ chat_history: chatHistory })
-      return profile.value
+      const result = await initProfile({
+        chat_history: chatHistory,
+        conversation_id: conversationId,
+      })
+      if (result?.profile_ready && result?.profile_json) {
+        profile.value = result
+      }
+      return result
     } finally {
       loading.value = false
     }
@@ -32,5 +38,9 @@ export const useProfileStore = defineStore('profile', () => {
     history.value = await getProfileHistory()
   }
 
-  return { profile, history, loading, fetchProfile, init, fetchHistory }
+  async function fetchInitState() {
+    return getProfileInitState()
+  }
+
+  return { profile, history, loading, fetchProfile, init, fetchHistory, fetchInitState }
 })

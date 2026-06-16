@@ -5,7 +5,13 @@ export function getProfile() {
 }
 
 export function initProfile(data) {
-  return request.post('/profile/init', data)
+  return request.post('/profile/init', data, {
+    timeout: 360000,
+  })
+}
+
+export function getProfileInitState() {
+  return request.get('/profile/init-state')
 }
 
 export function getProfileHistory() {

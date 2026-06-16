@@ -33,6 +33,9 @@ class Settings(BaseSettings):
 
     # ── Dify ────────────────────────────────────────────────────
     DIFY_MOCK_MODE: bool = True
+    DIFY_BASE_URL: str = "https://api.dify.ai/v1"
+    DIFY_API_KEY: str = ""
+    DIFY_TIMEOUT_SECONDS: int = 300
 
     # ── LLM (DeepSeek) ──────────────────────────────────────────
     LLM_API_KEY: str = ""

@@ -33,10 +33,24 @@ async def init_profile(
 ):
     chat_data = [m.model_dump() for m in body.chat_history]
     try:
-        data = await profile_service.init_profile(db, current_user.id, chat_data)
+        data = await profile_service.init_profile(
+            db, current_user.id, chat_data, body.conversation_id
+        )
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"画像生成失败: {exc}")
-    return success(data, "画像已生成")
+    msg = data.get("frontend_message") or (
+        "画像已生成" if data.get("profile_ready") else "已更新画像信息"
+    )
+    return success(data, msg)
+
+
+@router.get("/init-state", summary="获取最近一次未完成画像初始化会话")
+def get_init_state(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    data = profile_service.get_latest_init_state(db, current_user.id)
+    return success(data, "获取成功")
 
 
 @router.get("/history", summary="获取画像历史版本")

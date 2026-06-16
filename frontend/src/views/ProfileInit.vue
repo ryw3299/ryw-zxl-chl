@@ -17,37 +17,52 @@
           <div class="msg-avatar">
             <svg width="18" height="18" viewBox="0 0 28 28" fill="none"><rect x="7" y="10" width="14" height="10" rx="3" fill="#2563eb"/><circle cx="11" cy="15" r="1.5" fill="white"/><circle cx="17" cy="15" r="1.5" fill="white"/></svg>
           </div>
-          <div class="thinking-dots"><span></span><span></span><span></span></div>
+          <div class="thinking-card">
+            <div class="thinking-dots"><span></span><span></span><span></span></div>
+            <p class="thinking-text">正在为你记录信息并整理追问，可能需要一分钟左右，复杂情况会更久一点。</p>
+          </div>
         </div>
       </div>
       <div class="chat-input-area" v-if="!profileDone">
+        <div v-if="isGenerating" class="chat-status">
+          <el-icon class="chat-status-icon is-loading"><Loading /></el-icon>
+          <span>{{ generatingText }}</span>
+        </div>
         <div class="chat-input">
           <el-input v-model="userInput" placeholder="输入你的回答..." :disabled="isThinking" @keyup.enter="sendMessage" />
           <el-button type="primary" :disabled="isThinking || !userInput.trim()" @click="sendMessage"><el-icon><Promotion /></el-icon></el-button>
         </div>
       </div>
     </div>
-    <div class="init-preview">
-      <div class="preview-card">
-        <div class="preview-header">
-          <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="#2563eb"/><path d="M8 14L12 18L20 10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>学习画像预览</span>
-        </div>
-        <div class="preview-section">
-          <div class="preview-section-title">基本信息</div>
-          <div class="preview-items">
-            <div class="preview-item"><span class="pi-label">姓名</span><span class="pi-value" :class="{ empty: !collected.name }">{{ collected.name || '待采集' }}</span></div>
-            <div class="preview-item"><span class="pi-label">专业</span><span class="pi-value" :class="{ empty: !collected.major }">{{ collected.major || '待采集' }}</span></div>
+    <aside class="intro-guide">
+      <div class="guide-card">
+        <div class="guide-header">
+          <div class="guide-icon">
+            <svg width="22" height="22" viewBox="0 0 28 28" fill="none">
+              <rect x="2" y="2" width="24" height="24" rx="6" fill="#2563eb" />
+              <path d="M9 11.5H19" stroke="white" stroke-width="2.2" stroke-linecap="round" />
+              <path d="M9 16H16" stroke="white" stroke-width="2.2" stroke-linecap="round" />
+            </svg>
+          </div>
+          <div>
+            <h3>可以自我介绍的方向</h3>
+            <p>不需要一次说全，先从你最想说的部分开始就可以。</p>
           </div>
         </div>
-        <div v-if="isGenerating" class="preview-footer">
-          <p class="gen-hint"><el-icon><Loading /></el-icon>AI 正在生成你的画像...</p>
+        <div class="guide-section" v-for="section in introDirections" :key="section.title">
+          <div class="guide-section-title">{{ section.title }}</div>
+          <div class="guide-tags">
+            <span v-for="item in section.items" :key="item" class="guide-tag">{{ item }}</span>
+          </div>
+        </div>
+        <div v-if="isGenerating" class="guide-footer">
+          <p class="gen-hint"><el-icon><Loading /></el-icon>{{ generatingText }}</p>
         </div>
       </div>
-    </div>
-    <div v-if="profileDone" class="success-overlay">
+    </aside>
+    <div v-if="showSuccessOverlay" class="success-overlay">
       <div class="success-card">
-        <el-result icon="success" title="学习方案已生成">
+        <el-result icon="success" title="学习画像已生成">
           <template #extra>
             <p class="success-summary">{{ profileSummary }}</p>
             <div class="success-actions">
@@ -63,85 +78,226 @@
 </template>
 
 <script setup>
-import { nextTick, ref } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { Lock, Promotion, Loading } from '@element-plus/icons-vue'
+import { Promotion, Loading } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 import { useProfileStore } from '@/store/profileStore'
+import { useUserStore } from '@/store/userStore'
 
 const router = useRouter()
 const profileStore = useProfileStore()
+const userStore = useUserStore()
+
+const DEFAULT_MESSAGES = [
+  {
+    role: 'assistant',
+    content:
+      '你好，我是小智。为了更好地为你制定专属于你自己的学习路径，请问你可以先简单做个自我介绍吗？<br><br>比如你的姓名、年级、专业，现在在学什么，想往什么方向发展，或者最近觉得哪些地方比较吃力。',
+  },
+]
 
 const userInput = ref('')
 const isThinking = ref(false)
 const isGenerating = ref(false)
 const profileDone = ref(false)
+const showSuccessOverlay = ref(false)
 const profileSummary = ref('')
+const generatingText = ref('正在为你记录信息并整理追问，请稍等。')
 const msgRef = ref(null)
+const conversationId = ref('')
+const draftRestored = ref(false)
 
-const collected = ref({ name: '', major: '' })
+const introDirections = [
+  {
+    title: '基础信息',
+    items: ['姓名', '年级', '专业', '当前课程'],
+  },
+  {
+    title: '学习目标',
+    items: ['想往哪个方向发展', '近期想达成什么结果', '希望做出什么作品'],
+  },
+  {
+    title: '当前情况',
+    items: ['学到哪里了', '哪些内容掌握得还不错', '哪些地方最吃力'],
+  },
+  {
+    title: '学习方式',
+    items: ['每天能投入多久', '喜欢看文档还是视频', '更偏好练习还是项目'],
+  },
+]
 
-const messages = ref([
-  { role: 'assistant', content: '你好呀！我是小智，你的专属 AI 学习助手 🎉<br><br>为了给你定制最合适的学习方案，我想先了解一些你的基本情况。<br><br><strong>你叫什么名字？目前读什么专业？</strong>' },
-])
+const messages = ref([...DEFAULT_MESSAGES])
 
-function sendMessage() {
+async function sendMessage() {
   const text = userInput.value.trim()
   if (!text || isThinking.value) return
   userInput.value = ''
   messages.value.push({ role: 'user', content: text })
+  saveDraftState()
   scrollToBottom()
-
-  // Extract info
-  if (!collected.value.name) {
-    collected.value.name = text.slice(0, 30)
-    askMajor()
-    return
-  }
-  if (!collected.value.major) {
-    collected.value.major = text.slice(0, 30)
-    // 收集到姓名和专业后自动生成
-    autoGenerate()
-    return
-  }
-}
-
-function askMajor() {
   isThinking.value = true
-  setTimeout(() => {
-    isThinking.value = false
-    messages.value.push({ role: 'assistant', content: `好的 <strong>${collected.value.name}</strong>！那<strong>你读什么专业的呢？</strong>` })
-    scrollToBottom()
-  }, 600)
-}
+  isGenerating.value = true
+  generatingText.value = '正在为你记录信息并整理追问，请稍等。'
+  try {
+    const chatData = messages.value.map(m => ({
+      role: m.role,
+      content: m.content.replace(/<[^>]*>/g, ''),
+    }))
+    const result = await profileStore.init(chatData, conversationId.value)
+    conversationId.value = result?.conversation_id || conversationId.value
 
-async function autoGenerate() {
-  isThinking.value = true
-  setTimeout(async () => {
-    isThinking.value = false
-    messages.value.push({ role: 'assistant', content: `太棒了！<strong>${collected.value.name}</strong>，我已经了解你的基本情况了。现在让我为你生成专属学习画像吧 🎉` })
-    scrollToBottom()
-
-    isGenerating.value = true
-    try {
-      const chatData = messages.value.map(m => ({
-        role: m.role,
-        content: m.content.replace(/<[^>]*>/g, ''),
-      }))
-      const result = await profileStore.init(chatData)
-      profileSummary.value = result?.summary || '你的个性化学习画像已生成！'
+    if (result?.profile_ready) {
+      const completionMessage =
+        result?.frontend_message || '你的个性化学习画像已生成，接下来可以查看画像或继续生成学习路径。'
+      messages.value.push({ role: 'assistant', content: formatAssistantMessage(completionMessage) })
+      profileSummary.value =
+        result?.profile_summary || result?.summary || completionMessage
+      scrollToBottom()
       profileDone.value = true
-    } catch {
-      profileDone.value = true
-      profileSummary.value = '你的个性化学习画像已生成！'
-    } finally {
-      isGenerating.value = false
+      clearDraftState()
+      await wait(900)
+      showSuccessOverlay.value = true
+      return
     }
-  }, 1000)
+
+    const reply =
+      result?.frontend_message ||
+      '我已经记录了这些信息。接下来请继续补充你的学习目标、当前基础、薄弱点和时间安排。'
+    isThinking.value = false
+    messages.value.push({ role: 'assistant', content: formatAssistantMessage(reply) })
+    saveDraftState()
+    scrollToBottom()
+  } catch (error) {
+    ElMessage.error(error?.message || '画像生成失败，请稍后重试')
+    isThinking.value = false
+    saveDraftState()
+  } finally {
+    isThinking.value = false
+    isGenerating.value = false
+  }
+}
+
+function formatAssistantMessage(text) {
+  return escapeHtml(String(text || ''))
+    .replace(/\n/g, '<br>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+}
+
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 }
 
 function scrollToBottom() {
   nextTick(() => { if (msgRef.value) msgRef.value.scrollTop = msgRef.value.scrollHeight })
 }
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+function getDraftStorageKey() {
+  const userId = userStore.user?.id || userStore.username || 'anonymous'
+  return `profile-init-draft:${userId}`
+}
+
+function getLocalDraftTimestamp(draft) {
+  const value = draft?.updatedAt
+  if (typeof value === 'number') return value
+  return value ? Date.parse(value) || 0 : 0
+}
+
+function normalizeMessageForDisplay(message, fromServer = false) {
+  if (!message || !message.role || !message.content) return null
+  if (message.role === 'assistant' && fromServer) {
+    return { role: 'assistant', content: formatAssistantMessage(message.content) }
+  }
+  return {
+    role: message.role,
+    content: String(message.content),
+  }
+}
+
+function saveDraftState() {
+  if (profileDone.value) return
+  localStorage.setItem(
+    getDraftStorageKey(),
+    JSON.stringify({
+      messages: messages.value,
+      conversationId: conversationId.value,
+      userInput: userInput.value,
+      updatedAt: Date.now(),
+    }),
+  )
+}
+
+function clearDraftState() {
+  localStorage.removeItem(getDraftStorageKey())
+}
+
+function loadLocalDraft() {
+  try {
+    return JSON.parse(localStorage.getItem(getDraftStorageKey()) || 'null')
+  } catch {
+    return null
+  }
+}
+
+function applyDraftState(draft, fromServer = false) {
+  const restoredMessages = Array.isArray(draft?.messages)
+    ? draft.messages
+        .map(item => normalizeMessageForDisplay(item, fromServer))
+        .filter(Boolean)
+    : []
+  if (restoredMessages.length) {
+    messages.value = restoredMessages
+  }
+  conversationId.value = draft?.conversationId || draft?.conversation_id || ''
+  userInput.value = draft?.userInput || ''
+}
+
+async function restoreDraftState() {
+  const localDraft = loadLocalDraft()
+  let serverDraft = null
+  try {
+    serverDraft = await profileStore.fetchInitState()
+  } catch {
+    serverDraft = null
+  }
+
+  const localTs = getLocalDraftTimestamp(localDraft)
+  const serverTs = getLocalDraftTimestamp({ updatedAt: serverDraft?.updated_at })
+  const hasLocalDraft = Array.isArray(localDraft?.messages) && localDraft.messages.length > 1
+  const hasServerDraft = Boolean(serverDraft?.has_draft && serverDraft?.messages?.length)
+
+  if (!hasLocalDraft && !hasServerDraft) return
+
+  if (hasServerDraft && (!hasLocalDraft || serverTs > localTs)) {
+    applyDraftState(serverDraft, true)
+    saveDraftState()
+  } else if (hasLocalDraft) {
+    applyDraftState(localDraft, false)
+  }
+
+  draftRestored.value = true
+  scrollToBottom()
+  ElMessage.success('已恢复你上次未完成的画像初始化会话')
+}
+
+watch(userInput, () => {
+  if (draftRestored.value || userInput.value) {
+    saveDraftState()
+  }
+})
+
+onMounted(async () => {
+  await restoreDraftState()
+})
 </script>
 
 <style scoped>
@@ -159,27 +315,36 @@ function scrollToBottom() {
 .msg.assistant .msg-content { background: var(--bg-page); color: var(--text-primary); border-bottom-left-radius: 4px; }
 .msg.user .msg-content { background: var(--brand-primary); color: white; border-bottom-right-radius: 4px; }
 .msg-content :deep(strong) { font-weight: 600; }
-.thinking-dots { display: flex; gap: 4px; padding: 14px 18px; background: var(--bg-page); border-radius: 12px; }
+.thinking-card { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 18px; background: var(--bg-page); border-radius: 12px; }
+.thinking-dots { display: flex; gap: 4px; }
 .thinking-dots span { width: 7px; height: 7px; border-radius: 50%; background: var(--text-muted); animation: dotPulse 1.4s infinite ease-in-out both; }
 .thinking-dots span:nth-child(1) { animation-delay: 0s; }
 .thinking-dots span:nth-child(2) { animation-delay: 0.16s; }
 .thinking-dots span:nth-child(3) { animation-delay: 0.32s; }
+.thinking-text { font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); }
 @keyframes dotPulse { 0%,80%,100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
 .chat-input-area { padding: 16px 24px; border-top: 1px solid var(--border); }
+.chat-status { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; padding: 10px 12px; border-radius: 12px; background: rgba(37, 99, 235, 0.06); color: #1d4ed8; font-size: 0.82rem; }
+.chat-status-icon { font-size: 0.95rem; }
 .chat-input { display: flex; gap: 8px; }
-.init-preview { width: 280px; flex-shrink: 0; }
-.preview-card { background: white; border-radius: 14px; border: 1px solid var(--border); overflow: hidden; position: sticky; top: 84px; }
-.preview-header { display: flex; align-items: center; gap: 8px; padding: 16px 20px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 0.9rem; }
-.preview-section { padding: 12px 20px; border-bottom: 1px solid var(--border-light); }
-.preview-section-title { font-size: 0.78rem; font-weight: 500; color: var(--text-muted); margin-bottom: 8px; }
-.preview-items { display: flex; flex-direction: column; gap: 6px; }
-.preview-item { display: flex; justify-content: space-between; font-size: 0.82rem; }
-.pi-label { color: var(--text-secondary); }
-.pi-value { color: var(--text-primary); font-weight: 500; }
-.pi-value.empty { color: var(--text-muted); font-weight: 400; }
-.preview-footer { padding: 16px 20px; display: flex; align-items: center; gap: 6px; justify-content: center; font-size: 0.82rem; color: var(--text-muted); }
+.intro-guide { width: 300px; flex-shrink: 0; }
+.guide-card { background: white; border-radius: 18px; border: 1px solid var(--border); overflow: hidden; position: sticky; top: 84px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05); }
+.guide-header { display: flex; gap: 12px; padding: 18px 20px 16px; border-bottom: 1px solid var(--border-light); background: linear-gradient(180deg, rgba(37, 99, 235, 0.06) 0%, rgba(37, 99, 235, 0) 100%); }
+.guide-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(37, 99, 235, 0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.guide-header h3 { font-size: 0.98rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.guide-header p { font-size: 0.8rem; line-height: 1.6; color: var(--text-secondary); }
+.guide-section { padding: 14px 20px; border-bottom: 1px solid var(--border-light); }
+.guide-section-title { font-size: 0.79rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; }
+.guide-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.guide-tag { display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px; border-radius: 999px; background: var(--bg-page); color: var(--text-primary); font-size: 0.8rem; line-height: 1.2; }
+.guide-footer { padding: 16px 20px; display: flex; align-items: center; justify-content: center; }
 .success-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; z-index: 500; }
 .success-card { background: white; border-radius: 18px; padding: 40px; max-width: 480px; width: 90%; box-shadow: var(--shadow-lg); }
 .success-summary { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; margin: 16px 0; }
 .success-actions { display: flex; flex-direction: column; gap: 8px; }
+@media (max-width: 1080px) {
+  .init-page { flex-direction: column; }
+  .intro-guide { width: 100%; }
+  .guide-card { position: static; }
+}
 </style>

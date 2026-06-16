@@ -23,4 +23,7 @@ class User(Base):
 
     # 关系
     profiles = relationship("StudentProfile", back_populates="user", lazy="dynamic")
+    profile_generation_records = relationship(
+        "ProfileGenerationRecord", back_populates="user", lazy="dynamic"
+    )
     learning_paths = relationship("LearningPath", back_populates="user", lazy="dynamic")

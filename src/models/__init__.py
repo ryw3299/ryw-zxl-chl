@@ -1,5 +1,6 @@
 from .user import User
 from .profile import StudentProfile
+from .profile_generation import ProfileGenerationRecord
 from .learning_path import LearningPath
 from .resource import PlatformResource, GeneratedResource
 from .event import LearningEvent, KnowledgeMastery
@@ -10,6 +11,7 @@ from .supplement import StudyTask, Announcement, StudyRecord
 __all__ = [
     "User",
     "StudentProfile",
+    "ProfileGenerationRecord",
     "LearningPath",
     "PlatformResource",
     "GeneratedResource",
